@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AmmuOpenShop" xml:space="preserve">
+    <value>按 ~INPUT_CONTEXT~ 购买武器。</value>
+  </data>
+  <data name="AmmuPistol" xml:space="preserve">
+    <value>手枪弹药 x100</value>
+  </data>
+  <data name="AmmuPistolSubtitle" xml:space="preserve">
+    <value>适合于自卫的标准手枪。</value>
+  </data>
+  <data name="AmmuPumpShotgun" xml:space="preserve">
+    <value>泵动式霰弹枪弹药 x50</value>
+  </data>
+  <data name="AmmuPumpShotgunSubtitle" xml:space="preserve">
+    <value>适合于个人防卫的标准霰弹枪。 </value>
+  </data>
+  <data name="AmmuSubtitle" xml:space="preserve">
+    <value>武器商店</value>
+  </data>
+  <data name="AmmuTitle" xml:space="preserve">
+    <value>武装国度</value>
+  </data>
+  <data name="ArmedBonus" xml:space="preserve">
+    <value>击杀武装 NPC 奖励 +$10</value>
+  </data>
+  <data name="BuyNoMoney" xml:space="preserve">
+    <value>你没有足够的现金来购买此物品。</value>
+  </data>
+  <data name="DifficultyCarbineRifle" xml:space="preserve">
+    <value>卡宾步枪</value>
+  </data>
+  <data name="DifficultyChange" xml:space="preserve">
+    <value>难度已更改</value>
+  </data>
+  <data name="DifficultyEasy" xml:space="preserve">
+    <value>简单</value>
+  </data>
+  <data name="DifficultyHard" xml:space="preserve">
+    <value>困难</value>
+  </data>
+  <data name="DifficultyHelp" xml:space="preserve">
+    <value>游戏难度已上升至{0}。街头的路人现在会使用{0}了。</value>
+  </data>
+  <data name="DifficultyInitial" xml:space="preserve">
+    <value>初始</value>
+  </data>
+  <data name="DifficultyMicroSmg" xml:space="preserve">
+    <value>微型冲锋枪</value>
+  </data>
+  <data name="DifficultyNether" xml:space="preserve">
+    <value>地狱</value>
+  </data>
+  <data name="DifficultyNormal" xml:space="preserve">
+    <value>普通</value>
+  </data>
+  <data name="DifficultyPumpShotgun" xml:space="preserve">
+    <value>泵动式霰弹枪</value>
+  </data>
+  <data name="DifficultyRPG" xml:space="preserve">
+    <value>火箭发射器</value>
+  </data>
+  <data name="DifficultyShard" xml:space="preserve">
+    <value>游戏难度已上升至{0}。</value>
+  </data>
+  <data name="ExceptionMain" xml:space="preserve">
+    <value>NoArtifactLights 遇到错误需要关闭。</value>
+  </data>
+  <data name="ExceptionMenu" xml:space="preserve">
+    <value>NoArtifactLights 的菜单遇到错误，因此菜单被禁用。</value>
+  </data>
+  <data name="FirstKill" xml:space="preserve">
+    <value>你击杀了一个 NPC。一旦你的击杀数过多，难度就会上升。</value>
+  </data>
+  <data name="GameLoaded" xml:space="preserve">
+    <value>游戏已成功~b~加载~s~。</value>
+  </data>
+  <data name="GameSaved" xml:space="preserve">
+    <value>游戏已成功~b~保存~s~。</value>
+  </data>
+  <data name="ItemCashSubtitle" xml:space="preserve">
+    <value>查看当前现金数量。</value>
+  </data>
+  <data name="ItemCashTitle" xml:space="preserve">
+    <value>现金</value>
+  </data>
+  <data name="ItemCopsSubtitle" xml:space="preserve">
+    <value>请求警察的帮助。</value>
+  </data>
+  <data name="ItemCopsTitle" xml:space="preserve">
+    <value>报警</value>
+  </data>
+  <data name="ItemDifficulty" xml:space="preserve">
+    <value>当前难度</value>
+  </data>
+  <data name="ItemDIfficultySubtitle" xml:space="preserve">
+    <value>查看当前难度。</value>
+  </data>
+  <data name="ItemKills" xml:space="preserve">
+    <value>击杀数</value>
+  </data>
+  <data name="ItemKillsSubtitle" xml:space="preserve">
+    <value>查看当前击杀。</value>
+  </data>
+  <data name="ItemLightsSubtitle" xml:space="preserve">
+    <value>设置圣安地列斯是否停电。</value>
+  </data>
+  <data name="ItemLightsTitle" xml:space="preserve">
+    <value>停电</value>
+  </data>
+  <data name="ItemLoadSubtitle" xml:space="preserve">
+    <value>从存档载入游戏状态。</value>
+  </data>
+  <data name="ItemLoadTitle" xml:space="preserve">
+    <value>载入游戏</value>
+  </data>
+  <data name="ItemSaveSubtitle" xml:space="preserve">
+    <value>保存当前游戏状态。</value>
+  </data>
+  <data name="ItemSaveTitle" xml:space="preserve">
+    <value>保存游戏</value>
+  </data>
+  <data name="MenuMainTitle" xml:space="preserve">
+    <value>主菜单</value>
+  </data>
+  <data name="NoSave" xml:space="preserve">
+    <value>没有存档文件可供加载。</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>欢迎来到 NoArtifactLights 生存模组。</value>
+  </data>
+  <data name="WeaponPistol" xml:space="preserve">
+    <value>手枪</value>
+  </data>
+</root>
