@@ -28,7 +28,8 @@ namespace NoArtifactLights
             UI.ShowHelpMessage(Strings.Start);
             if(!File.Exists("scripts\\PlayerReliveNoResetModel.dll"))
             {
-                UI.Notify("");
+                UI.Notify(Strings.NoModelWarning);
+                UI.Notify(Strings.NoModelWarning2);
             }
             this.Interval = 100;
             this.Tick += Entry_Tick;
