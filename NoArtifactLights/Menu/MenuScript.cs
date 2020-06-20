@@ -63,9 +63,9 @@ namespace NoArtifactLights.Menu
                 Common.CashChanged += Common_CashChanged;
                 buyMenu = new UIMenu(Strings.AmmuTitle, Strings.AmmuSubtitle);
                 itemPistol = new UIMenuItem(Strings.AmmuPistol, Strings.AmmuPistolSubtitle);
-                itemPistol.SetRightLabel("$50");
+                itemPistol.SetRightLabel("$100");
                 itemPumpShotgun = new UIMenuItem(Strings.AmmuPumpShotgun, Strings.AmmuPumpShotgunSubtitle);
-                itemPumpShotgun.SetRightLabel("$100");
+                itemPumpShotgun.SetRightLabel("$200");
                 buyMenu.AddItem(itemCash);
                 buyMenu.AddItem(itemPistol);
                 buyMenu.AddItem(itemPumpShotgun);
@@ -84,36 +84,36 @@ namespace NoArtifactLights.Menu
 
         private void ItemPumpShotgun_Activated(UIMenu sender, UIMenuItem selectedItem)
         {
+            if (Common.cash < 200)
+            {
+                UI.ShowSubtitle(Strings.BuyNoMoney);
+                return;
+            }
+            Common.cash -= 200;
+            if (!Game.Player.Character.Weapons.HasWeapon(WeaponHash.PumpShotgun))
+            {
+                Game.Player.Character.Weapons.Give(WeaponHash.PumpShotgun, 20, true, true);
+                return;
+            }
+            Game.Player.Character.Weapons.Select(WeaponHash.PumpShotgun);
+            Game.Player.Character.Weapons.Current.Ammo += 20;
+        }
+
+        private void ItemPistol_Activated(UIMenu sender, UIMenuItem selectedItem)
+        {
             if (Common.cash < 100)
             {
                 UI.ShowSubtitle(Strings.BuyNoMoney);
                 return;
             }
-            Common.cash -= 50;
-            if (!Game.Player.Character.Weapons.HasWeapon(WeaponHash.PumpShotgun))
-            {
-                Game.Player.Character.Weapons.Give(WeaponHash.PumpShotgun, 50, true, true);
-                return;
-            }
-            Game.Player.Character.Weapons.Select(WeaponHash.PumpShotgun);
-            Game.Player.Character.Weapons.Current.Ammo += 50;
-        }
-
-        private void ItemPistol_Activated(UIMenu sender, UIMenuItem selectedItem)
-        {
-            if (Common.cash < 50)
-            {
-                UI.ShowSubtitle(Strings.BuyNoMoney);
-                return;
-            }
-            Common.cash -= 50;
+            Common.cash -= 100;
             if (!Game.Player.Character.Weapons.HasWeapon(WeaponHash.Pistol))
             {
-                Game.Player.Character.Weapons.Give(WeaponHash.Pistol, 100, true, true);
+                Game.Player.Character.Weapons.Give(WeaponHash.Pistol, 50, true, true);
                 return;
             }
             Game.Player.Character.Weapons.Select(WeaponHash.Pistol);
-            Game.Player.Character.Weapons.Current.Ammo += 100;
+            Game.Player.Character.Weapons.Current.Ammo += 50;
         }
 
         private void Common_CashChanged(object sender, EventArgs e)

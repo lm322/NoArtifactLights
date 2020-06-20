@@ -121,13 +121,13 @@
     <value>Press ~INPUT_CONTEXT~ to buy weapons.</value>
   </data>
   <data name="AmmuPistol" xml:space="preserve">
-    <value>Pistol Ammo x100</value>
+    <value>Pistol Ammo x50</value>
   </data>
   <data name="AmmuPistolSubtitle" xml:space="preserve">
     <value>Standard pistol, suitable for self defense.</value>
   </data>
   <data name="AmmuPumpShotgun" xml:space="preserve">
-    <value>Pump Shotgun Ammo x50</value>
+    <value>Pump Shotgun Ammo x20</value>
   </data>
   <data name="AmmuPumpShotgunSubtitle" xml:space="preserve">
     <value>Standard shotgun for self defense purposes.</value>
@@ -245,6 +245,12 @@
   </data>
   <data name="MenuMainTitle" xml:space="preserve">
     <value>Main Menu</value>
+  </data>
+  <data name="NoModelWarning" xml:space="preserve">
+    <value>~r~Warning~s~: You must use this mod together with ~b~MrTank's~h~ Player Death No Reset Model~s~ script or ~r~you will stuck~s~ on death screen.</value>
+  </data>
+  <data name="NoModelWarning2" xml:space="preserve">
+    <value>You can download it from ~b~GTA5-Mods~s~.</value>
   </data>
   <data name="NoSave" xml:space="preserve">
     <value>You do not have a save file.</value>

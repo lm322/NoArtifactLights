@@ -19,12 +19,17 @@ namespace NoArtifactLights
         private List<int> killedIds = new List<int>();
         private List<int> weaponedIds = new List<int>();
         private int eplased = 0;
+        CallbackMarker cb = new CallbackMarker();
         private bool dead;
 
         public Entry()
         {
             Function.Call(Hash._SET_BLACKOUT, true);
             UI.ShowHelpMessage(Strings.Start);
+            if(!File.Exists("scripts\\PlayerReliveNoResetModel.dll"))
+            {
+                UI.Notify("");
+            }
             this.Interval = 100;
             this.Tick += Entry_Tick;
             Game.Player.ChangeModel("a_m_m_bevhills_02");
@@ -47,16 +52,6 @@ namespace NoArtifactLights
         {
             try
             {
-                if (!dead && Game.Player.IsDead)
-                {
-                    dead = true;
-                    Game.Player.ChangeModel("player_zero");
-                }
-                if (dead && Game.Player.IsAlive)
-                {
-                    dead = false;
-                    Game.Player.ChangeModel("a_m_m_bevhills_02");
-                }
                 Game.Player.WantedLevel = 0;
                 Ped[] peds = World.GetAllPeds();
                 foreach (Ped ped in peds)
@@ -108,7 +103,9 @@ namespace NoArtifactLights
                     ids.Add(ped.Handle);
                     if (new Random().Next(100, 189) == 150)
                     {
-                        ped.Task.EnterVehicle(World.GetClosestVehicle(ped.Position, 35f), VehicleSeat.Driver, 6000, 8f);
+                        Vehicle v = World.GetClosestVehicle(ped.Position, 50f);
+                        if (v == null || !v.Exists()) continue;
+                        ped.Task.EnterVehicle(v, VehicleSeat.Driver, 6000, 8f);
                         continue;
                     }
                     ped.Task.FightAgainst(World.GetClosestPed(ped.Position, 15f), -1);

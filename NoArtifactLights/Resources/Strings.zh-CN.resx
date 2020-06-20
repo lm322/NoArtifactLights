@@ -240,6 +240,12 @@
   <data name="MenuMainTitle" xml:space="preserve">
     <value>主菜单</value>
   </data>
+  <data name="NoModelWarning" xml:space="preserve">
+    <value>~r~警告~s~: 必须与~b~BV1C7411c7Ss~s~提供的下载配套使用否则玩家死亡后会卡在黑屏。</value>
+  </data>
+  <data name="NoModelWarning2" xml:space="preserve">
+    <value>也可以从 GTA5-Mods 里面搜索下载。</value>
+  </data>
   <data name="NoSave" xml:space="preserve">
     <value>没有存档文件可供加载。</value>
   </data>

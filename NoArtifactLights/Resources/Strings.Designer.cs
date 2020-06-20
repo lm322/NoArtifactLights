@@ -70,7 +70,7 @@ namespace NoArtifactLights.Resources {
         }
         
         /// <summary>
-        ///   查找类似 Pistol Ammo x100 的本地化字符串。
+        ///   查找类似 Pistol Ammo x50 的本地化字符串。
         /// </summary>
         public static string AmmuPistol {
             get {
@@ -88,7 +88,7 @@ namespace NoArtifactLights.Resources {
         }
         
         /// <summary>
-        ///   查找类似 Pump Shotgun Ammo x50 的本地化字符串。
+        ///   查找类似 Pump Shotgun Ammo x20 的本地化字符串。
         /// </summary>
         public static string AmmuPumpShotgun {
             get {
@@ -444,6 +444,24 @@ namespace NoArtifactLights.Resources {
         public static string MenuMainTitle {
             get {
                 return ResourceManager.GetString("MenuMainTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 ~r~Warning~s~: You must use this mod together with ~b~MrTank&apos;s~h~ Player Death No Reset Model~s~ script or ~r~you will stuck~s~ on death screen. 的本地化字符串。
+        /// </summary>
+        public static string NoModelWarning {
+            get {
+                return ResourceManager.GetString("NoModelWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 You can download it from ~b~GTA5-Mods~s~. 的本地化字符串。
+        /// </summary>
+        public static string NoModelWarning2 {
+            get {
+                return ResourceManager.GetString("NoModelWarning2", resourceCulture);
             }
         }
         
