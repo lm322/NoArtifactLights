@@ -11,3 +11,4 @@ C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\obj\Debug\NoArtifa
 C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\zh-CN\NoArtifactLights.resources.dll
 C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\obj\Debug\NoArtifactLights.Resources.Strings.zh-CN.resources
 C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\obj\Debug\zh-CN\NoArtifactLights.resources.dll
+C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\obj\Debug\NoArtifactLights.Resources.Missions.resources

@@ -29,6 +29,7 @@ namespace NoArtifactLights.Menu
         private UIMenu buyMenu;
         private UIMenuItem itemPistol;
         private UIMenuItem itemPumpShotgun;
+        private UIMenuItem itemBodyArmor;
 
         private UIMenu marketMenu;
         private UIMenuItem itemSellVehicle;
@@ -73,13 +74,17 @@ namespace NoArtifactLights.Menu
                 itemPistol.SetRightLabel("$100");
                 itemPumpShotgun = new UIMenuItem(Strings.AmmuPumpShotgun, Strings.AmmuPumpShotgunSubtitle);
                 itemPumpShotgun.SetRightLabel("$200");
+                itemBodyArmor = new UIMenuItem(Strings.WeaponBodyArmor, Strings.WeaponBodyArmorDescription);
+                itemBodyArmor.SetRightLabel("$380");
                 buyMenu.AddItem(itemCash);
                 buyMenu.AddItem(itemPistol);
                 buyMenu.AddItem(itemPumpShotgun);
+                buyMenu.AddItem(itemBodyArmor);
                 buyMenu.RefreshIndex();
                 pool.Add(buyMenu);
                 itemPistol.Activated += ItemPistol_Activated;
                 itemPumpShotgun.Activated += ItemPumpShotgun_Activated;
+                itemBodyArmor.Activated += ItemBodyArmor_Activated;
 
                 marketMenu = new UIMenu(Strings.MenuMarketTitle, Strings.MenuMarketSubtitle);
                 itemSellVehicle = new UIMenuItem(Strings.ItemSellCarTitle, Strings.ItemSellCarSubtitle);
@@ -101,6 +106,22 @@ namespace NoArtifactLights.Menu
                 File.WriteAllText("MENUEXCEPTION.TXT", $"Exception caught: \r\n{ex.GetType().Name}\r\nException Message:\r\n{ex.Message}\r\nException StackTrace:\r\n{ex.StackTrace}");
                 this.Abort();
             }
+        }
+
+        private void ItemBodyArmor_Activated(UIMenu sender, UIMenuItem selectedItem)
+        {
+            if(Game.Player.Character.Armor >= 50)
+            {
+                UI.Notify(Strings.BodyArmorAlreadyHad);
+                return;
+            }
+            if(Common.cash <= 380)
+            {
+                UI.Notify(Strings.BuyNoMoney);
+                return;
+            }
+            Common.cash -= 380;
+            Game.Player.Character.Armor = 100;
         }
 
         private void ItemSellVehicle_Activated(UIMenu sender, UIMenuItem selectedItem)
@@ -199,6 +220,8 @@ namespace NoArtifactLights.Menu
             Common.difficulty = sf.CurrentDifficulty;
             Game.Player.Character.Weapons.RemoveAll();
             Game.Player.Character.Weapons.Give(WeaponHash.Flashlight, 1, false, true);
+            Game.Player.Character.Health = sf.PlayerHealth;
+            Game.Player.Character.Armor = sf.PlayerArmor;
             if (sf.Pistol.Existence)
             {
                 Game.Player.Character.Weapons.Give(WeaponHash.Pistol, sf.Pistol.Ammo, true, true);
@@ -228,6 +251,8 @@ namespace NoArtifactLights.Menu
             sf.CurrentDifficulty = Common.difficulty;
             sf.Cash = Common.cash;
             sf.VehicleSellCooldown = selled;
+            sf.PlayerHealth = Game.Player.Character.Health;
+            sf.PlayerArmor = Game.Player.Character.Armor;
             if (Game.Player.Character.Weapons.HasWeapon(WeaponHash.Pistol))
             {
                 sf.Pistol = new SaveWeapon(Game.Player.Character.Weapons[WeaponHash.Pistol].Ammo + Game.Player.Character.Weapons.Current.AmmoInClip, true);

@@ -141,6 +141,9 @@
   <data name="ArmedBonus" xml:space="preserve">
     <value>击杀武装 NPC 奖励 +$10</value>
   </data>
+  <data name="BodyArmorAlreadyHad" xml:space="preserve">
+    <value>你~h~已经~s~穿上了~b~防弹衣~s~。</value>
+  </data>
   <data name="BuyNoMoney" xml:space="preserve">
     <value>您的现金不足。</value>
   </data>
@@ -287,6 +290,12 @@
   </data>
   <data name="StolenDelivery" xml:space="preserve">
     <value>赃物运输车奖励 +$100</value>
+  </data>
+  <data name="WeaponBodyArmor" xml:space="preserve">
+    <value>防弹衣</value>
+  </data>
+  <data name="WeaponBodyArmorDescription" xml:space="preserve">
+    <value>标准防弹衣，可以用来防护爆炸和子弹。</value>
   </data>
   <data name="WeaponPistol" xml:space="preserve">
     <value>手枪</value>

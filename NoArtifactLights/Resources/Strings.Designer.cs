@@ -133,6 +133,15 @@ namespace NoArtifactLights.Resources {
         }
         
         /// <summary>
+        ///   查找类似 You already ~h~has~s~~b~ body armor~s~. 的本地化字符串。
+        /// </summary>
+        public static string BodyArmorAlreadyHad {
+            get {
+                return ResourceManager.GetString("BodyArmorAlreadyHad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 You do not have enough money for this. 的本地化字符串。
         /// </summary>
         public static string BuyNoMoney {
@@ -570,6 +579,24 @@ namespace NoArtifactLights.Resources {
         public static string StolenDelivery {
             get {
                 return ResourceManager.GetString("StolenDelivery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Body Armor 的本地化字符串。
+        /// </summary>
+        public static string WeaponBodyArmor {
+            get {
+                return ResourceManager.GetString("WeaponBodyArmor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 A standard armor that can provides protection to ammos and explosions. 的本地化字符串。
+        /// </summary>
+        public static string WeaponBodyArmorDescription {
+            get {
+                return ResourceManager.GetString("WeaponBodyArmorDescription", resourceCulture);
             }
         }
         

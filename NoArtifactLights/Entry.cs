@@ -19,10 +19,10 @@ namespace NoArtifactLights
         private List<int> killedIds = new List<int>();
         private List<int> weaponedIds = new List<int>();
         private int eplased = 0;
-        CallbackMarker cb = new CallbackMarker();
         private bool dead;
         private Vehicle deliveryCar;
         private Ped delivery;
+        private string modelName;
 
         public Entry()
         {

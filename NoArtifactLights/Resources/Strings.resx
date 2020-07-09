@@ -141,6 +141,9 @@
   <data name="ArmedBonus" xml:space="preserve">
     <value>Armed NPC Kill Bonus +$10</value>
   </data>
+  <data name="BodyArmorAlreadyHad" xml:space="preserve">
+    <value>You already ~h~has~s~~b~ body armor~s~.</value>
+  </data>
   <data name="BuyNoMoney" xml:space="preserve">
     <value>You do not have enough money for this.</value>
   </data>
@@ -287,6 +290,12 @@
   </data>
   <data name="StolenDelivery" xml:space="preserve">
     <value>Destory stolen delivery bonus +$100</value>
+  </data>
+  <data name="WeaponBodyArmor" xml:space="preserve">
+    <value>Body Armor</value>
+  </data>
+  <data name="WeaponBodyArmorDescription" xml:space="preserve">
+    <value>A standard armor that can provides protection to ammos and explosions.</value>
   </data>
   <data name="WeaponPistol" xml:space="preserve">
     <value>Pistol</value>
