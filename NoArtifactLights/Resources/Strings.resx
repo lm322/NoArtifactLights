@@ -238,13 +238,19 @@
     <value>Save Game</value>
   </data>
   <data name="ItemSellCarSubtitle" xml:space="preserve">
-    <value>Sells current vehicle. You will receive some dollars.</value>
+    <value>Sells current vehicle. The car will be locked and you will receive NAL$.</value>
   </data>
   <data name="ItemSellCarTitle" xml:space="preserve">
-    <value>Sell Current Vehicle</value>
+    <value>Sell Vehicle</value>
   </data>
   <data name="MenuMainTitle" xml:space="preserve">
     <value>Main Menu</value>
+  </data>
+  <data name="MenuMarketSubtitle" xml:space="preserve">
+    <value>Deals Menu</value>
+  </data>
+  <data name="MenuMarketTitle" xml:space="preserve">
+    <value>Market</value>
   </data>
   <data name="NoModelWarning" xml:space="preserve">
     <value>~r~Warning~s~: You must use this mod together with ~b~MrTank's~h~ Player Death No Reset Model~s~ script or ~r~you will stuck~s~ on death screen.</value>
@@ -255,8 +261,29 @@
   <data name="NoSave" xml:space="preserve">
     <value>You do not have a save file.</value>
   </data>
+  <data name="RepairBlip" xml:space="preserve">
+    <value>Vehicle Repair</value>
+  </data>
+  <data name="RepairHelp" xml:space="preserve">
+    <value>Press ~INPUT_CONTEXT~ to repair your current vehicle.</value>
+  </data>
+  <data name="RepairSuccess" xml:space="preserve">
+    <value>Your vehicle has been repaired.</value>
+  </data>
+  <data name="RepairUndamaged" xml:space="preserve">
+    <value>Your vehicle is intact.</value>
+  </data>
+  <data name="SellNoCar" xml:space="preserve">
+    <value>You currently does not in a vehicle. Get in the car you wanna sell.</value>
+  </data>
+  <data name="SellSuccess" xml:space="preserve">
+    <value>You have successfully selled your vehicle.</value>
+  </data>
   <data name="Start" xml:space="preserve">
     <value>Welcome to NoArtifactLights survival modification. </value>
+  </data>
+  <data name="StolenDelivery" xml:space="preserve">
+    <value>Destory stolen delivery bonus +$100</value>
   </data>
   <data name="WeaponPistol" xml:space="preserve">
     <value>Pistol</value>

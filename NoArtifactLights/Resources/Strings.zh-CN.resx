@@ -142,7 +142,7 @@
     <value>击杀武装 NPC 奖励 +$10</value>
   </data>
   <data name="BuyNoMoney" xml:space="preserve">
-    <value>你没有足够的现金来购买此物品。</value>
+    <value>您的现金不足。</value>
   </data>
   <data name="DifficultyCarbineRifle" xml:space="preserve">
     <value>卡宾步枪</value>
@@ -237,8 +237,20 @@
   <data name="ItemSaveTitle" xml:space="preserve">
     <value>保存游戏</value>
   </data>
+  <data name="ItemSellCarSubtitle" xml:space="preserve">
+    <value>出售当前车辆。车辆会被上锁，并且你会获得 NAL 游戏币。</value>
+  </data>
+  <data name="ItemSellCarTitle" xml:space="preserve">
+    <value>出售车辆</value>
+  </data>
   <data name="MenuMainTitle" xml:space="preserve">
     <value>主菜单</value>
+  </data>
+  <data name="MenuMarketSubtitle" xml:space="preserve">
+    <value>交易菜单</value>
+  </data>
+  <data name="MenuMarketTitle" xml:space="preserve">
+    <value>市场</value>
   </data>
   <data name="NoModelWarning" xml:space="preserve">
     <value>~r~警告~s~: 必须与~b~BV1C7411c7Ss~s~提供的下载配套使用否则玩家死亡后会卡在黑屏。</value>
@@ -249,8 +261,29 @@
   <data name="NoSave" xml:space="preserve">
     <value>没有存档文件可供加载。</value>
   </data>
+  <data name="RepairBlip" xml:space="preserve">
+    <value>车辆修复</value>
+  </data>
+  <data name="RepairHelp" xml:space="preserve">
+    <value>按 ~INPUT_CONTEXT~ 来修复您的当前车辆。</value>
+  </data>
+  <data name="RepairSuccess" xml:space="preserve">
+    <value>您的车辆已经修复。</value>
+  </data>
+  <data name="RepairUndamaged" xml:space="preserve">
+    <value>您的车辆无需修复。</value>
+  </data>
+  <data name="SellNoCar" xml:space="preserve">
+    <value>您当前不在车辆中。进入您想出售的车辆。</value>
+  </data>
+  <data name="SellSuccess" xml:space="preserve">
+    <value>您已成功出售车辆。</value>
+  </data>
   <data name="Start" xml:space="preserve">
     <value>欢迎来到 NoArtifactLights 生存模组。</value>
+  </data>
+  <data name="StolenDelivery" xml:space="preserve">
+    <value>赃物运输车奖励 +$100</value>
   </data>
   <data name="WeaponPistol" xml:space="preserve">
     <value>手枪</value>

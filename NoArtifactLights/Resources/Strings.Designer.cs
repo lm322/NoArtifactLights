@@ -421,7 +421,7 @@ namespace NoArtifactLights.Resources {
         }
         
         /// <summary>
-        ///   查找类似 Sells current vehicle. You will receive some dollars. 的本地化字符串。
+        ///   查找类似 Sells current vehicle. The car will be locked and you will receive NAL$. 的本地化字符串。
         /// </summary>
         public static string ItemSellCarSubtitle {
             get {
@@ -430,7 +430,7 @@ namespace NoArtifactLights.Resources {
         }
         
         /// <summary>
-        ///   查找类似 Sell Current Vehicle 的本地化字符串。
+        ///   查找类似 Sell Vehicle 的本地化字符串。
         /// </summary>
         public static string ItemSellCarTitle {
             get {
@@ -444,6 +444,24 @@ namespace NoArtifactLights.Resources {
         public static string MenuMainTitle {
             get {
                 return ResourceManager.GetString("MenuMainTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Deals Menu 的本地化字符串。
+        /// </summary>
+        public static string MenuMarketSubtitle {
+            get {
+                return ResourceManager.GetString("MenuMarketSubtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Market 的本地化字符串。
+        /// </summary>
+        public static string MenuMarketTitle {
+            get {
+                return ResourceManager.GetString("MenuMarketTitle", resourceCulture);
             }
         }
         
@@ -475,11 +493,74 @@ namespace NoArtifactLights.Resources {
         }
         
         /// <summary>
+        ///   查找类似 Vehicle Repair 的本地化字符串。
+        /// </summary>
+        public static string RepairBlip {
+            get {
+                return ResourceManager.GetString("RepairBlip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Press ~INPUT_CONTEXT~ to repair your current vehicle. 的本地化字符串。
+        /// </summary>
+        public static string RepairHelp {
+            get {
+                return ResourceManager.GetString("RepairHelp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Your vehicle has been repaired. 的本地化字符串。
+        /// </summary>
+        public static string RepairSuccess {
+            get {
+                return ResourceManager.GetString("RepairSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Your vehicle is intact. 的本地化字符串。
+        /// </summary>
+        public static string RepairUndamaged {
+            get {
+                return ResourceManager.GetString("RepairUndamaged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 You currently does not in a vehicle. Get in the car you wanna sell. 的本地化字符串。
+        /// </summary>
+        public static string SellNoCar {
+            get {
+                return ResourceManager.GetString("SellNoCar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 You have successfully selled your vehicle. 的本地化字符串。
+        /// </summary>
+        public static string SellSuccess {
+            get {
+                return ResourceManager.GetString("SellSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Welcome to NoArtifactLights survival modification.  的本地化字符串。
         /// </summary>
         public static string Start {
             get {
                 return ResourceManager.GetString("Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Destory stolen delivery bonus +$100 的本地化字符串。
+        /// </summary>
+        public static string StolenDelivery {
+            get {
+                return ResourceManager.GetString("StolenDelivery", resourceCulture);
             }
         }
         

@@ -23,12 +23,18 @@ namespace NoArtifactLights.Menu
         private UIMenuItem itemKills;
         private UIMenuCheckboxItem itemLights;
         private UIMenuItem itemCash;
+        private int unlockHour;
+        private bool selled;
 
         private UIMenu buyMenu;
         private UIMenuItem itemPistol;
         private UIMenuItem itemPumpShotgun;
 
+        private UIMenu marketMenu;
+        private UIMenuItem itemSellVehicle;
+
         private Vector3 ammu = new Vector3(18.18945f, -1120.384f, 28.91654f);
+        private Vector3 repair = new Vector3(140.683f, -1081.387f, 28.56039f);
         private Vector3[] ammus = { new Vector3(18.18945f, -1120.384f, 28.91654f), new Vector3(-325.6184f, 6072.246f, 31.21228f) };
 
         public MenuScript()
@@ -61,6 +67,7 @@ namespace NoArtifactLights.Menu
                 itemCallCops.Activated += ItemCallCops_Activated;
                 cashBar = new TextTimerBar("Cash", "$0");
                 Common.CashChanged += Common_CashChanged;
+                
                 buyMenu = new UIMenu(Strings.AmmuTitle, Strings.AmmuSubtitle);
                 itemPistol = new UIMenuItem(Strings.AmmuPistol, Strings.AmmuPistolSubtitle);
                 itemPistol.SetRightLabel("$100");
@@ -73,6 +80,20 @@ namespace NoArtifactLights.Menu
                 pool.Add(buyMenu);
                 itemPistol.Activated += ItemPistol_Activated;
                 itemPumpShotgun.Activated += ItemPumpShotgun_Activated;
+
+                marketMenu = new UIMenu(Strings.MenuMarketTitle, Strings.MenuMarketSubtitle);
+                itemSellVehicle = new UIMenuItem(Strings.ItemSellCarTitle, Strings.ItemSellCarSubtitle);
+                marketMenu.AddItem(itemCash);
+                marketMenu.AddItem(itemSellVehicle);
+                marketMenu.RefreshIndex();
+                pool.Add(marketMenu);
+                itemSellVehicle.Activated += ItemSellVehicle_Activated;
+                Blip repairBlip = World.CreateBlip(repair);
+                repairBlip.IsFriendly = true;
+                repairBlip.IsShortRange = true;
+                repairBlip.Sprite = BlipSprite.Garage;
+                repairBlip.Color = BlipColor.Blue;
+                repairBlip.Name = Strings.RepairBlip;
             }
             catch (Exception ex)
             {
@@ -80,6 +101,30 @@ namespace NoArtifactLights.Menu
                 File.WriteAllText("MENUEXCEPTION.TXT", $"Exception caught: \r\n{ex.GetType().Name}\r\nException Message:\r\n{ex.Message}\r\nException StackTrace:\r\n{ex.StackTrace}");
                 this.Abort();
             }
+        }
+
+        private void ItemSellVehicle_Activated(UIMenu sender, UIMenuItem selectedItem)
+        {
+            marketMenu.Visible = false;
+            if(!Game.Player.Character.IsInVehicle())
+            {
+                UI.ShowHelpMessage(Strings.SellNoCar);
+                return;
+            }
+            Vehicle v = Game.Player.Character.CurrentVehicle;
+            if(!v.Exists())
+            {
+                return;
+            }
+            v.IsPersistent = true;
+            Game.Player.Character.Task.LeaveVehicle();
+            v.LockStatus = VehicleLockStatus.Locked;
+            v.MarkAsNoLongerNeeded();
+            int money = new Random().Next(100, 501);
+            Common.cash += money;
+            UI.Notify(Strings.SellSuccess);
+            selled = true;
+            unlockHour = 0;
         }
 
         private void ItemPumpShotgun_Activated(UIMenu sender, UIMenuItem selectedItem)
@@ -160,6 +205,8 @@ namespace NoArtifactLights.Menu
             itemDifficulty.SetRightLabel(Strings.ResourceManager.GetString("Difficulty" + Common.difficulty.ToString()));
             itemKills.SetRightLabel(Common.counter.ToString());
             itemCash.SetRightLabel("$" + Common.cash.ToString());
+            unlockHour = 0;
+            selled = sf.VehicleSellCooldown;
             UI.Notify(Strings.GameLoaded);
         }
 
@@ -174,6 +221,7 @@ namespace NoArtifactLights.Menu
             sf.Kills = Common.counter;
             sf.CurrentDifficulty = Common.difficulty;
             sf.Cash = Common.cash;
+            sf.VehicleSellCooldown = selled;
             bool pistolExists = Game.Player.Character.Weapons.HasWeapon(WeaponHash.Pistol);
             if (pistolExists)
             {
@@ -222,31 +270,72 @@ namespace NoArtifactLights.Menu
             pool.ProcessMenus();
             if (ammu.DistanceTo(Game.Player.Character.Position) <= 15f)
             {
-                UI.ShowHelpMessage("");
+                UI.ShowHelpMessage(Strings.AmmuOpenShop);
+            }
+            if (selled && World.CurrentDayTime.Hours == unlockHour)
+            {
+                selled = false;
+            }
+            if (repair.DistanceTo(Game.Player.Character.Position) <= 10f && Game.Player.Character.IsInVehicle())
+            {
+                UI.ShowHelpMessage(Strings.RepairHelp);
             }
         }
 
         private void MenuScript_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.N)
+            switch (e.KeyCode)
             {
-                mainMenu.Visible = !mainMenu.Visible;
-                itemDifficulty.SetRightLabel(Strings.ResourceManager.GetString("Difficulty" + Common.difficulty.ToString()));
-                itemKills.SetRightLabel(Common.counter.ToString());
-                itemCash.SetRightLabel("$" + Common.cash.ToString());
-            }
-            if (e.KeyCode == Keys.E)
-            {
-                if (mainMenu.Visible) return;
-                if (buyMenu.Visible)
-                {
-                    buyMenu.Visible = false;
-                    return;
-                }
-                if (ammu.DistanceTo(Game.Player.Character.Position) <= 15f)
-                {
-                    buyMenu.Visible = true;
-                }
+                case Keys.N:
+                    mainMenu.Visible = !mainMenu.Visible;
+                    itemDifficulty.SetRightLabel(Strings.ResourceManager.GetString("Difficulty" + Common.difficulty.ToString()));
+                    itemKills.SetRightLabel(Common.counter.ToString());
+                    itemCash.SetRightLabel("$" + Common.cash.ToString());
+                    break;
+                case Keys.E:
+                    if (mainMenu.Visible || marketMenu.Visible) return;
+                    if (buyMenu.Visible)
+                    {
+                        buyMenu.Visible = false;
+                        return;
+                    }
+                    if (ammu.DistanceTo(Game.Player.Character.Position) <= 15f)
+                    {
+                        buyMenu.Visible = true;
+                    }
+                    if (repair.DistanceTo(Game.Player.Character.Position) <= 10f && Game.Player.Character.IsInVehicle())
+                    {
+                        if(Common.cash < 100)
+                        {
+                            UI.ShowSubtitle(Strings.BuyNoMoney);
+                            return;
+                        }
+                        if(Game.Player.Character.CurrentVehicle.IsDamaged == false)
+                        {
+                            UI.ShowSubtitle(Strings.RepairUndamaged);
+                            return;
+                        }
+                        Common.cash -= 100;
+                        Game.Player.Character.CurrentVehicle.Repair();
+                        UI.ShowSubtitle(Strings.RepairSuccess);
+                    }
+                    break;
+                case Keys.B:
+                    if (mainMenu.Visible || buyMenu.Visible) return;
+                    if(marketMenu.Visible)
+                    {
+                        marketMenu.Visible = false;
+                        return;
+                    }
+                    else
+                    {
+                        marketMenu.Visible = true;
+                    }
+                    if(selled)
+                    {
+                        itemSellVehicle.Enabled = false;
+                    }
+                    break;
             }
         }
     }

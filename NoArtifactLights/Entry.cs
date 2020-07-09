@@ -21,6 +21,8 @@ namespace NoArtifactLights
         private int eplased = 0;
         CallbackMarker cb = new CallbackMarker();
         private bool dead;
+        private Vehicle deliveryCar;
+        private Ped delivery;
 
         public Entry()
         {
@@ -39,6 +41,8 @@ namespace NoArtifactLights
             Game.Player.Character.Position = new Vector3(459.8501f, -1001.404f, 24.91487f);
             Game.Player.Character.Weapons.Give(WeaponHash.Flashlight, 1, true, true);
             Game.Player.Character.Weapons.Give(WeaponHash.Pistol, 50, false, false);
+            World.SetRelationshipBetweenGroups(Relationship.Hate, 0x02B8FA80, 0x47033600);
+            World.SetRelationshipBetweenGroups(Relationship.Hate, 0x47033600, 0x02B8FA80);
         }
 
         private void T_Elapsed1(object sender, ElapsedEventArgs e)
@@ -57,6 +61,10 @@ namespace NoArtifactLights
                 Ped[] peds = World.GetAllPeds();
                 foreach (Ped ped in peds)
                 {
+                    if(ped == delivery)
+                    {
+                        continue;
+                    }
                     if (ped.Exists() && ped.HasBeenDamagedBy(Game.Player.Character) && ped.IsDead && !killedIds.Contains(ped.Handle))
                     {
                         killedIds.Add(ped.Handle);
@@ -65,6 +73,7 @@ namespace NoArtifactLights
                         {
                             Common.cash += 10;
                             UI.ShowHelpMessage(Strings.ArmedBonus);
+                            ped.CurrentBlip.Remove();
                         }
                         switch (Common.counter)
                         {
@@ -102,14 +111,23 @@ namespace NoArtifactLights
                         continue;
                     }
                     ids.Add(ped.Handle);
-                    if (new Random().Next(100, 189) == 150)
+                    if (new Random().Next(1000000, 2000001) == 1100000 &&(delivery == null || !delivery.Exists() || !deliveryCar.Exists()))
                     {
-                        Vehicle v = World.GetClosestVehicle(ped.Position, 50f);
-                        if (v == null || !v.Exists()) continue;
-                        ped.Task.EnterVehicle(v, VehicleSeat.Driver, 6000, 8f);
-                        continue;
+                        deliveryCar = World.CreateVehicle("MULE", World.GetNextPositionOnStreet(Game.Player.Character.Position.Around(30f)));
+                        delivery = deliveryCar.CreateRandomPedOnSeat(VehicleSeat.Driver);
+                        delivery.AddBlip();
+                        delivery.CurrentBlip.Sprite = BlipSprite.PersonalVehicleCar;
+                        delivery.CurrentBlip.IsFriendly = false;
+                        delivery.CurrentBlip.IsFlashing = true;
+                        delivery.CurrentBlip.Color = BlipColor.Red;
+                        delivery.IsPersistent = true;
+                        deliveryCar.IsPersistent = true;
+                        delivery.AlwaysKeepTask = true;
+                        delivery.BlockPermanentEvents = true;
                     }
-                    ped.Task.FightAgainst(World.GetClosestPed(ped.Position, 15f), -1);
+                    
+
+
                     if (new Random().Next(9, 89) == 10)
                     {
                         WeaponHash wp;
@@ -171,6 +189,26 @@ namespace NoArtifactLights
                 if (ids.Count >= 60000)
                 {
                     ids.Clear();
+                }
+                if(delivery != null && delivery.Exists() && deliveryCar.Exists() && !delivery.IsInVehicle(deliveryCar) && !delivery.IsGettingIntoAVehicle)
+                {
+                    delivery.Task.EnterVehicle(deliveryCar, VehicleSeat.Driver);
+                }
+                if(delivery != null && delivery.Exists() && deliveryCar.Exists() && delivery.Position.DistanceTo2D(Game.Player.Character.Position) >= 350f && !deliveryCar.IsOnScreen)
+                {
+                    delivery.CurrentBlip.Remove();
+                    delivery.MarkAsNoLongerNeeded();
+                    deliveryCar.MarkAsNoLongerNeeded();
+                    delivery = null;
+                    deliveryCar = null;
+                }
+                if (delivery != null && delivery.Exists() && deliveryCar.Exists() && delivery.HasBeenDamagedBy(Game.Player.Character) && (deliveryCar.IsDead || delivery.IsDead || !delivery.IsInVehicle(deliveryCar)))
+                {
+                    delivery.CurrentBlip.Remove();
+                    delivery = null;
+                    deliveryCar = null;
+                    UI.ShowHelpMessage(Strings.StolenDelivery);
+                    Common.cash += 100;
                 }
             }
             catch (Exception ex)

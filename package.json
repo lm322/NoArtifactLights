@@ -1,0 +1,24 @@
+{
+  "name": "NoArtifactLights",
+  "version": "1.0.0",
+  "description": "NoArtifactLights is a GTA5 survival mod based on Blackouts and NPCs fights eachother.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "EndermanMC@vs-ssh.visualstudio.com:v3/EndermanMC/NoArtifactLights/NoArtifactLights"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "GPL-3.0-or-later",
+  "devDependencies": {
+    "cz-conventional-changelog": "^3.2.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
