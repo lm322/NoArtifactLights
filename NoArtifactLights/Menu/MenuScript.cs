@@ -184,6 +184,11 @@ namespace NoArtifactLights.Menu
             sf = (SaveFile)serializer.Deserialize(fs);
             fs.Close();
             fs.Dispose();
+            if(sf.Version != 2)
+            {
+                UI.Notify("");
+                return;
+            }
             World.Weather = sf.Status.CurrentWeather;
             World.CurrentDayTime = new TimeSpan(sf.Status.Hour, sf.Status.Minute, 0);
             World.SetBlackout(sf.Blackout);
@@ -213,6 +218,7 @@ namespace NoArtifactLights.Menu
         private void ItemSave_Activated(UIMenu sender, UIMenuItem selectedItem)
         {
             SaveFile sf = new SaveFile();
+            sf.Version = 2;
             sf.Status = new WorldStatus(World.Weather, World.CurrentDayTime.Hours, World.CurrentDayTime.Minutes);
             sf.PlayerX = Game.Player.Character.Position.X;
             sf.PlayerY = Game.Player.Character.Position.Y;
@@ -222,21 +228,17 @@ namespace NoArtifactLights.Menu
             sf.CurrentDifficulty = Common.difficulty;
             sf.Cash = Common.cash;
             sf.VehicleSellCooldown = selled;
-            bool pistolExists = Game.Player.Character.Weapons.HasWeapon(WeaponHash.Pistol);
-            if (pistolExists)
+            if (Game.Player.Character.Weapons.HasWeapon(WeaponHash.Pistol))
             {
-                Game.Player.Character.Weapons.Select(WeaponHash.Pistol);
-                sf.Pistol = new SaveWeapon(Game.Player.Character.Weapons.Current.Ammo + Game.Player.Character.Weapons.Current.AmmoInClip, true);
+                sf.Pistol = new SaveWeapon(Game.Player.Character.Weapons[WeaponHash.Pistol].Ammo + Game.Player.Character.Weapons.Current.AmmoInClip, true);
             }
             else
             {
                 sf.Pistol = new SaveWeapon(0, false);
             }
-            bool pumpExists = Game.Player.Character.Weapons.HasWeapon(WeaponHash.PumpShotgun);
-            if (pumpExists)
+            if (Game.Player.Character.Weapons.HasWeapon(WeaponHash.PumpShotgun))
             {
-                Game.Player.Character.Weapons.Select(WeaponHash.PumpShotgun);
-                sf.PumpShotgun = new SaveWeapon(Game.Player.Character.Weapons.Current.Ammo + Game.Player.Character.Weapons.Current.AmmoInClip, true);
+                sf.PumpShotgun = new SaveWeapon(Game.Player.Character.Weapons[WeaponHash.PumpShotgun].Ammo + Game.Player.Character.Weapons.Current.AmmoInClip, true);
             }
             else
             {

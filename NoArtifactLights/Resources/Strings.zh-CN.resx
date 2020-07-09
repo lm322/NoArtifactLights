@@ -273,6 +273,9 @@
   <data name="RepairUndamaged" xml:space="preserve">
     <value>您的车辆无需修复。</value>
   </data>
+  <data name="SaveVersion" xml:space="preserve">
+    <value>~h~注意！~s~ 该存档与当前版本的 NoArtifactLights 不兼容。</value>
+  </data>
   <data name="SellNoCar" xml:space="preserve">
     <value>您当前不在车辆中。进入您想出售的车辆。</value>
   </data>

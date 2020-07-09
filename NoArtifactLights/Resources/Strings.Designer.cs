@@ -529,6 +529,15 @@ namespace NoArtifactLights.Resources {
         }
         
         /// <summary>
+        ///   查找类似 ~h~Attention!~s~ This save is not available in this version of NoArtifactLights. 的本地化字符串。
+        /// </summary>
+        public static string SaveVersion {
+            get {
+                return ResourceManager.GetString("SaveVersion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 You currently does not in a vehicle. Get in the car you wanna sell. 的本地化字符串。
         /// </summary>
         public static string SellNoCar {

@@ -43,6 +43,8 @@ namespace NoArtifactLights
             Game.Player.Character.Weapons.Give(WeaponHash.Pistol, 50, false, false);
             World.SetRelationshipBetweenGroups(Relationship.Hate, 0x02B8FA80, 0x47033600);
             World.SetRelationshipBetweenGroups(Relationship.Hate, 0x47033600, 0x02B8FA80);
+            Game.MaxWantedLevel = 0;
+            Game.Player.IgnoredByPolice = true;
         }
 
         private void T_Elapsed1(object sender, ElapsedEventArgs e)
@@ -57,7 +59,6 @@ namespace NoArtifactLights
         {
             try
             {
-                Game.Player.WantedLevel = 0;
                 Ped[] peds = World.GetAllPeds();
                 foreach (Ped ped in peds)
                 {
@@ -81,25 +82,25 @@ namespace NoArtifactLights
                                 UI.ShowHelpMessage(Strings.FirstKill);
                                 break;
 
-                            case 1000:
+                            case 100:
                                 Common.difficulty = Difficulty.Easy;
                                 BigMessageThread.MessageInstance.ShowSimpleShard(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyEasy));
                                 UI.ShowHelpMessage(string.Format(Strings.DifficultyHelp, Strings.DifficultyEasy));
                                 break;
 
-                            case 3000:
+                            case 300:
                                 Common.difficulty = Difficulty.Normal;
                                 BigMessageThread.MessageInstance.ShowSimpleShard(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyNormal));
                                 UI.ShowHelpMessage(string.Format(Strings.DifficultyHelp, Strings.DifficultyNormal));
                                 break;
 
-                            case 7000:
+                            case 700:
                                 Common.difficulty = Difficulty.Hard;
                                 BigMessageThread.MessageInstance.ShowSimpleShard(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyHard));
                                 UI.ShowHelpMessage(string.Format(Strings.DifficultyHelp, Strings.DifficultyHard));
                                 break;
 
-                            case 15000:
+                            case 1500:
                                 Common.difficulty = Difficulty.Nether;
                                 BigMessageThread.MessageInstance.ShowSimpleShard(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyNether));
                                 UI.ShowHelpMessage(string.Format(Strings.DifficultyHelp, Strings.DifficultyNether));

@@ -273,6 +273,9 @@
   <data name="RepairUndamaged" xml:space="preserve">
     <value>Your vehicle is intact.</value>
   </data>
+  <data name="SaveVersion" xml:space="preserve">
+    <value>~h~Attention!~s~ This save is not available in this version of NoArtifactLights.</value>
+  </data>
   <data name="SellNoCar" xml:space="preserve">
     <value>You currently does not in a vehicle. Get in the car you wanna sell.</value>
   </data>
