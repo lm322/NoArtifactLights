@@ -2,6 +2,7 @@
 using GTA.Math;
 using GTA.Native;
 using NativeUI;
+using NoArtifactLights.Managers;
 using NoArtifactLights.Resources;
 using NoArtifactLights.Serialize;
 using System;
@@ -70,10 +71,8 @@ namespace NoArtifactLights.Menu
                 Common.CashChanged += Common_CashChanged;
                 
                 buyMenu = new UIMenu(Strings.AmmuTitle, Strings.AmmuSubtitle);
-                itemPistol = new UIMenuItem(Strings.AmmuPistol, Strings.AmmuPistolSubtitle);
-                itemPistol.SetRightLabel("$100");
-                itemPumpShotgun = new UIMenuItem(Strings.AmmuPumpShotgun, Strings.AmmuPumpShotgunSubtitle);
-                itemPumpShotgun.SetRightLabel("$200");
+                itemPistol = WeaponShopManager.GenerateWeaponSellerItem(Strings.AmmuPistol, Strings.AmmuPistolSubtitle, 100);
+                itemPumpShotgun = WeaponShopManager.GenerateWeaponSellerItem(Strings.AmmuPumpShotgun, Strings.AmmuPumpShotgunSubtitle, 200);
                 itemBodyArmor = new UIMenuItem(Strings.WeaponBodyArmor, Strings.WeaponBodyArmorDescription);
                 itemBodyArmor.SetRightLabel("$380");
                 buyMenu.AddItem(itemCash);
@@ -110,18 +109,7 @@ namespace NoArtifactLights.Menu
 
         private void ItemBodyArmor_Activated(UIMenu sender, UIMenuItem selectedItem)
         {
-            if(Game.Player.Character.Armor >= 50)
-            {
-                UI.Notify(Strings.BodyArmorAlreadyHad);
-                return;
-            }
-            if(Common.cash <= 380)
-            {
-                UI.Notify(Strings.BuyNoMoney);
-                return;
-            }
-            Common.cash -= 380;
-            Game.Player.Character.Armor = 100;
+            WeaponShopManager.SellArmor(50, 380);
         }
 
         private void ItemSellVehicle_Activated(UIMenu sender, UIMenuItem selectedItem)
@@ -148,39 +136,8 @@ namespace NoArtifactLights.Menu
             unlockHour = 0;
         }
 
-        private void ItemPumpShotgun_Activated(UIMenu sender, UIMenuItem selectedItem)
-        {
-            if (Common.cash < 200)
-            {
-                UI.ShowSubtitle(Strings.BuyNoMoney);
-                return;
-            }
-            Common.cash -= 200;
-            if (!Game.Player.Character.Weapons.HasWeapon(WeaponHash.PumpShotgun))
-            {
-                Game.Player.Character.Weapons.Give(WeaponHash.PumpShotgun, 20, true, true);
-                return;
-            }
-            Game.Player.Character.Weapons.Select(WeaponHash.PumpShotgun);
-            Game.Player.Character.Weapons.Current.Ammo += 20;
-        }
-
-        private void ItemPistol_Activated(UIMenu sender, UIMenuItem selectedItem)
-        {
-            if (Common.cash < 100)
-            {
-                UI.ShowSubtitle(Strings.BuyNoMoney);
-                return;
-            }
-            Common.cash -= 100;
-            if (!Game.Player.Character.Weapons.HasWeapon(WeaponHash.Pistol))
-            {
-                Game.Player.Character.Weapons.Give(WeaponHash.Pistol, 50, true, true);
-                return;
-            }
-            Game.Player.Character.Weapons.Select(WeaponHash.Pistol);
-            Game.Player.Character.Weapons.Current.Ammo += 50;
-        }
+        private void ItemPumpShotgun_Activated(UIMenu sender, UIMenuItem selectedItem) => WeaponShopManager.SellWeapon(200, 50, WeaponHash.PumpShotgun);
+        private void ItemPistol_Activated(UIMenu sender, UIMenuItem selectedItem) => WeaponShopManager.SellWeapon(100, 100, WeaponHash.Pistol);
 
         private void Common_CashChanged(object sender, EventArgs e)
         {
@@ -194,102 +151,19 @@ namespace NoArtifactLights.Menu
 
         private void ItemLoad_Activated(UIMenu sender, UIMenuItem selectedItem)
         {
-            SaveFile sf;
-            if (!File.Exists("NALSave.xml"))
-            {
-                UI.Notify(Strings.NoSave);
-                return;
-            }
-            FileStream fs = File.OpenRead("NALSave.xml");
-            XmlSerializer serializer = new XmlSerializer(typeof(SaveFile));
-            sf = (SaveFile)serializer.Deserialize(fs);
-            fs.Close();
-            fs.Dispose();
-            if(sf.Version != 2)
-            {
-                UI.Notify("");
-                return;
-            }
-            World.Weather = sf.Status.CurrentWeather;
-            World.CurrentDayTime = new TimeSpan(sf.Status.Hour, sf.Status.Minute, 0);
-            World.SetBlackout(sf.Blackout);
-            itemLights.Checked = sf.Blackout;
-            Game.Player.Character.Position = new GTA.Math.Vector3(sf.PlayerX, sf.PlayerY, sf.PlayerZ);
-            Common.counter = sf.Kills;
-            Common.cash = sf.Cash;
-            Common.difficulty = sf.CurrentDifficulty;
-            Game.Player.Character.Weapons.RemoveAll();
-            Game.Player.Character.Weapons.Give(WeaponHash.Flashlight, 1, false, true);
-            Game.Player.Character.Health = sf.PlayerHealth;
-            Game.Player.Character.Armor = sf.PlayerArmor;
-            if (sf.Pistol.Existence)
-            {
-                Game.Player.Character.Weapons.Give(WeaponHash.Pistol, sf.Pistol.Ammo, true, true);
-            }
-            if (sf.PumpShotgun.Existence)
-            {
-                Game.Player.Character.Weapons.Give(WeaponHash.PumpShotgun, sf.PumpShotgun.Ammo, true, true);
-            }
+            SaveManager.Load();
+            itemLights.Checked = Common.blackout;
             itemDifficulty.SetRightLabel(Strings.ResourceManager.GetString("Difficulty" + Common.difficulty.ToString()));
             itemKills.SetRightLabel(Common.counter.ToString());
             itemCash.SetRightLabel("$" + Common.cash.ToString());
-            unlockHour = 0;
-            selled = sf.VehicleSellCooldown;
             UI.Notify(Strings.GameLoaded);
         }
 
-        private void ItemSave_Activated(UIMenu sender, UIMenuItem selectedItem)
-        {
-            SaveFile sf = new SaveFile();
-            sf.Version = 2;
-            sf.Status = new WorldStatus(World.Weather, World.CurrentDayTime.Hours, World.CurrentDayTime.Minutes);
-            sf.PlayerX = Game.Player.Character.Position.X;
-            sf.PlayerY = Game.Player.Character.Position.Y;
-            sf.PlayerZ = Game.Player.Character.Position.Z;
-            sf.Blackout = itemLights.Checked;
-            sf.Kills = Common.counter;
-            sf.CurrentDifficulty = Common.difficulty;
-            sf.Cash = Common.cash;
-            sf.VehicleSellCooldown = selled;
-            sf.PlayerHealth = Game.Player.Character.Health;
-            sf.PlayerArmor = Game.Player.Character.Armor;
-            if (Game.Player.Character.Weapons.HasWeapon(WeaponHash.Pistol))
-            {
-                sf.Pistol = new SaveWeapon(Game.Player.Character.Weapons[WeaponHash.Pistol].Ammo + Game.Player.Character.Weapons.Current.AmmoInClip, true);
-            }
-            else
-            {
-                sf.Pistol = new SaveWeapon(0, false);
-            }
-            if (Game.Player.Character.Weapons.HasWeapon(WeaponHash.PumpShotgun))
-            {
-                sf.PumpShotgun = new SaveWeapon(Game.Player.Character.Weapons[WeaponHash.PumpShotgun].Ammo + Game.Player.Character.Weapons.Current.AmmoInClip, true);
-            }
-            else
-            {
-                sf.PumpShotgun = new SaveWeapon(0, false);
-            }
-            FileStream fs = File.Create("NALSave.xml");
-            XmlSerializer serializer = new XmlSerializer(typeof(SaveFile));
-            serializer.Serialize(fs, sf);
-            UI.Notify(Strings.GameSaved);
-            fs.Close();
-            fs.Dispose();
-        }
+        private void ItemSave_Activated(UIMenu sender, UIMenuItem selectedItem) => SaveManager.Save(itemLights.Checked);
 
         private void ItemLights_CheckboxEvent(UIMenuCheckboxItem sender, bool Checked)
         {
             Function.Call(Hash._SET_BLACKOUT, Checked);
-        }
-
-        private void ItemWithdraw_Activated(UIMenu sender, UIMenuItem selectedItem)
-        {
-            Common.Withdraw(100);
-        }
-
-        private void ItemDeposit_Activated(UIMenu sender, UIMenuItem selectedItem)
-        {
-            Common.Deposit(100);
         }
 
         private void MenuScript_Tick(object sender, EventArgs e)

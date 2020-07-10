@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     ".NETFramework,Version=v4.8": {
-      "ScriptHookVDotNet2/2.10.12": {
+      "ScriptHookVDotNet2/2.10.13": {
         "type": "package",
         "compile": {
           "lib/net48/ScriptHookVDotNet2.dll": {}
@@ -13,7 +13,7 @@
       }
     },
     ".NETFramework,Version=v4.8/win": {
-      "ScriptHookVDotNet2/2.10.12": {
+      "ScriptHookVDotNet2/2.10.13": {
         "type": "package",
         "compile": {
           "lib/net48/ScriptHookVDotNet2.dll": {}
@@ -24,7 +24,7 @@
       }
     },
     ".NETFramework,Version=v4.8/win-x64": {
-      "ScriptHookVDotNet2/2.10.12": {
+      "ScriptHookVDotNet2/2.10.13": {
         "type": "package",
         "compile": {
           "lib/net48/ScriptHookVDotNet2.dll": {}
@@ -35,7 +35,7 @@
       }
     },
     ".NETFramework,Version=v4.8/win-x86": {
-      "ScriptHookVDotNet2/2.10.12": {
+      "ScriptHookVDotNet2/2.10.13": {
         "type": "package",
         "compile": {
           "lib/net48/ScriptHookVDotNet2.dll": {}
@@ -47,23 +47,23 @@
     }
   },
   "libraries": {
-    "ScriptHookVDotNet2/2.10.12": {
-      "sha512": "tMRJXU1hh4fpGaLH0BO6DTqXVjOOoOPFylwmSt06ntl9/ZXHpg5CMVsiJmMFp/T+BL2YW14G7Z1pGqbb8TvtOA==",
+    "ScriptHookVDotNet2/2.10.13": {
+      "sha512": "C+Dt9M4qSDGwo6Jm4KJfuNZI4VJjAI+Fy1fg5NE6Xwqt3G31yQiAIjEqEjMrvVZ55Ow0lztsm78wbbexSJo2Vw==",
       "type": "package",
-      "path": "scripthookvdotnet2/2.10.12",
+      "path": "scripthookvdotnet2/2.10.13",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/net48/ScriptHookVDotNet2.dll",
         "lib/net48/ScriptHookVDotNet2.xml",
-        "scripthookvdotnet2.2.10.12.nupkg.sha512",
+        "scripthookvdotnet2.2.10.13.nupkg.sha512",
         "scripthookvdotnet2.nuspec"
       ]
     }
   },
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.8": [
-      "ScriptHookVDotNet2 >= 2.10.12"
+      "ScriptHookVDotNet2 >= 2.10.13"
     ]
   },
   "packageFolders": {
@@ -106,7 +106,7 @@
         "dependencies": {
           "ScriptHookVDotNet2": {
             "target": "Package",
-            "version": "[2.10.12, )"
+            "version": "[2.10.13, )"
           }
         }
       }

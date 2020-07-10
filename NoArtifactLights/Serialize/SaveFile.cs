@@ -16,7 +16,6 @@ namespace NoArtifactLights.Serialize
         public int Cash { get; set; }
         public SaveWeapon Pistol { get; set; }
         public SaveWeapon PumpShotgun { get; set; }
-        public bool VehicleSellCooldown { get; set; }
         public int PlayerArmor { get; set; }
         public int PlayerHealth { get; set; }
     }

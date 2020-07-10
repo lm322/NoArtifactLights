@@ -9,6 +9,7 @@ namespace NoArtifactLights
         internal static int counter = 0;
         internal static Difficulty difficulty = Difficulty.Initial;
         internal static int cash = 0;
+        internal static bool blackout;
 
         internal static event EventHandler CashChanged;
 
