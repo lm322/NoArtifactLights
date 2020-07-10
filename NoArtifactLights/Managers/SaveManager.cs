@@ -42,9 +42,13 @@ namespace NoArtifactLights.Managers
             Common.counter = sf.Kills;
             Common.cash = sf.Cash;
             Common.difficulty = sf.CurrentDifficulty;
+            GameContentManager.SetRelationship(sf.CurrentDifficulty);
             Game.Player.Character.Weapons.RemoveAll();
             Game.Player.Character.Weapons.Give(WeaponHash.Flashlight, 1, false, true);
-            Game.Player.Character.Health = sf.PlayerHealth;
+            if(sf.PlayerHealth > 0)
+            {
+                Game.Player.Character.Health = sf.PlayerHealth;
+            }
             Game.Player.Character.Armor = sf.PlayerArmor;
             if (sf.Pistol.Existence)
             {
@@ -68,7 +72,7 @@ namespace NoArtifactLights.Managers
             sf.Kills = Common.counter;
             sf.CurrentDifficulty = Common.difficulty;
             sf.Cash = Common.cash;
-            // sf.PlayerHealth = Game.Player.Character.Health;
+            sf.PlayerHealth = Game.Player.Character.Health;
             sf.PlayerArmor = Game.Player.Character.Armor;
             if (Game.Player.Character.Weapons.HasWeapon(WeaponHash.Pistol))
             {

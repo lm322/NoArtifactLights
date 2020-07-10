@@ -46,8 +46,7 @@ namespace NoArtifactLights
             Game.Player.Character.Weapons.Give(WeaponHash.Flashlight, 1, true, true);
             Game.Player.Character.Weapons.Give(WeaponHash.Pistol, 50, false, false);
             logger.Log("Setting relationship and game settings", "Main");
-            World.SetRelationshipBetweenGroups(Relationship.Hate, 0x02B8FA80, 0x47033600);
-            World.SetRelationshipBetweenGroups(Relationship.Hate, 0x47033600, 0x02B8FA80);
+            GameContentManager.SetRelationship(Difficulty.Initial);
             Game.MaxWantedLevel = 0;
             Game.Player.IgnoredByPolice = true;
         }
