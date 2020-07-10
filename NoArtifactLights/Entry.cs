@@ -15,15 +15,12 @@ namespace NoArtifactLights
     {
         private Pickup weapon;
         private Blip weaponBlip;
-        private Timer fall;
         private List<int> ids = new List<int>();
         private List<int> killedIds = new List<int>();
         private List<int> weaponedIds = new List<int>();
         private int eplased = 0;
-        private bool dead;
         private Vehicle deliveryCar;
         private Ped delivery;
-        private string modelName;
 
         private Logger logger = new Logger();
 
