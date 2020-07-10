@@ -68,7 +68,7 @@ namespace NoArtifactLights.Managers
             sf.Kills = Common.counter;
             sf.CurrentDifficulty = Common.difficulty;
             sf.Cash = Common.cash;
-            sf.PlayerHealth = Game.Player.Character.Health;
+            // sf.PlayerHealth = Game.Player.Character.Health;
             sf.PlayerArmor = Game.Player.Character.Armor;
             if (Game.Player.Character.Weapons.HasWeapon(WeaponHash.Pistol))
             {

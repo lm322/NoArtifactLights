@@ -41,8 +41,10 @@ namespace NoArtifactLights
             this.Interval = 100;
             this.Tick += Entry_Tick;
             Game.Player.ChangeModel("a_m_m_bevhills_02");
+            logger.Log("Loading multiplayer maps");
             Function.Call(Hash._LOAD_MP_DLC_MAPS);
             Function.Call(Hash._LOWER_MAP_PROP_DENSITY, true);
+            logger.Log("Setting player position and giving weapons");
             Game.Player.Character.Position = new Vector3(459.8501f, -1001.404f, 24.91487f);
             Game.Player.Character.Weapons.Give(WeaponHash.Flashlight, 1, true, true);
             Game.Player.Character.Weapons.Give(WeaponHash.Pistol, 50, false, false);

@@ -48,7 +48,9 @@
     <Compile Include="Common.cs" />
     <Compile Include="Difficulty.cs" />
     <Compile Include="Entry.cs" />
+    <Compile Include="Managers\Logger.cs" />
     <Compile Include="Managers\SaveManager.cs" />
+    <Compile Include="Managers\WeaponShopManager.cs" />
     <Compile Include="Menu\MenuScript.cs" />
     <Compile Include="Missions\Mission.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
