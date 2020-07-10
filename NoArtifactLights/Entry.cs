@@ -2,6 +2,7 @@
 using GTA.Math;
 using GTA.Native;
 using NativeUI;
+using NoArtifactLights.Managers;
 using NoArtifactLights.Resources;
 using System;
 using System.Collections.Generic;
@@ -24,12 +25,16 @@ namespace NoArtifactLights
         private Ped delivery;
         private string modelName;
 
+        private Logger logger = new Logger();
+
         public Entry()
         {
+            logger.Log("Initialized", "Main");    
             Function.Call(Hash._SET_BLACKOUT, true);
             UI.ShowHelpMessage(Strings.Start);
             if(!File.Exists("scripts\\PlayerReliveNoResetModel.dll"))
             {
+                logger.Log("No PlayerReliveNoResetModel to provide Game.FadeScreenIn upon player wasted or busted. The game will faded out and never fade in upon death or arrest.", "Main", Logger.LogLevel.Warning);
                 UI.Notify(Strings.NoModelWarning);
                 UI.Notify(Strings.NoModelWarning2);
             }
@@ -41,6 +46,7 @@ namespace NoArtifactLights
             Game.Player.Character.Position = new Vector3(459.8501f, -1001.404f, 24.91487f);
             Game.Player.Character.Weapons.Give(WeaponHash.Flashlight, 1, true, true);
             Game.Player.Character.Weapons.Give(WeaponHash.Pistol, 50, false, false);
+            logger.Log("Setting relationship and game settings", "Main");
             World.SetRelationshipBetweenGroups(Relationship.Hate, 0x02B8FA80, 0x47033600);
             World.SetRelationshipBetweenGroups(Relationship.Hate, 0x47033600, 0x02B8FA80);
             Game.MaxWantedLevel = 0;
@@ -114,6 +120,7 @@ namespace NoArtifactLights
                     ids.Add(ped.Handle);
                     if (new Random().Next(1000000, 2000001) == 1100000 &&(delivery == null || !delivery.Exists() || !deliveryCar.Exists()))
                     {
+                        logger.Log("Hit deliverycar", "Main");
                         deliveryCar = World.CreateVehicle("MULE", World.GetNextPositionOnStreet(Game.Player.Character.Position.Around(30f)));
                         delivery = deliveryCar.CreateRandomPedOnSeat(VehicleSeat.Driver);
                         delivery.AddBlip();
