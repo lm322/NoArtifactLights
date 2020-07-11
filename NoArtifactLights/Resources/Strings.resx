@@ -291,6 +291,9 @@
   <data name="StolenDelivery" xml:space="preserve">
     <value>Destory stolen delivery bonus +$100</value>
   </data>
+  <data name="Unload" xml:space="preserve">
+    <value>~h~Unloading mod~s~. ~b~Bye!~s~</value>
+  </data>
   <data name="WeaponBodyArmor" xml:space="preserve">
     <value>Body Armor</value>
   </data>

@@ -1,6 +1,9 @@
 ﻿using GTA;
+using NoArtifactLights.Managers;
+using NoArtifactLights.Resources;
 using System;
 using System.IO;
+using System.Runtime.CompilerServices;
 
 namespace NoArtifactLights
 {
@@ -10,8 +13,17 @@ namespace NoArtifactLights
         internal static Difficulty difficulty = Difficulty.Initial;
         internal static int cash = 0;
         internal static bool blackout;
+        internal static Logger logger = new Logger();
+        internal static event EventHandler Unload;
 
         internal static event EventHandler CashChanged;
+
+        internal static void UnloadMod(object you)
+        {
+            UI.Notify(Strings.Unload);
+            logger.Log("Unloading modification. Bye!", "Common");
+            Unload(you, new EventArgs());
+        }
 
         internal static void AddCash(int amount)
         {

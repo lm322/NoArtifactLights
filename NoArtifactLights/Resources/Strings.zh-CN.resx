@@ -291,6 +291,9 @@
   <data name="StolenDelivery" xml:space="preserve">
     <value>赃物运输车奖励 +$100</value>
   </data>
+  <data name="Unload" xml:space="preserve">
+    <value>~h~正在退出模组~s~. ~b~再见~s~！</value>
+  </data>
   <data name="WeaponBodyArmor" xml:space="preserve">
     <value>防弹衣</value>
   </data>

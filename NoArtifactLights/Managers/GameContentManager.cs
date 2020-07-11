@@ -50,5 +50,67 @@ namespace NoArtifactLights.Managers
                     break;
             }
         }
+        internal static bool CreateDelivery(out Vehicle car, out Ped driver)
+        {
+            try
+            {
+                Vehicle deliveryCar = World.CreateVehicle("MULE", World.GetNextPositionOnStreet(Game.Player.Character.Position.Around(30f)));
+                Ped delivery = deliveryCar.CreateRandomPedOnSeat(VehicleSeat.Driver);
+                delivery.AddBlip();
+                delivery.CurrentBlip.Sprite = BlipSprite.PersonalVehicleCar;
+                delivery.CurrentBlip.IsFriendly = false;
+                delivery.CurrentBlip.IsFlashing = true;
+                delivery.CurrentBlip.Color = BlipColor.Red;
+                delivery.IsPersistent = true;
+                deliveryCar.IsPersistent = true;
+                delivery.AlwaysKeepTask = true;
+                delivery.BlockPermanentEvents = true;
+                car = deliveryCar;
+                driver = delivery;
+                return true;
+            }
+            catch(Exception ex)
+            {
+                Common.logger.Log("Failed to create delivery: \r\n" + ex.ToString(), Logger.LogLevel.Warning);
+                car = null;
+                driver = null;
+                return false;
+            }
+        }
+
+        internal static void EquipWeapon(this Ped ped)
+        {
+            WeaponHash wp;
+            switch (Common.difficulty)
+            {
+                default:
+                case Difficulty.Initial:
+                    if (new Random().Next(200, 272) == 40) wp = WeaponHash.PumpShotgun;
+                    else wp = WeaponHash.Pistol;
+                    break;
+
+                case Difficulty.Easy:
+                    wp = WeaponHash.PumpShotgun;
+                    break;
+
+                case Difficulty.Normal:
+                    wp = WeaponHash.MiniSMG;
+                    break;
+
+                case Difficulty.Hard:
+                    wp = WeaponHash.CarbineRifle;
+                    break;
+
+                case Difficulty.Nether:
+                    wp = WeaponHash.RPG;
+                    break;
+            }
+            ped.Weapons.Give(wp, 9999, true, true);
+            ped.AddBlip();
+            ped.CurrentBlip.IsFriendly = false;
+            ped.CurrentBlip.Sprite = BlipSprite.Enemy;
+            ped.CurrentBlip.Scale = 0.5f;
+            ped.CurrentBlip.Color = BlipColor.Red;
+        }
     }
 }

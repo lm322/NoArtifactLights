@@ -583,6 +583,15 @@ namespace NoArtifactLights.Resources {
         }
         
         /// <summary>
+        ///   查找类似 ~h~Unloading mod~s~. ~b~Bye!~s~ 的本地化字符串。
+        /// </summary>
+        public static string Unload {
+            get {
+                return ResourceManager.GetString("Unload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Body Armor 的本地化字符串。
         /// </summary>
         public static string WeaponBodyArmor {

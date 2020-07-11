@@ -1,23 +1,32 @@
 ﻿using GTA;
+using GTA.Math;
 using GTA.Native;
 using NativeUI;
 using NoArtifactLights.Resources;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NoArtifactLights.Managers
 {
     internal static class WeaponShopManager
     {
+        private static Logger logger = Common.logger;
+        private static Vector3[] ammus = { new Vector3(18.18945f, -1120.384f, 28.91654f), new Vector3(-325.6184f, 6072.246f, 31.21228f) };
         internal static UIMenuItem GenerateWeaponSellerItem(string displayName, string description, int price)
         {
+            logger.Log("Creating weapon sell item for: " + displayName + " at price " + price, "WeaponShopManager");
             UIMenuItem result = new UIMenuItem(displayName, description);
             result.SetRightLabel("$" + price);
+            logger.Log("Created weapon sell item for: " + displayName);
             return result;
+        }
+
+        internal static bool DistanceToAmmu()
+        {
+            foreach(Vector3 ammu in ammus)
+            {
+                if (Game.Player.Character.Position.DistanceTo(ammu) < 7f) return true;
+                else continue;
+            }
+            return false;
         }
 
         internal static void SellWeapon(int price, int ammo, WeaponHash weapon)

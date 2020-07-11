@@ -22,33 +22,59 @@ namespace NoArtifactLights
         private Vehicle deliveryCar;
         private Ped delivery;
 
-        private Logger logger = new Logger();
+        private Logger logger = Common.logger;
 
         public Entry()
         {
-            logger.Log("Initialized", "Main");    
-            Function.Call(Hash._SET_BLACKOUT, true);
-            UI.ShowHelpMessage(Strings.Start);
-            if(!File.Exists("scripts\\PlayerReliveNoResetModel.dll"))
+            try
             {
-                logger.Log("No PlayerReliveNoResetModel to provide Game.FadeScreenIn upon player wasted or busted. The game will faded out and never fade in upon death or arrest.", "Main", Logger.LogLevel.Warning);
-                UI.Notify(Strings.NoModelWarning);
-                UI.Notify(Strings.NoModelWarning2);
+                Game.FadeScreenOut(1000);
+                logger.Log("Initialized", "Main");
+                Function.Call(Hash._SET_BLACKOUT, true);
+                UI.ShowHelpMessage(Strings.Start);
+                if (!File.Exists("scripts\\PlayerReliveNoResetModel.dll"))
+                {
+                    logger.Log("No PlayerReliveNoResetModel to provide Game.FadeScreenIn upon player wasted or busted. The game will faded out and never fade in upon death or arrest.", "Main", Logger.LogLevel.Warning);
+                    UI.Notify(Strings.NoModelWarning);
+                    UI.Notify(Strings.NoModelWarning2);
+                }
+                this.Interval = 100;
+                this.Tick += Entry_Tick;
+                logger.Log("Loading multiplayer maps");
+                Function.Call(Hash._LOAD_MP_DLC_MAPS);
+                Function.Call(Hash._LOWER_MAP_PROP_DENSITY, true);
+                logger.Log("Setting player position and giving weapons");
+                Game.Player.Character.Position = new Vector3(459.8501f, -1001.404f, 24.91487f);
+                Game.Player.Character.Weapons.Give(WeaponHash.Flashlight, 1, true, true);
+                Game.Player.Character.Weapons.Give(WeaponHash.Pistol, 50, false, false);
+                logger.Log("Setting relationship and game settings", "Main");
+                GameContentManager.SetRelationship(Difficulty.Initial);
+                Game.MaxWantedLevel = 0;
+                Game.Player.IgnoredByPolice = true;
+                Game.Player.ChangeModel("a_m_m_bevhills_02");
+                Game.FadeScreenIn(1000);
+                Common.Unload += Common_Unload;
             }
-            this.Interval = 100;
-            this.Tick += Entry_Tick;
-            Game.Player.ChangeModel("a_m_m_bevhills_02");
-            logger.Log("Loading multiplayer maps");
-            Function.Call(Hash._LOAD_MP_DLC_MAPS);
-            Function.Call(Hash._LOWER_MAP_PROP_DENSITY, true);
-            logger.Log("Setting player position and giving weapons");
-            Game.Player.Character.Position = new Vector3(459.8501f, -1001.404f, 24.91487f);
-            Game.Player.Character.Weapons.Give(WeaponHash.Flashlight, 1, true, true);
-            Game.Player.Character.Weapons.Give(WeaponHash.Pistol, 50, false, false);
-            logger.Log("Setting relationship and game settings", "Main");
-            GameContentManager.SetRelationship(Difficulty.Initial);
-            Game.MaxWantedLevel = 0;
-            Game.Player.IgnoredByPolice = true;
+            catch(Exception ex)
+            {
+                Game.FadeScreenIn(500);
+                logger.Log("FATAL ERROR DURING LOAD", "Main", Logger.LogLevel.Fatal);
+                logger.Log(ex.ToString(), "Main", Logger.LogLevel.Fatal);
+                logger.Log(" ------ ADDITIONAL STACKTRACE ------");
+                logger.Log(Environment.StackTrace);
+                Abort();
+            }
+        }
+
+        private void Common_Unload(object sender, EventArgs e)
+        {
+            if(!sender.Equals(this))
+            {
+                World.SetRelationshipBetweenGroups(Relationship.Pedestrians, 0x02B8FA80, 0x47033600);
+                World.SetRelationshipBetweenGroups(Relationship.Pedestrians, 0x47033600, 0x02B8FA80);
+                this.Tick -= Entry_Tick;
+                Abort();
+            }
         }
 
         private void T_Elapsed1(object sender, ElapsedEventArgs e)
@@ -119,55 +145,20 @@ namespace NoArtifactLights
                     if (new Random().Next(1000000, 2000001) == 1100000 &&(delivery == null || !delivery.Exists() || !deliveryCar.Exists()))
                     {
                         logger.Log("Hit deliverycar", "Main");
-                        deliveryCar = World.CreateVehicle("MULE", World.GetNextPositionOnStreet(Game.Player.Character.Position.Around(30f)));
-                        delivery = deliveryCar.CreateRandomPedOnSeat(VehicleSeat.Driver);
-                        delivery.AddBlip();
-                        delivery.CurrentBlip.Sprite = BlipSprite.PersonalVehicleCar;
-                        delivery.CurrentBlip.IsFriendly = false;
-                        delivery.CurrentBlip.IsFlashing = true;
-                        delivery.CurrentBlip.Color = BlipColor.Red;
-                        delivery.IsPersistent = true;
-                        deliveryCar.IsPersistent = true;
-                        delivery.AlwaysKeepTask = true;
-                        delivery.BlockPermanentEvents = true;
+                        bool success = GameContentManager.CreateDelivery(out deliveryCar, out delivery);
+                        if(!success)
+                        {
+                            deliveryCar = null;
+                            delivery = null;
+                        }
                     }
                     
 
 
                     if (new Random().Next(9, 89) == 10)
                     {
-                        WeaponHash wp;
-                        switch (Common.difficulty)
-                        {
-                            default:
-                            case Difficulty.Initial:
-                                if (new Random().Next(200, 272) == 40) wp = WeaponHash.PumpShotgun;
-                                else wp = WeaponHash.Pistol;
-                                break;
-
-                            case Difficulty.Easy:
-                                wp = WeaponHash.PumpShotgun;
-                                break;
-
-                            case Difficulty.Normal:
-                                wp = WeaponHash.MiniSMG;
-                                break;
-
-                            case Difficulty.Hard:
-                                wp = WeaponHash.CarbineRifle;
-                                break;
-
-                            case Difficulty.Nether:
-                                wp = WeaponHash.RPG;
-                                break;
-                        }
-                        ped.Weapons.Give(wp, short.MaxValue, true, true);
+                        ped.EquipWeapon();
                         weaponedIds.Add(ped.Handle);
-                        ped.AddBlip();
-                        ped.CurrentBlip.IsFriendly = false;
-                        ped.CurrentBlip.Sprite = BlipSprite.Enemy;
-                        ped.CurrentBlip.Scale = 0.5f;
-                        ped.CurrentBlip.Color = BlipColor.Red;
                     }
                 }
 
