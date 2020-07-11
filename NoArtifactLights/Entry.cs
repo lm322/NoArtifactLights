@@ -152,8 +152,6 @@ namespace NoArtifactLights
                             delivery = null;
                         }
                     }
-                    
-
 
                     if (new Random().Next(9, 89) == 10)
                     {
