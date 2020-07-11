@@ -116,24 +116,28 @@ namespace NoArtifactLights
                                 Common.difficulty = Difficulty.Easy;
                                 BigMessageThread.MessageInstance.ShowSimpleShard(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyEasy));
                                 UI.ShowHelpMessage(string.Format(Strings.DifficultyHelp, Strings.DifficultyEasy));
+                                GameContentManager.SetRelationship(Difficulty.Easy);
                                 break;
 
                             case 300:
                                 Common.difficulty = Difficulty.Normal;
                                 BigMessageThread.MessageInstance.ShowSimpleShard(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyNormal));
                                 UI.ShowHelpMessage(string.Format(Strings.DifficultyHelp, Strings.DifficultyNormal));
+                                GameContentManager.SetRelationship(Difficulty.Normal);
                                 break;
 
                             case 700:
                                 Common.difficulty = Difficulty.Hard;
                                 BigMessageThread.MessageInstance.ShowSimpleShard(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyHard));
                                 UI.ShowHelpMessage(string.Format(Strings.DifficultyHelp, Strings.DifficultyHard));
+                                GameContentManager.SetRelationship(Difficulty.Hard);
                                 break;
 
                             case 1500:
                                 Common.difficulty = Difficulty.Nether;
                                 BigMessageThread.MessageInstance.ShowSimpleShard(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyNether));
                                 UI.ShowHelpMessage(string.Format(Strings.DifficultyHelp, Strings.DifficultyNether));
+                                GameContentManager.SetRelationship(Difficulty.Nether);
                                 break;
                         }
                     }
