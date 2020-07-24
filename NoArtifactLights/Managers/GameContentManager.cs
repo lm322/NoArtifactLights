@@ -10,15 +10,15 @@ namespace NoArtifactLights.Managers
 {
     public static class GameContentManager
     {
-        private static void SetRelationshipBetGroupsUInt(Relationship relation, uint group1, uint group2)
+        internal static void SetRelationshipBetGroupsUInt(Relationship relation, uint group1, uint group2)
         {
             Function.Call(Hash.SET_RELATIONSHIP_BETWEEN_GROUPS, (int)relation, group1, group2);
         }
 
         public static void SetRelationship(Difficulty difficulty)
         {
-            World.SetRelationshipBetweenGroups(Relationship.Hate, 0x02B8FA80, 0x47033600);
-            World.SetRelationshipBetweenGroups(Relationship.Hate, 0x47033600, 0x02B8FA80);
+            SetRelationshipBetGroupsUInt(Relationship.Hate, 0x02B8FA80, 0x47033600);
+            SetRelationshipBetGroupsUInt(Relationship.Hate, 0x47033600, 0x02B8FA80);
             switch (difficulty)
             {
                 default:
@@ -57,10 +57,10 @@ namespace NoArtifactLights.Managers
                 Vehicle deliveryCar = World.CreateVehicle("MULE", World.GetNextPositionOnStreet(Game.Player.Character.Position.Around(30f)));
                 Ped delivery = deliveryCar.CreateRandomPedOnSeat(VehicleSeat.Driver);
                 delivery.AddBlip();
-                delivery.CurrentBlip.Sprite = BlipSprite.PersonalVehicleCar;
-                delivery.CurrentBlip.IsFriendly = false;
-                delivery.CurrentBlip.IsFlashing = true;
-                delivery.CurrentBlip.Color = BlipColor.Red;
+                delivery.AttachedBlip.Sprite = BlipSprite.PersonalVehicleCar;
+                delivery.AttachedBlip.IsFriendly = false;
+                delivery.AttachedBlip.IsFlashing = true;
+                delivery.AttachedBlip.Color = BlipColor.Red;
                 delivery.IsPersistent = true;
                 deliveryCar.IsPersistent = true;
                 delivery.AlwaysKeepTask = true;
@@ -107,10 +107,10 @@ namespace NoArtifactLights.Managers
             }
             ped.Weapons.Give(wp, 9999, true, true);
             ped.AddBlip();
-            ped.CurrentBlip.IsFriendly = false;
-            ped.CurrentBlip.Sprite = BlipSprite.Enemy;
-            ped.CurrentBlip.Scale = 0.5f;
-            ped.CurrentBlip.Color = BlipColor.Red;
+            ped.AttachedBlip.IsFriendly = false;
+            ped.AttachedBlip.Sprite = BlipSprite.Enemy;
+            ped.AttachedBlip.Scale = 0.5f;
+            ped.AttachedBlip.Color = BlipColor.Red;
         }
     }
 }

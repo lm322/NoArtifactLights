@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "dtZDI8bQg+7lCq6pPQk3E8FxyiC0hC/QcWIliJme8aHUilPoLIRK9YBYWj+skn9z9pEKzD5Ti2U0GgbnFqPodw==",
+  "dgSpecHash": "xU0KijV1iLMF4dgkmvXD2WG6IgQD3T1Zq+0dPJOobsIJHr2vgeW0WT2GMIAvouDoKzM8blpnpK6BN0fSQwq1SA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Ender\\source\\repos\\NoArtifactLights\\NoArtifactLights\\NoArtifactLights.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Ender\\.nuget\\packages\\scripthookvdotnet2\\2.10.13\\scripthookvdotnet2.2.10.13.nupkg.sha512"
+    "C:\\Users\\Ender\\.nuget\\packages\\scripthookvdotnet3\\3.0.4\\scripthookvdotnet3.3.0.4.nupkg.sha512"
   ],
   "logs": []
 }

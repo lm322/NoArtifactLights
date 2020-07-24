@@ -1,5 +1,6 @@
 ﻿using GTA;
 using GTA.Native;
+using GTA.UI;
 using NoArtifactLights.Resources;
 using NoArtifactLights.Serialize;
 using System;
@@ -21,7 +22,7 @@ namespace NoArtifactLights.Managers
             SaveFile sf;
             if (!File.Exists("NALSave.xml"))
             {
-                UI.Notify(Strings.NoSave);
+                Notification.Show(Strings.NoSave);
                 return;
             }
             FileStream fs = File.OpenRead("NALSave.xml");
@@ -31,12 +32,12 @@ namespace NoArtifactLights.Managers
             fs.Dispose();
             if (sf.Version != 2)
             {
-                UI.Notify("");
+                
                 return;
             }
             World.Weather = sf.Status.CurrentWeather;
-            World.CurrentDayTime = new TimeSpan(sf.Status.Hour, sf.Status.Minute, 0);
-            World.SetBlackout(sf.Blackout);
+            World.CurrentTimeOfDay = new TimeSpan(sf.Status.Hour, sf.Status.Minute, 0);
+            Function.Call(Hash.SET_ARTIFICIAL_LIGHTS_STATE, sf.Blackout);
             Common.blackout = sf.Blackout;
             Game.Player.Character.Position = new GTA.Math.Vector3(sf.PlayerX, sf.PlayerY, sf.PlayerZ);
             Common.counter = sf.Kills;
@@ -64,7 +65,7 @@ namespace NoArtifactLights.Managers
         {
             SaveFile sf = new SaveFile();
             sf.Version = 2;
-            sf.Status = new WorldStatus(World.Weather, World.CurrentDayTime.Hours, World.CurrentDayTime.Minutes);
+            sf.Status = new WorldStatus(World.Weather, World.CurrentTimeOfDay.Hours, World.CurrentTimeOfDay.Minutes);
             sf.PlayerX = Game.Player.Character.Position.X;
             sf.PlayerY = Game.Player.Character.Position.Y;
             sf.PlayerZ = Game.Player.Character.Position.Z;
@@ -93,7 +94,7 @@ namespace NoArtifactLights.Managers
             FileStream fs = File.Create("NALSave.xml");
             XmlSerializer serializer = new XmlSerializer(typeof(SaveFile));
             serializer.Serialize(fs, sf);
-            UI.Notify(Strings.GameSaved);
+            Notification.Show(Strings.GameSaved);
             fs.Close();
             fs.Dispose();
         }

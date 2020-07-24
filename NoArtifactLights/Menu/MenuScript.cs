@@ -1,6 +1,7 @@
 ﻿using GTA;
 using GTA.Math;
 using GTA.Native;
+using GTA.UI;
 using NativeUI;
 using NoArtifactLights.Managers;
 using NoArtifactLights.Resources;
@@ -100,7 +101,7 @@ namespace NoArtifactLights.Menu
             }
             catch (Exception ex)
             {
-                UI.ShowHelpMessage(Strings.ExceptionMenu);
+                GameUI.DisplayHelp(Strings.ExceptionMenu);
                 File.WriteAllText("MENUEXCEPTION.TXT", $"Exception caught: \r\n{ex.GetType().Name}\r\nException Message:\r\n{ex.Message}\r\nException StackTrace:\r\n{ex.StackTrace}");
                 Common.UnloadMod(this);
                 this.Abort();
@@ -144,14 +145,14 @@ namespace NoArtifactLights.Menu
             itemDifficulty.SetRightLabel(Strings.ResourceManager.GetString("Difficulty" + Common.difficulty.ToString()));
             itemKills.SetRightLabel(Common.counter.ToString());
             itemCash.SetRightLabel("$" + Common.cash.ToString());
-            UI.Notify(Strings.GameLoaded);
+            Notification.Show(Strings.GameLoaded);
         }
 
         private void ItemSave_Activated(UIMenu sender, UIMenuItem selectedItem) => SaveManager.Save(itemLights.Checked);
 
         private void ItemLights_CheckboxEvent(UIMenuCheckboxItem sender, bool Checked)
         {
-            Function.Call(Hash._SET_BLACKOUT, Checked);
+            Function.Call(Hash.SET_ARTIFICIAL_LIGHTS_STATE, Checked);
         }
 
         private void MenuScript_Tick(object sender, EventArgs e)
@@ -159,15 +160,15 @@ namespace NoArtifactLights.Menu
             pool.ProcessMenus();
             if (WeaponShopManager.DistanceToAmmu())
             {
-                UI.ShowHelpMessage(Strings.AmmuOpenShop);
+                GameUI.DisplayHelp(Strings.AmmuOpenShop);
             }
-            if (selled && World.CurrentDayTime.Hours == unlockHour)
+            if (selled && World.CurrentTimeOfDay.Hours == unlockHour)
             {
                 selled = false;
             }
             if (repair.DistanceTo(Game.Player.Character.Position) <= 10f && Game.Player.Character.IsInVehicle())
             {
-                UI.ShowHelpMessage(Strings.RepairHelp);
+                GameUI.DisplayHelp(Strings.RepairHelp);
             }
         }
 
@@ -196,17 +197,17 @@ namespace NoArtifactLights.Menu
                     {
                         if(Common.cash < 100)
                         {
-                            UI.ShowSubtitle(Strings.BuyNoMoney);
+                            Screen.ShowSubtitle(Strings.BuyNoMoney);
                             return;
                         }
                         if(Game.Player.Character.CurrentVehicle.IsDamaged == false)
                         {
-                            UI.ShowSubtitle(Strings.RepairUndamaged);
+                            GTA,UI.Screen.ShowSubtitle(Strings.RepairUndamaged);
                             return;
                         }
                         Common.cash -= 100;
                         Game.Player.Character.CurrentVehicle.Repair();
-                        UI.ShowSubtitle(Strings.RepairSuccess);
+                        Screen.ShowSubtitle(Strings.RepairSuccess);
                     }
                     break;
             }

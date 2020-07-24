@@ -1,4 +1,5 @@
 ﻿using GTA;
+using GTA.UI;
 using NoArtifactLights.Managers;
 using NoArtifactLights.Resources;
 using System;
@@ -20,7 +21,7 @@ namespace NoArtifactLights
 
         internal static void UnloadMod(object you)
         {
-            UI.Notify(Strings.Unload);
+            Notification.Show(Strings.Unload);
             logger.Log("Unloading modification. Bye!", "Common");
             Unload(you, new EventArgs());
         }
@@ -70,7 +71,7 @@ namespace NoArtifactLights
             already = br.ReadInt32();
             if (already <= amount)
             {
-                UI.ShowSubtitle("You do not have enough money to withdraw");
+                Screen.ShowSubtitle("You do not have enough money to withdraw");
             }
             already -= amount;
             br.Close();

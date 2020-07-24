@@ -1,6 +1,7 @@
 ﻿using GTA;
 using GTA.Math;
 using GTA.Native;
+using GTA.UI;
 using NativeUI;
 using NoArtifactLights.Managers;
 using NoArtifactLights.Resources;
@@ -28,21 +29,21 @@ namespace NoArtifactLights
         {
             try
             {
-                Game.FadeScreenOut(1000);
+                Screen.FadeOut(1000);
                 logger.Log("Initialized", "Main");
-                Function.Call(Hash._SET_BLACKOUT, true);
-                UI.ShowHelpMessage(Strings.Start);
+                Function.Call(Hash.SET_ARTIFICIAL_LIGHTS_STATE, true);
+                GameUI.DisplayHelp(Strings.Start);
                 if (!File.Exists("scripts\\PlayerReliveNoResetModel.dll"))
                 {
                     logger.Log("No PlayerReliveNoResetModel to provide Game.FadeScreenIn upon player wasted or busted. The game will faded out and never fade in upon death or arrest.", "Main", Logger.LogLevel.Warning);
-                    UI.Notify(Strings.NoModelWarning);
-                    UI.Notify(Strings.NoModelWarning2);
+                    Notification.Show(Strings.NoModelWarning);
+                    Notification.Show(Strings.NoModelWarning2);
                 }
                 this.Interval = 100;
                 this.Tick += Entry_Tick;
                 logger.Log("Loading multiplayer maps");
                 Function.Call(Hash._LOAD_MP_DLC_MAPS);
-                Function.Call(Hash._LOWER_MAP_PROP_DENSITY, true);
+                Function.Call(Hash._USE_FREEMODE_MAP_BEHAVIOR, true);
                 logger.Log("Setting player position and giving weapons");
                 Game.Player.Character.Position = new Vector3(459.8501f, -1001.404f, 24.91487f);
                 Game.Player.Character.Weapons.Give(WeaponHash.Flashlight, 1, true, true);
@@ -52,12 +53,12 @@ namespace NoArtifactLights
                 Game.MaxWantedLevel = 0;
                 Game.Player.IgnoredByPolice = true;
                 Game.Player.ChangeModel("a_m_m_bevhills_02");
-                Game.FadeScreenIn(1000);
+                Screen.FadeIn(1000);
                 Common.Unload += Common_Unload;
             }
             catch(Exception ex)
             {
-                Game.FadeScreenIn(500);
+                Screen.FadeIn(500);
                 logger.Log("FATAL ERROR DURING LOAD", "Main", Logger.LogLevel.Fatal);
                 logger.Log(ex.ToString(), "Main", Logger.LogLevel.Fatal);
                 logger.Log(" ------ ADDITIONAL STACKTRACE ------");
@@ -70,8 +71,8 @@ namespace NoArtifactLights
         {
             if(!sender.Equals(this))
             {
-                World.SetRelationshipBetweenGroups(Relationship.Pedestrians, 0x02B8FA80, 0x47033600);
-                World.SetRelationshipBetweenGroups(Relationship.Pedestrians, 0x47033600, 0x02B8FA80);
+                GameContentManager.SetRelationshipBetGroupsUInt(Relationship.Pedestrians, 0x02B8FA80, 0x47033600);
+                GameContentManager.SetRelationshipBetGroupsUInt(Relationship.Pedestrians, 0x47033600, 0x02B8FA80);
                 this.Tick -= Entry_Tick;
                 Abort();
             }
@@ -103,40 +104,40 @@ namespace NoArtifactLights
                         if (weaponedIds.Contains(ped.Handle))
                         {
                             Common.cash += 10;
-                            UI.ShowHelpMessage(Strings.ArmedBonus);
-                            ped.CurrentBlip.Remove();
+                            GameUI.DisplayHelp(Strings.ArmedBonus);
+                            ped.AttachedBlip.Delete();
                         }
                         switch (Common.counter)
                         {
                             case 1:
-                                UI.ShowHelpMessage(Strings.FirstKill);
+                                GameUI.DisplayHelp(Strings.FirstKill);
                                 break;
 
                             case 100:
                                 Common.difficulty = Difficulty.Easy;
                                 BigMessageThread.MessageInstance.ShowSimpleShard(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyEasy));
-                                UI.ShowHelpMessage(string.Format(Strings.DifficultyHelp, Strings.DifficultyEasy));
+                                GameUI.DisplayHelp(string.Format(Strings.DifficultyHelp, Strings.DifficultyEasy));
                                 GameContentManager.SetRelationship(Difficulty.Easy);
                                 break;
 
                             case 300:
                                 Common.difficulty = Difficulty.Normal;
                                 BigMessageThread.MessageInstance.ShowSimpleShard(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyNormal));
-                                UI.ShowHelpMessage(string.Format(Strings.DifficultyHelp, Strings.DifficultyNormal));
+                                GameUI.DisplayHelp(string.Format(Strings.DifficultyHelp, Strings.DifficultyNormal));
                                 GameContentManager.SetRelationship(Difficulty.Normal);
                                 break;
 
                             case 700:
                                 Common.difficulty = Difficulty.Hard;
                                 BigMessageThread.MessageInstance.ShowSimpleShard(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyHard));
-                                UI.ShowHelpMessage(string.Format(Strings.DifficultyHelp, Strings.DifficultyHard));
+                                GameUI.DisplayHelp(string.Format(Strings.DifficultyHelp, Strings.DifficultyHard));
                                 GameContentManager.SetRelationship(Difficulty.Hard);
                                 break;
 
                             case 1500:
                                 Common.difficulty = Difficulty.Nether;
                                 BigMessageThread.MessageInstance.ShowSimpleShard(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyNether));
-                                UI.ShowHelpMessage(string.Format(Strings.DifficultyHelp, Strings.DifficultyNether));
+                                GameUI.DisplayHelp(string.Format(Strings.DifficultyHelp, Strings.DifficultyNether));
                                 GameContentManager.SetRelationship(Difficulty.Nether);
                                 break;
                         }
@@ -189,13 +190,13 @@ namespace NoArtifactLights
                 {
                     ids.Clear();
                 }
-                if(delivery != null && delivery.Exists() && deliveryCar.Exists() && !delivery.IsInVehicle(deliveryCar) && !delivery.IsGettingIntoAVehicle)
+                if(delivery != null && delivery.Exists() && deliveryCar.Exists() && !delivery.IsInVehicle(deliveryCar) && !delivery.IsGettingIntoVehicle)
                 {
                     delivery.Task.EnterVehicle(deliveryCar, VehicleSeat.Driver);
                 }
                 if(delivery != null && delivery.Exists() && deliveryCar.Exists() && delivery.Position.DistanceTo2D(Game.Player.Character.Position) >= 350f && !deliveryCar.IsOnScreen)
                 {
-                    delivery.CurrentBlip.Remove();
+                    delivery.AttachedBlip.Delete();
                     delivery.MarkAsNoLongerNeeded();
                     deliveryCar.MarkAsNoLongerNeeded();
                     delivery = null;
@@ -203,16 +204,16 @@ namespace NoArtifactLights
                 }
                 if (delivery != null && delivery.Exists() && deliveryCar.Exists() && delivery.HasBeenDamagedBy(Game.Player.Character) && (deliveryCar.IsDead || delivery.IsDead || !delivery.IsInVehicle(deliveryCar)))
                 {
-                    delivery.CurrentBlip.Remove();
+                    delivery.AttachedBlip.Delete();
                     delivery = null;
                     deliveryCar = null;
-                    UI.ShowHelpMessage(Strings.StolenDelivery);
+                    GameUI.DisplayHelp(Strings.StolenDelivery);
                     Common.cash += 100;
                 }
             }
             catch (Exception ex)
             {
-                UI.ShowHelpMessage(Strings.ExceptionMain);
+                GameUI.DisplayHelp(Strings.ExceptionMain);
                 File.WriteAllText("EXCEPTION.TXT", $"Exception caught: \r\n{ex.GetType().Name}\r\nException Message:\r\n{ex.Message}\r\nException StackTrace:\r\n{ex.StackTrace}");
                 throw;
             }

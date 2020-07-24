@@ -29,6 +29,7 @@
 */
 
 using GTA;
+using GTA.UI;
 
 namespace NoArtifactLights
 {
@@ -41,9 +42,9 @@ namespace NoArtifactLights
 
         private void ForceFadeIn_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
         {
-            if(e.KeyCode == System.Windows.Forms.Keys.F && e.Control && e.Alt && Game.IsScreenFadedOut)
+            if(e.KeyCode == System.Windows.Forms.Keys.F && e.Control && e.Alt && Screen.IsFadedOut)
             {
-                Game.FadeScreenIn(1000);
+                Screen.FadeIn(1000);
             }
         }
     }

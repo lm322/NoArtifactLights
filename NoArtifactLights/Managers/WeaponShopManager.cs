@@ -1,6 +1,7 @@
 ﻿using GTA;
 using GTA.Math;
 using GTA.Native;
+using GTA.UI;
 using NativeUI;
 using NoArtifactLights.Resources;
 
@@ -33,7 +34,7 @@ namespace NoArtifactLights.Managers
         {
             if (Common.cash < price)
             {
-                UI.ShowSubtitle(Strings.BuyNoMoney);
+                Screen.ShowSubtitle(Strings.BuyNoMoney);
                 return;
             }
             Common.cash -= price;
@@ -59,13 +60,13 @@ namespace NoArtifactLights.Managers
         {
             if (Common.cash < price)
             {
-                UI.ShowSubtitle(Strings.BuyNoMoney);
+                Screen.ShowSubtitle(Strings.BuyNoMoney);
                 return;
             }
             Common.cash -= price;
             if(Game.Player.Character.Armor >= amount)
             {
-                UI.ShowSubtitle(Strings.BodyArmorAlreadyHad);
+                Screen.ShowSubtitle(Strings.BodyArmorAlreadyHad);
                 return;
             }
             Game.Player.Character.Armor = amount;

@@ -2,73 +2,72 @@
   "version": 3,
   "targets": {
     ".NETFramework,Version=v4.8": {
-      "ScriptHookVDotNet2/2.10.13": {
+      "ScriptHookVDotNet3/3.0.4": {
         "type": "package",
         "compile": {
-          "lib/net48/ScriptHookVDotNet2.dll": {}
+          "lib/net48/ScriptHookVDotNet3.dll": {}
         },
         "runtime": {
-          "lib/net48/ScriptHookVDotNet2.dll": {}
+          "lib/net48/ScriptHookVDotNet3.dll": {}
         }
       }
     },
     ".NETFramework,Version=v4.8/win": {
-      "ScriptHookVDotNet2/2.10.13": {
+      "ScriptHookVDotNet3/3.0.4": {
         "type": "package",
         "compile": {
-          "lib/net48/ScriptHookVDotNet2.dll": {}
+          "lib/net48/ScriptHookVDotNet3.dll": {}
         },
         "runtime": {
-          "lib/net48/ScriptHookVDotNet2.dll": {}
+          "lib/net48/ScriptHookVDotNet3.dll": {}
         }
       }
     },
     ".NETFramework,Version=v4.8/win-x64": {
-      "ScriptHookVDotNet2/2.10.13": {
+      "ScriptHookVDotNet3/3.0.4": {
         "type": "package",
         "compile": {
-          "lib/net48/ScriptHookVDotNet2.dll": {}
+          "lib/net48/ScriptHookVDotNet3.dll": {}
         },
         "runtime": {
-          "lib/net48/ScriptHookVDotNet2.dll": {}
+          "lib/net48/ScriptHookVDotNet3.dll": {}
         }
       }
     },
     ".NETFramework,Version=v4.8/win-x86": {
-      "ScriptHookVDotNet2/2.10.13": {
+      "ScriptHookVDotNet3/3.0.4": {
         "type": "package",
         "compile": {
-          "lib/net48/ScriptHookVDotNet2.dll": {}
+          "lib/net48/ScriptHookVDotNet3.dll": {}
         },
         "runtime": {
-          "lib/net48/ScriptHookVDotNet2.dll": {}
+          "lib/net48/ScriptHookVDotNet3.dll": {}
         }
       }
     }
   },
   "libraries": {
-    "ScriptHookVDotNet2/2.10.13": {
-      "sha512": "C+Dt9M4qSDGwo6Jm4KJfuNZI4VJjAI+Fy1fg5NE6Xwqt3G31yQiAIjEqEjMrvVZ55Ow0lztsm78wbbexSJo2Vw==",
+    "ScriptHookVDotNet3/3.0.4": {
+      "sha512": "SifJ+/asWEEgP9pzLhH2Z7x4R/16PzdgS/JTCf1/Z5BqFokKFcg8DmNofm7hlXPa0P1+L1aXX9V5LxzJgbF8hw==",
       "type": "package",
-      "path": "scripthookvdotnet2/2.10.13",
+      "path": "scripthookvdotnet3/3.0.4",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "lib/net48/ScriptHookVDotNet2.dll",
-        "lib/net48/ScriptHookVDotNet2.xml",
-        "scripthookvdotnet2.2.10.13.nupkg.sha512",
-        "scripthookvdotnet2.nuspec"
+        "lib/net48/ScriptHookVDotNet3.dll",
+        "lib/net48/ScriptHookVDotNet3.xml",
+        "scripthookvdotnet3.3.0.4.nupkg.sha512",
+        "scripthookvdotnet3.nuspec"
       ]
     }
   },
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.8": [
-      "ScriptHookVDotNet2 >= 2.10.13"
+      "ScriptHookVDotNet3 >= 3.0.4"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Ender\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\Ender\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -80,13 +79,9 @@
       "outputPath": "C:\\Users\\Ender\\source\\repos\\NoArtifactLights\\NoArtifactLights\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
-      "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
-      ],
       "configFilePaths": [
         "C:\\Users\\Ender\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net48"
@@ -104,9 +99,9 @@
     "frameworks": {
       "net48": {
         "dependencies": {
-          "ScriptHookVDotNet2": {
+          "ScriptHookVDotNet3": {
             "target": "Package",
-            "version": "[2.10.13, )"
+            "version": "[3.0.4, )"
           }
         }
       }

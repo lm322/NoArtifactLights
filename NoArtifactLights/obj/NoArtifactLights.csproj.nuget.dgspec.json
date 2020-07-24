@@ -14,13 +14,9 @@
         "outputPath": "C:\\Users\\Ender\\source\\repos\\NoArtifactLights\\NoArtifactLights\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
           "C:\\Users\\Ender\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net48"
@@ -38,9 +34,9 @@
       "frameworks": {
         "net48": {
           "dependencies": {
-            "ScriptHookVDotNet2": {
+            "ScriptHookVDotNet3": {
               "target": "Package",
-              "version": "[2.10.13, )"
+              "version": "[3.0.4, )"
             }
           }
         }

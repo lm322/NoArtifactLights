@@ -48,7 +48,9 @@
     <Compile Include="Common.cs" />
     <Compile Include="Difficulty.cs" />
     <Compile Include="Entry.cs" />
+    <Compile Include="ForceFadeIn.cs" />
     <Compile Include="Managers\GameContentManager.cs" />
+    <Compile Include="Managers\GameUI.cs" />
     <Compile Include="Managers\Logger.cs" />
     <Compile Include="Managers\SaveManager.cs" />
     <Compile Include="Managers\WeaponShopManager.cs" />
@@ -72,8 +74,8 @@
     <Compile Include="Serialize\WorldStatus.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="ScriptHookVDotNet2">
-      <Version>2.10.13</Version>
+    <PackageReference Include="ScriptHookVDotNet3">
+      <Version>3.0.4</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
