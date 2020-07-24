@@ -24,15 +24,13 @@ namespace NoArtifactLights.Menu
         private UIMenuItem itemKills;
         private UIMenuCheckboxItem itemLights;
         private UIMenuItem itemCash;
-        private int unlockHour;
-        private bool selled;
 
         private UIMenu buyMenu;
         private UIMenuItem itemPistol;
         private UIMenuItem itemPumpShotgun;
         private UIMenuItem itemBodyArmor;
 
-        private Vector3 ammu = new Vector3(18.18945f, -1120.384f, 28.91654f);
+        // private Vector3 ammu = new Vector3(18.18945f, -1120.384f, 28.91654f);
         private Vector3 repair = new Vector3(140.683f, -1081.387f, 28.56039f);
 
         private Logger logger = Common.logger;
@@ -162,10 +160,6 @@ namespace NoArtifactLights.Menu
             if (WeaponShopManager.DistanceToAmmu())
             {
                 GameUI.DisplayHelp(Strings.AmmuOpenShop);
-            }
-            if (selled && World.CurrentTimeOfDay.Hours == unlockHour)
-            {
-                selled = false;
             }
             if (repair.DistanceTo(Game.Player.Character.Position) <= 10f && Game.Player.Character.IsInVehicle())
             {
