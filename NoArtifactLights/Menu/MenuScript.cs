@@ -8,6 +8,7 @@ using NoArtifactLights.Resources;
 using System;
 using System.IO;
 using System.Windows.Forms;
+using Screen = GTA.UI.Screen;
 
 namespace NoArtifactLights.Menu
 {
@@ -202,7 +203,7 @@ namespace NoArtifactLights.Menu
                         }
                         if(Game.Player.Character.CurrentVehicle.IsDamaged == false)
                         {
-                            GTA,UI.Screen.ShowSubtitle(Strings.RepairUndamaged);
+                            Screen.ShowSubtitle(Strings.RepairUndamaged);
                             return;
                         }
                         Common.cash -= 100;
