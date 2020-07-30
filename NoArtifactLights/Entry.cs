@@ -16,9 +16,9 @@ namespace NoArtifactLights
     {
         private Pickup weapon;
         private Blip weaponBlip;
-        private List<int> ids = new List<int>();
-        private List<int> killedIds = new List<int>();
-        private List<int> weaponedIds = new List<int>();
+        private DuplicateManager peds1 = new DuplicateManager();
+        private DuplicateManager killedPeds = new DuplicateManager();
+        private DuplicateManager weaponedPeds = new DuplicateManager();
         private int eplased = 0;
         private Vehicle deliveryCar;
         private Ped delivery;
@@ -39,6 +39,10 @@ namespace NoArtifactLights
                     Notification.Show(Strings.NoModelWarning);
                     Notification.Show(Strings.NoModelWarning2);
                 }
+                if (!File.Exists("scripts\\NoArtifactLights.pdb"))
+                {
+                    logger.Log("Attention: No debug database found in game scripts folder. This means logs cannot provide additional information related to exception.", Logger.LogLevel.Warning);
+                }
                 this.Interval = 100;
                 this.Tick += Entry_Tick;
                 logger.Log("Loading multiplayer maps");
@@ -55,6 +59,7 @@ namespace NoArtifactLights
                 Game.Player.ChangeModel("a_m_m_bevhills_02");
                 Screen.FadeIn(1000);
                 Common.Unload += Common_Unload;
+                
             }
             catch(Exception ex)
             {
@@ -97,11 +102,11 @@ namespace NoArtifactLights
                     {
                         continue;
                     }
-                    if (ped.Exists() && ped.HasBeenDamagedBy(Game.Player.Character) && ped.IsDead && !killedIds.Contains(ped.Handle))
+                    if (ped.Exists() && ped.HasBeenDamagedBy(Game.Player.Character) && ped.IsDead && !killedPeds.IsDuplicate(ped))
                     {
-                        killedIds.Add(ped.Handle);
+                        killedPeds.Add(ped);
                         Common.counter++;
-                        if (weaponedIds.Contains(ped.Handle))
+                        if (weaponedPeds.IsDuplicate(ped))
                         {
                             Common.cash += 10;
                             GameUI.DisplayHelp(Strings.ArmedBonus);
@@ -142,11 +147,11 @@ namespace NoArtifactLights
                                 break;
                         }
                     }
-                    if (ids.Contains(ped.Handle) || !ped.IsHuman)
+                    if (peds1.IsDuplicate(ped) || !ped.IsHuman)
                     {
                         continue;
                     }
-                    ids.Add(ped.Handle);
+                    peds1.Add(ped);
                     if (new Random().Next(1000000, 2000001) == 1100000 &&(delivery == null || !delivery.Exists() || !deliveryCar.Exists()))
                     {
                         logger.Log("Hit deliverycar", "Main");
@@ -161,17 +166,17 @@ namespace NoArtifactLights
                     if (new Random().Next(9, 89) == 10)
                     {
                         ped.EquipWeapon();
-                        weaponedIds.Add(ped.Handle);
+                        weaponedPeds.Add(ped);
                     }
                 }
 
-                if (killedIds.Count >= 6000)
+                if (killedPeds.Count >= 6000)
                 {
-                    killedIds.Clear();
+                    killedPeds.Clear();
                 }
-                if (weaponedIds.Count >= 600)
+                if (weaponedPeds.Count >= 600)
                 {
-                    killedIds.Clear();
+                    weaponedPeds.Clear();
                 }
                 if (weapon != null && weapon.Exists() && weapon.IsCollected)
                 {
@@ -186,9 +191,9 @@ namespace NoArtifactLights
                     weaponBlip.Name = Strings.WeaponPistol;
                     BigMessageThread.MessageInstance.ShowSimpleShard(Strings.WeaponsShard, Strings.WeaponsShardSubtitle);
                 }
-                if (ids.Count >= 60000)
+                if (peds1.Count >= 60000)
                 {
-                    ids.Clear();
+                    peds1.Clear();
                 }
                 if(delivery != null && delivery.Exists() && deliveryCar.Exists() && !delivery.IsInVehicle(deliveryCar) && !delivery.IsGettingIntoVehicle)
                 {

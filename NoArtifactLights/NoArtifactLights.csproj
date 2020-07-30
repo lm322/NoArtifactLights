@@ -50,6 +50,7 @@
     <Compile Include="Difficulty.cs" />
     <Compile Include="Entry.cs" />
     <Compile Include="ForceFadeIn.cs" />
+    <Compile Include="Managers\DuplicateManager.cs" />
     <Compile Include="Managers\GameContentManager.cs" />
     <Compile Include="Managers\GameUI.cs" />
     <Compile Include="Managers\Logger.cs" />

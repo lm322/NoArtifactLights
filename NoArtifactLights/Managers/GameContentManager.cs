@@ -81,11 +81,16 @@ namespace NoArtifactLights.Managers
         internal static void EquipWeapon(this Ped ped)
         {
             WeaponHash wp;
+            if(ped.IsInVehicle())
+            {
+                ped.CurrentVehicle.SoundHorn(1000);
+                ped.Task.LeaveVehicle();
+            }
             switch (Common.difficulty)
             {
                 default:
                 case Difficulty.Initial:
-                    if (new Random().Next(200, 272) == 40) wp = WeaponHash.PumpShotgun;
+                    if (new Random().Next(200, 272) == 250) wp = WeaponHash.PumpShotgun;
                     else wp = WeaponHash.Pistol;
                     break;
 

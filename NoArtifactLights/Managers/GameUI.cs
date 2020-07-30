@@ -11,7 +11,6 @@ namespace NoArtifactLights.Managers
 	public static class GameUI
 	{
 
-
 		public static void DisplayHelp(string text)
 		{
 			Function.Call(Hash.BEGIN_TEXT_COMMAND_DISPLAY_HELP, "STRING");
