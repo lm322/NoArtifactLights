@@ -133,6 +133,15 @@ namespace NoArtifactLights.Resources {
         }
         
         /// <summary>
+        ///   查找类似 Exchange failed because your bank account has reached 32-bit integer limit. 的本地化字符串。
+        /// </summary>
+        public static string BankMaximum {
+            get {
+                return ResourceManager.GetString("BankMaximum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 You already ~h~has~s~~b~ body armor~s~. 的本地化字符串。
         /// </summary>
         public static string BodyArmorAlreadyHad {
@@ -147,6 +156,15 @@ namespace NoArtifactLights.Resources {
         public static string BuyNoMoney {
             get {
                 return ResourceManager.GetString("BuyNoMoney", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Exchange failed because your cash amount has reached 32-bit integer limit. 的本地化字符串。
+        /// </summary>
+        public static string CashMaximum {
+            get {
+                return ResourceManager.GetString("CashMaximum", resourceCulture);
             }
         }
         
@@ -273,6 +291,15 @@ namespace NoArtifactLights.Resources {
         public static string ExceptionMenu {
             get {
                 return ResourceManager.GetString("ExceptionMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Exchange Failed 的本地化字符串。
+        /// </summary>
+        public static string ExchangeNotificationFailed {
+            get {
+                return ResourceManager.GetString("ExchangeNotificationFailed", resourceCulture);
             }
         }
         
@@ -444,6 +471,15 @@ namespace NoArtifactLights.Resources {
         public static string ItemSellCarTitle {
             get {
                 return ResourceManager.GetString("ItemSellCarTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Maze Bank 的本地化字符串。
+        /// </summary>
+        public static string MazeBank {
+            get {
+                return ResourceManager.GetString("MazeBank", resourceCulture);
             }
         }
         

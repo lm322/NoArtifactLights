@@ -49,8 +49,11 @@
     <Compile Include="Common.cs" />
     <Compile Include="Difficulty.cs" />
     <Compile Include="Entry.cs" />
+    <Compile Include="Events\ArmedPed.cs" />
+    <Compile Include="Events\IEvent.cs" />
     <Compile Include="ForceFadeIn.cs" />
     <Compile Include="Managers\DuplicateManager.cs" />
+    <Compile Include="Managers\EventManager.cs" />
     <Compile Include="Managers\GameContentManager.cs" />
     <Compile Include="Managers\GameUI.cs" />
     <Compile Include="Managers\Logger.cs" />
@@ -91,9 +94,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Strings.zh-CN.resx" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Events\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Resources\Prologue.xml" />
   </ItemGroup>

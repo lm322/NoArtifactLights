@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace NoArtifactLights.Serialize
 {
@@ -16,6 +17,8 @@ namespace NoArtifactLights.Serialize
         public int Cash { get; set; }
         public SaveWeapon Pistol { get; set; }
         public SaveWeapon PumpShotgun { get; set; }
+
+        public List<SaveWeapon> WeaponDraft { get; set; }
         public int PlayerArmor { get; set; }
         public int PlayerHealth { get; set; }
     }

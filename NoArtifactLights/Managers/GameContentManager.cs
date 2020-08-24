@@ -10,6 +10,19 @@ namespace NoArtifactLights.Managers
 {
     public static class GameContentManager
     {
+        /// <summary>
+        /// Adds a ped to list of armed peds. These peds will not be re-assigned to certain events.
+        /// </summary>
+        /// <param name="p"></param>
+        public static void AddWeaponedPed(Ped p)
+        {
+            if(p == null || !p.Exists())
+            {
+                return;
+            }    
+            Entry.weaponedPeds.Add(p);
+        }
+
         internal static void SetRelationshipBetGroupsUInt(Relationship relation, uint group1, uint group2)
         {
             Function.Call(Hash.SET_RELATIONSHIP_BETWEEN_GROUPS, (int)relation, group1, group2);

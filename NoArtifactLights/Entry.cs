@@ -3,6 +3,7 @@ using GTA.Math;
 using GTA.Native;
 using GTA.UI;
 using NativeUI;
+using NoArtifactLights.Events;
 using NoArtifactLights.Managers;
 using NoArtifactLights.Resources;
 using System;
@@ -16,9 +17,9 @@ namespace NoArtifactLights
     {
         private Pickup weapon;
         private Blip weaponBlip;
-        private DuplicateManager peds1 = new DuplicateManager();
-        private DuplicateManager killedPeds = new DuplicateManager();
-        private DuplicateManager weaponedPeds = new DuplicateManager();
+        internal static DuplicateManager peds1 = new DuplicateManager();
+        internal static DuplicateManager killedPeds = new DuplicateManager();
+        internal static DuplicateManager weaponedPeds = new DuplicateManager();
         private int eplased = 0;
         private Vehicle deliveryCar;
         private Ped delivery;
@@ -35,7 +36,7 @@ namespace NoArtifactLights
                 GameUI.DisplayHelp(Strings.Start);
                 if (!File.Exists("scripts\\PlayerReliveNoResetModel.dll"))
                 {
-                    logger.Log("No PlayerReliveNoResetModel to provide Game.FadeScreenIn upon player wasted or busted. The game will faded out and never fade in upon death or arrest.", "Main", Logger.LogLevel.Warning);
+                    logger.Log("No PlayerReliveNoResetModel to provide Screen.FadeIn upon player wasted or busted. The game will faded out and never fade in upon death or arrest.", "Main", Logger.LogLevel.Warning);
                     Notification.Show(Strings.NoModelWarning);
                     Notification.Show(Strings.NoModelWarning2);
                 }
@@ -59,7 +60,7 @@ namespace NoArtifactLights
                 Game.Player.ChangeModel("a_m_m_bevhills_02");
                 Screen.FadeIn(1000);
                 Common.Unload += Common_Unload;
-                
+                EventManager.RegisterEvent(typeof(ArmedPed));
             }
             catch(Exception ex)
             {
@@ -108,7 +109,7 @@ namespace NoArtifactLights
                         Common.counter++;
                         if (weaponedPeds.IsDuplicate(ped))
                         {
-                            Common.cash += 10;
+                            Common.Earn(10);
                             GameUI.DisplayHelp(Strings.ArmedBonus);
                             ped.AttachedBlip.Delete();
                         }
@@ -165,8 +166,7 @@ namespace NoArtifactLights
 
                     if (new Random().Next(9, 89) == 10)
                     {
-                        ped.EquipWeapon();
-                        weaponedPeds.Add(ped);
+                        EventManager.StartRandomEvent(ped);
                     }
                 }
 
@@ -213,7 +213,7 @@ namespace NoArtifactLights
                     delivery = null;
                     deliveryCar = null;
                     GameUI.DisplayHelp(Strings.StolenDelivery);
-                    Common.cash += 100;
+                    Common.Earn(100);
                 }
             }
             catch (Exception ex)

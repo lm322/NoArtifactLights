@@ -32,12 +32,7 @@ namespace NoArtifactLights.Managers
 
         internal static void SellWeapon(int price, int ammo, WeaponHash weapon)
         {
-            if (Common.cash < price)
-            {
-                Screen.ShowSubtitle(Strings.BuyNoMoney);
-                return;
-            }
-            Common.cash -= price;
+            if (!Common.Cost(price)) return;
             try
             {
                 if (Game.Player.Character.Weapons.HasWeapon(weapon))
@@ -58,12 +53,7 @@ namespace NoArtifactLights.Managers
 
         internal static void SellArmor(int amount, int price)
         {
-            if (Common.cash < price)
-            {
-                Screen.ShowSubtitle(Strings.BuyNoMoney);
-                return;
-            }
-            Common.cash -= price;
+            if (!Common.Cost(amount)) return;
             if(Game.Player.Character.Armor >= amount)
             {
                 Screen.ShowSubtitle(Strings.BodyArmorAlreadyHad);

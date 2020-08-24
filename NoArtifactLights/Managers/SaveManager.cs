@@ -41,7 +41,7 @@ namespace NoArtifactLights.Managers
             Common.blackout = sf.Blackout;
             Game.Player.Character.Position = new GTA.Math.Vector3(sf.PlayerX, sf.PlayerY, sf.PlayerZ);
             Common.counter = sf.Kills;
-            Common.cash = sf.Cash;
+            Common.Cash = sf.Cash;
             Common.difficulty = sf.CurrentDifficulty;
             GameContentManager.SetRelationship(sf.CurrentDifficulty);
             Game.Player.Character.Weapons.RemoveAll();
@@ -72,7 +72,7 @@ namespace NoArtifactLights.Managers
             sf.Blackout = blackout;
             sf.Kills = Common.counter;
             sf.CurrentDifficulty = Common.difficulty;
-            sf.Cash = Common.cash;
+            sf.Cash = Common.Cash;
             sf.PlayerHealth = Game.Player.Character.Health;
             sf.PlayerArmor = Game.Player.Character.Armor;
             if (Game.Player.Character.Weapons.HasWeapon(WeaponHash.Pistol))

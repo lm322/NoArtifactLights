@@ -141,11 +141,17 @@
   <data name="ArmedBonus" xml:space="preserve">
     <value>Armed NPC Kill Bonus +$10</value>
   </data>
+  <data name="BankMaximum" xml:space="preserve">
+    <value>Exchange failed because your bank account has reached 32-bit integer limit.</value>
+  </data>
   <data name="BodyArmorAlreadyHad" xml:space="preserve">
     <value>You already ~h~has~s~~b~ body armor~s~.</value>
   </data>
   <data name="BuyNoMoney" xml:space="preserve">
     <value>You do not have enough money for this.</value>
+  </data>
+  <data name="CashMaximum" xml:space="preserve">
+    <value>Exchange failed because your cash amount has reached 32-bit integer limit.</value>
   </data>
   <data name="DifficultyCarbineRifle" xml:space="preserve">
     <value>Carbine Rifle</value>
@@ -188,6 +194,9 @@
   </data>
   <data name="ExceptionMenu" xml:space="preserve">
     <value>NoArtifactLights menu has encountered error and menu is disabled.</value>
+  </data>
+  <data name="ExchangeNotificationFailed" xml:space="preserve">
+    <value>Exchange Failed</value>
   </data>
   <data name="FirstKill" xml:space="preserve">
     <value>You have killed a person. Once you killed amount of persons, the difficulty will upgrade.</value>
@@ -245,6 +254,9 @@
   </data>
   <data name="ItemSellCarTitle" xml:space="preserve">
     <value>Sell Vehicle</value>
+  </data>
+  <data name="MazeBank" xml:space="preserve">
+    <value>Maze Bank</value>
   </data>
   <data name="MenuMainTitle" xml:space="preserve">
     <value>Main Menu</value>

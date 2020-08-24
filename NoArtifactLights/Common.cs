@@ -12,12 +12,25 @@ namespace NoArtifactLights
     {
         internal static int counter = 0;
         internal static Difficulty difficulty = Difficulty.Initial;
-        internal static int cash = 0;
+        private static int cash = 0;
+        private static int bank = 0;
         internal static bool blackout;
         internal static Logger logger = new Logger();
         internal static event EventHandler Unload;
 
         internal static event EventHandler CashChanged;
+
+        public static int Cash
+        {
+            get
+            {
+                return cash;
+            }
+            set
+            {
+                AlterCashAmount(value);
+            }
+        }
 
         internal static void UnloadMod(object you)
         {
@@ -26,16 +39,11 @@ namespace NoArtifactLights
             Unload(you, new EventArgs());
         }
 
-        internal static void AddCash(int amount)
+        private static void AlterCashAmount(int amount)
         {
-            cash += amount;
-            CashChanged(new object(), new EventArgs());
-        }
-
-        internal static void RemoveCash(int amount)
-        {
-            cash -= amount;
-            CashChanged(new object(), new EventArgs());
+            if (amount <= 0) return;
+            if (amount > int.MaxValue) return;
+            cash = amount;
         }
 
         public static void Deposit(int amount)
@@ -58,6 +66,29 @@ namespace NoArtifactLights
             bw.Close();
             bw.Dispose();
             fs.Dispose();
+        }
+
+        public static bool Cost(int amount)
+        {
+            if(cash < amount)
+            {
+                Screen.ShowSubtitle(Strings.BuyNoMoney);
+                return false;
+            }
+            cash -= amount;
+            return true;
+        }
+
+        public static bool Earn(int amount)
+        {
+            if(cash == int.MaxValue)
+            {
+                logger.Log("Player's cash has reached int limit");
+                Notification.Show(NotificationIcon.Blocked, "", "", Strings.CashMaximum);
+                return false;
+            }
+            cash += amount;
+            return true;
         }
 
         public static void Withdraw(int amount)

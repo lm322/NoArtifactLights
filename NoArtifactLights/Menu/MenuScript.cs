@@ -129,7 +129,7 @@ namespace NoArtifactLights.Menu
 
         private void Common_CashChanged(object sender, EventArgs e)
         {
-            cashBar.Text = $"${Common.cash}";
+            // cashBar.Text = $"${Common.Cash}";
         }
 
         private void ItemCallCops_Activated(UIMenu sender, UIMenuItem selectedItem)
@@ -143,7 +143,7 @@ namespace NoArtifactLights.Menu
             itemLights.Checked = Common.blackout;
             itemDifficulty.SetRightLabel(Strings.ResourceManager.GetString("Difficulty" + Common.difficulty.ToString()));
             itemKills.SetRightLabel(Common.counter.ToString());
-            itemCash.SetRightLabel("$" + Common.cash.ToString());
+            itemCash.SetRightLabel("$" + Common.Cash.ToString());
             Notification.Show(Strings.GameLoaded);
         }
 
@@ -175,7 +175,7 @@ namespace NoArtifactLights.Menu
                     mainMenu.Visible = !mainMenu.Visible;
                     itemDifficulty.SetRightLabel(Strings.ResourceManager.GetString("Difficulty" + Common.difficulty.ToString()));
                     itemKills.SetRightLabel(Common.counter.ToString());
-                    itemCash.SetRightLabel("$" + Common.cash.ToString());
+                    itemCash.SetRightLabel("$" + Common.Cash.ToString());
                     break;
                 case Keys.E:
                     if (mainMenu.Visible) return;
@@ -190,17 +190,13 @@ namespace NoArtifactLights.Menu
                     }
                     if (repair.DistanceTo(Game.Player.Character.Position) <= 10f && Game.Player.Character.IsInVehicle())
                     {
-                        if(Common.cash < 100)
-                        {
-                            Screen.ShowSubtitle(Strings.BuyNoMoney);
-                            return;
-                        }
+        
                         if(Game.Player.Character.CurrentVehicle.IsDamaged == false)
                         {
                             Screen.ShowSubtitle(Strings.RepairUndamaged);
                             return;
                         }
-                        Common.cash -= 100;
+                        if (!Common.Cost(100)) break;
                         Game.Player.Character.CurrentVehicle.Repair();
                         Screen.ShowSubtitle(Strings.RepairSuccess);
                     }
