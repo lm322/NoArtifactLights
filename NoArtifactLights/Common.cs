@@ -30,13 +30,6 @@ namespace NoArtifactLights
             Unload(you, new EventArgs());
         }
 
-        private static void AlterCashAmount(int amount)
-        {
-            if (amount <= 0) return;
-            if (amount > int.MaxValue) return;
-            Cash = amount;
-        }
-
         [Obsolete]
         public static void Deposit(int amount)
         {

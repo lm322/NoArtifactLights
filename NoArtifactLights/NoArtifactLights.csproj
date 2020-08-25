@@ -77,7 +77,6 @@
     <Compile Include="Managers\GameContentManager.cs" />
     <Compile Include="Managers\GameUI.cs" />
     <Compile Include="Managers\InventoryManager.cs" />
-    <Compile Include="Managers\Logger.cs" />
     <Compile Include="Managers\SaveManager.cs" />
     <Compile Include="Managers\WeaponShopManager.cs" />
     <Compile Include="Menu\MenuScript.cs" />
