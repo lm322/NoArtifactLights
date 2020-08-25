@@ -34,6 +34,14 @@
       "frameworks": {
         "net48": {
           "dependencies": {
+            "NLog": {
+              "target": "Package",
+              "version": "[4.7.4, )"
+            },
+            "NLog.Schema": {
+              "target": "Package",
+              "version": "[4.7.4, )"
+            },
             "ScriptHookVDotNet3": {
               "target": "Package",
               "version": "[3.0.4, )"

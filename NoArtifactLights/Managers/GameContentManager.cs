@@ -1,5 +1,6 @@
 ﻿using GTA;
 using GTA.Native;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,8 @@ namespace NoArtifactLights.Managers
 {
     public static class GameContentManager
     {
+        private static NLog.Logger logger = LogManager.GetCurrentClassLogger();
+
         /// <summary>
         /// Adds a ped to list of armed peds. These peds will not be re-assigned to certain events.
         /// </summary>
@@ -84,7 +87,7 @@ namespace NoArtifactLights.Managers
             }
             catch(Exception ex)
             {
-                Common.logger.Log("Failed to create delivery: \r\n" + ex.ToString(), Logger.LogLevel.Warning);
+                logger.Error(ex, "Failed to create delivery");
                 car = null;
                 driver = null;
                 return false;

@@ -1,6 +1,5 @@
 C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\NoArtifactLights.dll
 C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\NoArtifactLights.pdb
-C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\ScriptHookVDotNet2.dll
 C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\obj\Debug\NoArtifactLights.csprojAssemblyReference.cache
 C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\obj\Debug\NoArtifactLights.csproj.CoreCompileInputs.cache
 C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\obj\Debug\NoArtifactLights.csproj.CopyComplete
@@ -12,3 +11,6 @@ C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\zh-CN\No
 C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\obj\Debug\NoArtifactLights.Resources.Strings.zh-CN.resources
 C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\obj\Debug\zh-CN\NoArtifactLights.resources.dll
 C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\obj\Debug\NoArtifactLights.Resources.Missions.resources
+C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\NLog.dll
+C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\ScriptHookVDotNet3.dll
+C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\NativeUI.dll

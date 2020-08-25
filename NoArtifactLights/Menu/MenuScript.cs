@@ -3,6 +3,7 @@ using GTA.Math;
 using GTA.Native;
 using GTA.UI;
 using NativeUI;
+using NLog;
 using NoArtifactLights.Managers;
 using NoArtifactLights.Resources;
 using System;
@@ -33,15 +34,15 @@ namespace NoArtifactLights.Menu
         // private Vector3 ammu = new Vector3(18.18945f, -1120.384f, 28.91654f);
         private Vector3 repair = new Vector3(140.683f, -1081.387f, 28.56039f);
 
-        private Logger logger = Common.logger;
+        private NLog.Logger logger = LogManager.GetCurrentClassLogger();
 
         public MenuScript()
         {
             try
             {
-                logger.Log("Loading Main Menu", "MenuScript");
+                logger.Trace("Loading Main Menu");
                 pool = new MenuPool();
-                logger.Log("Menu Pool created", "MenuScript");
+                logger.Trace("Menu Pool created");
                 mainMenu = new UIMenu("NoArtifactLights", Strings.MenuMainTitle);
                 itemLights = new UIMenuCheckboxItem(Strings.ItemLightsTitle, true, Strings.ItemLightsSubtitle);
                 itemSave = new UIMenuItem(Strings.ItemSaveTitle, Strings.ItemSaveSubtitle);
@@ -50,7 +51,7 @@ namespace NoArtifactLights.Menu
                 itemDifficulty = new UIMenuItem(Strings.ItemDifficulty, Strings.ItemDIfficultySubtitle);
                 itemKills = new UIMenuItem(Strings.ItemKills, Strings.ItemKillsSubtitle);
                 itemCash = new UIMenuItem(Strings.ItemCashTitle, Strings.ItemCashSubtitle);
-                logger.Log("All instances initialized", "MenuScript");
+                logger.Trace("All instances initialized");
                 mainMenu.AddItem(itemLights);
                 mainMenu.AddItem(itemSave);
                 mainMenu.AddItem(itemLoad);
@@ -58,10 +59,10 @@ namespace NoArtifactLights.Menu
                 mainMenu.AddItem(itemDifficulty);
                 mainMenu.AddItem(itemKills);
                 mainMenu.AddItem(itemCash);
-                logger.Log("Refreshing Index", "MenuScript");
+                logger.Trace("Refreshing Index");
                 mainMenu.RefreshIndex();
                 pool.Add(mainMenu);
-                logger.Log("Main Menu Done", "MenuScript");
+                logger.Trace("Main Menu Done");
                 Tick += MenuScript_Tick;
                 KeyDown += MenuScript_KeyDown;
                 itemLights.CheckboxEvent += ItemLights_CheckboxEvent;
@@ -69,18 +70,18 @@ namespace NoArtifactLights.Menu
                 itemLoad.Activated += ItemLoad_Activated;
                 itemCallCops.Activated += ItemCallCops_Activated;
                 cashBar = new TextTimerBar("Cash", "$0");
-                Common.CashChanged += Common_CashChanged;
+               // Common.CashChanged += Common_CashChanged;
 
                 Common.Unload += Common_Unload;
 
-                logger.Log("Loading Ammu-Nation Menu", "MenuScript");
+                logger.Trace("Loading Ammu-Nation Menu");
 
                 buyMenu = new UIMenu(Strings.AmmuTitle, Strings.AmmuSubtitle);
                 itemPistol = WeaponShopManager.GenerateWeaponSellerItem(Strings.AmmuPistol, Strings.AmmuPistolSubtitle, 100);
                 itemPumpShotgun = WeaponShopManager.GenerateWeaponSellerItem(Strings.AmmuPumpShotgun, Strings.AmmuPumpShotgunSubtitle, 200);
                 itemBodyArmor = new UIMenuItem(Strings.WeaponBodyArmor, Strings.WeaponBodyArmorDescription);
                 itemBodyArmor.SetRightLabel("$380");
-                logger.Log("Instances created", "MenuScript");
+                logger.Trace("Instances created");
                 buyMenu.AddItem(itemCash);
                 buyMenu.AddItem(itemPistol);
                 buyMenu.AddItem(itemPumpShotgun);
@@ -101,7 +102,7 @@ namespace NoArtifactLights.Menu
             catch (Exception ex)
             {
                 GameUI.DisplayHelp(Strings.ExceptionMenu);
-                File.WriteAllText("MENUEXCEPTION.TXT", $"Exception caught: \r\n{ex.GetType().Name}\r\nException Message:\r\n{ex.Message}\r\nException StackTrace:\r\n{ex.StackTrace}");
+                logger.Fatal(ex, "Error while loading menu");
                 Common.UnloadMod(this);
                 this.Abort();
             }
@@ -119,6 +120,8 @@ namespace NoArtifactLights.Menu
                 itemSave.Activated -= ItemSave_Activated;
                 itemLoad.Activated -= ItemLoad_Activated;
                 itemCallCops.Activated -= ItemCallCops_Activated;
+                mainMenu = null;
+                buyMenu = null;
                 Abort();
             }
         }

@@ -1,4 +1,5 @@
 ﻿using GTA;
+using NLog;
 using NoArtifactLights.Events;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,8 @@ namespace NoArtifactLights.Managers
     internal static class EventManager
     {
         public static List<Type> registeredEvents = new List<Type>();
-        public static bool disable;
+        public static bool disable = false;
+        private static NLog.Logger logger = LogManager.GetCurrentClassLogger();
         
         public static void RegisterEvent(Type t)
         {
@@ -38,8 +40,8 @@ namespace NoArtifactLights.Managers
             }
             catch(Exception ex)
             {
-                Common.logger.Log("Error while executing event: " + @event.GetType().Name, "EventManager", Logger.LogLevel.Error);
-                Common.logger.Log(ex.ToString(), "EventManager", Logger.LogLevel.Error);
+                logger.Error("Error while executing event: " + @event.GetType().Name);
+                logger.Error(ex);
             }
         }
     }

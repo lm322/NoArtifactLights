@@ -4,12 +4,14 @@ using GTA.Native;
 using GTA.UI;
 using NativeUI;
 using NoArtifactLights.Events;
+using NLog;
 using NoArtifactLights.Managers;
 using NoArtifactLights.Resources;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Timers;
+using Logger = NLog.Logger;
 
 namespace NoArtifactLights
 {
@@ -24,36 +26,36 @@ namespace NoArtifactLights
         private Vehicle deliveryCar;
         private Ped delivery;
 
-        private Logger logger = Common.logger;
+        private Logger logger = LogManager.GetCurrentClassLogger();
 
         public Entry()
         {
             try
             {
                 Screen.FadeOut(1000);
-                logger.Log("Initialized", "Main");
+                logger.Info("Initialized");
                 Function.Call(Hash.SET_ARTIFICIAL_LIGHTS_STATE, true);
                 GameUI.DisplayHelp(Strings.Start);
                 if (!File.Exists("scripts\\PlayerReliveNoResetModel.dll"))
                 {
-                    logger.Log("No PlayerReliveNoResetModel to provide Screen.FadeIn upon player wasted or busted. The game will faded out and never fade in upon death or arrest.", "Main", Logger.LogLevel.Warning);
+                    logger.Warn("No PlayerReliveNoResetModel to provide Screen.FadeIn upon player wasted or busted. The game will faded out and never fade in upon death or arrest.");
                     Notification.Show(Strings.NoModelWarning);
                     Notification.Show(Strings.NoModelWarning2);
                 }
                 if (!File.Exists("scripts\\NoArtifactLights.pdb"))
                 {
-                    logger.Log("Attention: No debug database found in game scripts folder. This means logs cannot provide additional information related to exception.", Logger.LogLevel.Warning);
+                    logger.Warn("Attention: No debug database found in game scripts folder. This means logs cannot provide additional information related to exception.");
                 }
                 this.Interval = 100;
                 this.Tick += Entry_Tick;
-                logger.Log("Loading multiplayer maps");
+                logger.Trace("Loading multiplayer maps");
                 Function.Call(Hash._LOAD_MP_DLC_MAPS);
                 Function.Call(Hash._USE_FREEMODE_MAP_BEHAVIOR, true);
-                logger.Log("Setting player position and giving weapons");
+                logger.Trace("Setting player position and giving weapons");
                 Game.Player.Character.Position = new Vector3(459.8501f, -1001.404f, 24.91487f);
                 Game.Player.Character.Weapons.Give(WeaponHash.Flashlight, 1, true, true);
                 Game.Player.Character.Weapons.Give(WeaponHash.Pistol, 50, false, false);
-                logger.Log("Setting relationship and game settings", "Main");
+                logger.Trace("Setting relationship and game settings");
                 GameContentManager.SetRelationship(Difficulty.Initial);
                 Game.MaxWantedLevel = 0;
                 Game.Player.IgnoredByPolice = true;
@@ -65,10 +67,7 @@ namespace NoArtifactLights
             catch(Exception ex)
             {
                 Screen.FadeIn(500);
-                logger.Log("FATAL ERROR DURING LOAD", "Main", Logger.LogLevel.Fatal);
-                logger.Log(ex.ToString(), "Main", Logger.LogLevel.Fatal);
-                logger.Log(" ------ ADDITIONAL STACKTRACE ------");
-                logger.Log(Environment.StackTrace);
+                logger.Fatal(ex, "Excepting during initial load process");
                 Abort();
             }
         }
@@ -155,7 +154,7 @@ namespace NoArtifactLights
                     peds1.Add(ped);
                     if (new Random().Next(1000000, 2000001) == 1100000 &&(delivery == null || !delivery.Exists() || !deliveryCar.Exists()))
                     {
-                        logger.Log("Hit deliverycar", "Main");
+                        logger.Debug("Hit deliverycar");
                         bool success = GameContentManager.CreateDelivery(out deliveryCar, out delivery);
                         if(!success)
                         {
@@ -219,7 +218,7 @@ namespace NoArtifactLights
             catch (Exception ex)
             {
                 GameUI.DisplayHelp(Strings.ExceptionMain);
-                File.WriteAllText("EXCEPTION.TXT", $"Exception caught: \r\n{ex.GetType().Name}\r\nException Message:\r\n{ex.Message}\r\nException StackTrace:\r\n{ex.StackTrace}");
+                logger.Fatal(ex, "Fatal error during main loop");
                 throw;
             }
         }
