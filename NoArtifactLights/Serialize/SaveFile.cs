@@ -15,6 +15,8 @@ namespace NoArtifactLights.Serialize
         public Difficulty CurrentDifficulty { get; set; }
         public int Kills { get; set; }
         public int Cash { get; set; }
+        public int Bank { get; set; }
+        public string Model { get; set; }
         public SaveWeapon Pistol { get; set; }
         public SaveWeapon PumpShotgun { get; set; }
 

@@ -34,6 +34,10 @@
       "frameworks": {
         "net48": {
           "dependencies": {
+            "MongoDB.Bson": {
+              "target": "Package",
+              "version": "[2.11.1, )"
+            },
             "NLog": {
               "target": "Package",
               "version": "[4.7.4, )"

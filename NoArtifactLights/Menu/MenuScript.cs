@@ -23,8 +23,11 @@ namespace NoArtifactLights.Menu
         private UIMenuItem itemCallCops;
         private UIMenuItem itemDifficulty;
         private UIMenuItem itemKills;
+        private UIMenuItem itemDeposit;
+        private UIMenuItem itemWithdraw;
         private UIMenuCheckboxItem itemLights;
         private UIMenuItem itemCash;
+        private UIMenuItem itemBank;
 
         private UIMenu buyMenu;
         private UIMenuItem itemPistol;
@@ -52,7 +55,10 @@ namespace NoArtifactLights.Menu
                 itemCallCops = new UIMenuItem(Strings.ItemCopsTitle, Strings.ItemCopsSubtitle);
                 itemDifficulty = new UIMenuItem(Strings.ItemDifficulty, Strings.ItemDIfficultySubtitle);
                 itemKills = new UIMenuItem(Strings.ItemKills, Strings.ItemKillsSubtitle);
+                itemDeposit = new UIMenuItem(Strings.ItemDepositTitle, Strings.ItemDepositSubtitle);
+                itemWithdraw = new UIMenuItem(Strings.ItemWithdrawTitle, Strings.ItemWithdrawSubtitle);
                 itemCash = new UIMenuItem(Strings.ItemCashTitle, Strings.ItemCashSubtitle);
+                itemBank = new UIMenuItem(Strings.ItemBankTitle, Strings.ItemBankSubtitle);
                 logger.Trace("All instances initialized");
                 mainMenu.AddItem(itemLights);
                 mainMenu.AddItem(itemSave);
@@ -60,7 +66,10 @@ namespace NoArtifactLights.Menu
                 mainMenu.AddItem(itemCallCops);
                 mainMenu.AddItem(itemDifficulty);
                 mainMenu.AddItem(itemKills);
+                mainMenu.AddItem(itemDeposit);
+                mainMenu.AddItem(itemWithdraw);
                 mainMenu.AddItem(itemCash);
+                mainMenu.AddItem(itemBank);
                 logger.Trace("Refreshing Index");
                 mainMenu.RefreshIndex();
                 pool.Add(mainMenu);
@@ -71,6 +80,8 @@ namespace NoArtifactLights.Menu
                 itemSave.Activated += ItemSave_Activated;
                 itemLoad.Activated += ItemLoad_Activated;
                 itemCallCops.Activated += ItemCallCops_Activated;
+                itemDeposit.Activated += ItemDeposit_Activated;
+                itemWithdraw.Activated += ItemWithdraw_Activated;
                 cashBar = new TextTimerBar("Cash", "$0");
                // Common.CashChanged += Common_CashChanged;
 
@@ -110,6 +121,45 @@ namespace NoArtifactLights.Menu
                 Common.UnloadMod(this);
                 this.Abort();
             }
+        }
+
+        private void ItemWithdraw_Activated(UIMenu sender, UIMenuItem selectedItem)
+        {
+            mainMenu.Visible = false;
+            string cash = Game.GetUserInput(WindowTitle.EnterMessage20, "", 20);
+            int result;
+            bool success = int.TryParse(cash, out result);
+            if (!success)
+            {
+                Screen.ShowSubtitle(Strings.InputNotNumber);
+                return;
+            }
+            if(Common.Bank < result)
+            {
+                Screen.ShowSubtitle(Strings.WithdrawNoCurrency);
+                return;
+            }
+            Common.Bank -= result;
+            Common.Cash += result;
+            GameUI.DisplayHelp(Strings.TransactionSuccess);
+        }
+
+        private void ItemDeposit_Activated(UIMenu sender, UIMenuItem selectedItem)
+        {
+            mainMenu.Visible = false;
+            string cash = Game.GetUserInput(WindowTitle.EnterMessage20, "", 20);
+            int result;
+            bool success = int.TryParse(cash, out result);
+            if (!success)
+            {
+                Screen.ShowSubtitle(Strings.InputNotNumber);
+                return;
+            }
+            if (!Common.Cost(result))
+            {
+                return;
+            }
+            GameUI.DisplayHelp(Strings.TransactionSuccess);
         }
 
         private void MenuScript_Aborted(object sender, EventArgs e)

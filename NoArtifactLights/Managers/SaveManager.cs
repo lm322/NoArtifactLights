@@ -27,12 +27,13 @@ namespace NoArtifactLights.Managers
             }
             FileStream fs = File.OpenRead("NALSave.xml");
             XmlSerializer serializer = new XmlSerializer(typeof(SaveFile));
+            
             sf = (SaveFile)serializer.Deserialize(fs);
             fs.Close();
             fs.Dispose();
-            if (sf.Version != 2)
+            if (sf.Version != 3)
             {
-                
+                Notification.Show(Strings.SaveVersion);
                 return;
             }
             World.Weather = sf.Status.CurrentWeather;
@@ -42,6 +43,7 @@ namespace NoArtifactLights.Managers
             Game.Player.Character.Position = new GTA.Math.Vector3(sf.PlayerX, sf.PlayerY, sf.PlayerZ);
             Common.counter = sf.Kills;
             Common.Cash = sf.Cash;
+            Common.Bank = sf.Bank;
             Common.difficulty = sf.CurrentDifficulty;
             GameContentManager.SetRelationship(sf.CurrentDifficulty);
             Game.Player.Character.Weapons.RemoveAll();
@@ -73,6 +75,7 @@ namespace NoArtifactLights.Managers
             sf.Kills = Common.counter;
             sf.CurrentDifficulty = Common.difficulty;
             sf.Cash = Common.Cash;
+            sf.Bank = Common.Bank;
             sf.PlayerHealth = Game.Player.Character.Health;
             sf.PlayerArmor = Game.Player.Character.Armor;
             if (Game.Player.Character.Weapons.HasWeapon(WeaponHash.Pistol))

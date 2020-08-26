@@ -102,6 +102,9 @@
     <Compile Include="Serialize\WorldStatus.cs" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="MongoDB.Bson">
+      <Version>2.11.1</Version>
+    </PackageReference>
     <PackageReference Include="NLog">
       <Version>4.7.4</Version>
     </PackageReference>

@@ -153,6 +153,9 @@
   <data name="CashMaximum" xml:space="preserve">
     <value>Exchange failed because your cash amount has reached 32-bit integer limit.</value>
   </data>
+  <data name="DepositNoMoney" xml:space="preserve">
+    <value>You don't have enough cash to deposit.</value>
+  </data>
   <data name="DifficultyCarbineRifle" xml:space="preserve">
     <value>Carbine Rifle</value>
   </data>
@@ -207,6 +210,15 @@
   <data name="GameSaved" xml:space="preserve">
     <value>The game has been ~b~saved~s~.</value>
   </data>
+  <data name="InputNotNumber" xml:space="preserve">
+    <value>You may only enter numbers.</value>
+  </data>
+  <data name="ItemBankSubtitle" xml:space="preserve">
+    <value>View current bank account currency.</value>
+  </data>
+  <data name="ItemBankTitle" xml:space="preserve">
+    <value>Currency</value>
+  </data>
   <data name="ItemCashSubtitle" xml:space="preserve">
     <value>Views current cash.</value>
   </data>
@@ -218,6 +230,12 @@
   </data>
   <data name="ItemCopsTitle" xml:space="preserve">
     <value>Call for Cops</value>
+  </data>
+  <data name="ItemDepositSubtitle" xml:space="preserve">
+    <value>Deposits cash into bank account.</value>
+  </data>
+  <data name="ItemDepositTitle" xml:space="preserve">
+    <value>Deposit</value>
   </data>
   <data name="ItemDifficulty" xml:space="preserve">
     <value>Difficulty</value>
@@ -254,6 +272,12 @@
   </data>
   <data name="ItemSellCarTitle" xml:space="preserve">
     <value>Sell Vehicle</value>
+  </data>
+  <data name="ItemWithdrawSubtitle" xml:space="preserve">
+    <value>Withdraws currency into cash.</value>
+  </data>
+  <data name="ItemWithdrawTitle" xml:space="preserve">
+    <value>Withdraw</value>
   </data>
   <data name="MazeBank" xml:space="preserve">
     <value>Maze Bank</value>
@@ -303,6 +327,9 @@
   <data name="StolenDelivery" xml:space="preserve">
     <value>Destory stolen delivery bonus +$100</value>
   </data>
+  <data name="TransactionSuccess" xml:space="preserve">
+    <value>The transaction was success.</value>
+  </data>
   <data name="Unload" xml:space="preserve">
     <value>~h~Unloading mod~s~. ~b~Bye!~s~</value>
   </data>
@@ -320,5 +347,8 @@
   </data>
   <data name="WeaponsShardSubtitle" xml:space="preserve">
     <value>A pistol is available in nearby sidewalk.</value>
+  </data>
+  <data name="WithdrawNoCurrency" xml:space="preserve">
+    <value>You don't have enough currency to withdraw.</value>
   </data>
 </root>

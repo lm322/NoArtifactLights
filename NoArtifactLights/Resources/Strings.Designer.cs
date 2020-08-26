@@ -169,6 +169,15 @@ namespace NoArtifactLights.Resources {
         }
         
         /// <summary>
+        ///   查找类似 You don&apos;t have enough cash to deposit. 的本地化字符串。
+        /// </summary>
+        public static string DepositNoMoney {
+            get {
+                return ResourceManager.GetString("DepositNoMoney", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Carbine Rifle 的本地化字符串。
         /// </summary>
         public static string DifficultyCarbineRifle {
@@ -331,6 +340,33 @@ namespace NoArtifactLights.Resources {
         }
         
         /// <summary>
+        ///   查找类似 You may only enter numbers. 的本地化字符串。
+        /// </summary>
+        public static string InputNotNumber {
+            get {
+                return ResourceManager.GetString("InputNotNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 View current bank account currency. 的本地化字符串。
+        /// </summary>
+        public static string ItemBankSubtitle {
+            get {
+                return ResourceManager.GetString("ItemBankSubtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Currency 的本地化字符串。
+        /// </summary>
+        public static string ItemBankTitle {
+            get {
+                return ResourceManager.GetString("ItemBankTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Views current cash. 的本地化字符串。
         /// </summary>
         public static string ItemCashSubtitle {
@@ -363,6 +399,24 @@ namespace NoArtifactLights.Resources {
         public static string ItemCopsTitle {
             get {
                 return ResourceManager.GetString("ItemCopsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Deposits cash into bank account. 的本地化字符串。
+        /// </summary>
+        public static string ItemDepositSubtitle {
+            get {
+                return ResourceManager.GetString("ItemDepositSubtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Deposit 的本地化字符串。
+        /// </summary>
+        public static string ItemDepositTitle {
+            get {
+                return ResourceManager.GetString("ItemDepositTitle", resourceCulture);
             }
         }
         
@@ -471,6 +525,24 @@ namespace NoArtifactLights.Resources {
         public static string ItemSellCarTitle {
             get {
                 return ResourceManager.GetString("ItemSellCarTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Withdraws currency into cash. 的本地化字符串。
+        /// </summary>
+        public static string ItemWithdrawSubtitle {
+            get {
+                return ResourceManager.GetString("ItemWithdrawSubtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Withdraw 的本地化字符串。
+        /// </summary>
+        public static string ItemWithdrawTitle {
+            get {
+                return ResourceManager.GetString("ItemWithdrawTitle", resourceCulture);
             }
         }
         
@@ -619,6 +691,15 @@ namespace NoArtifactLights.Resources {
         }
         
         /// <summary>
+        ///   查找类似 The transaction was success. 的本地化字符串。
+        /// </summary>
+        public static string TransactionSuccess {
+            get {
+                return ResourceManager.GetString("TransactionSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 ~h~Unloading mod~s~. ~b~Bye!~s~ 的本地化字符串。
         /// </summary>
         public static string Unload {
@@ -669,6 +750,15 @@ namespace NoArtifactLights.Resources {
         public static string WeaponsShardSubtitle {
             get {
                 return ResourceManager.GetString("WeaponsShardSubtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 You don&apos;t have enough currency to withdraw. 的本地化字符串。
+        /// </summary>
+        public static string WithdrawNoCurrency {
+            get {
+                return ResourceManager.GetString("WithdrawNoCurrency", resourceCulture);
             }
         }
     }

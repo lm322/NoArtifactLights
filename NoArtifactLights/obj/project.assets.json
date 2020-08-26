@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     ".NETFramework,Version=v4.8": {
+      "MongoDB.Bson/2.11.1": {
+        "type": "package",
+        "compile": {
+          "lib/net452/MongoDB.Bson.dll": {}
+        },
+        "runtime": {
+          "lib/net452/MongoDB.Bson.dll": {}
+        }
+      },
       "NLog/4.7.4": {
         "type": "package",
         "frameworkAssemblies": [
@@ -44,6 +53,15 @@
       }
     },
     ".NETFramework,Version=v4.8/win": {
+      "MongoDB.Bson/2.11.1": {
+        "type": "package",
+        "compile": {
+          "lib/net452/MongoDB.Bson.dll": {}
+        },
+        "runtime": {
+          "lib/net452/MongoDB.Bson.dll": {}
+        }
+      },
       "NLog/4.7.4": {
         "type": "package",
         "frameworkAssemblies": [
@@ -86,6 +104,15 @@
       }
     },
     ".NETFramework,Version=v4.8/win-x64": {
+      "MongoDB.Bson/2.11.1": {
+        "type": "package",
+        "compile": {
+          "lib/net452/MongoDB.Bson.dll": {}
+        },
+        "runtime": {
+          "lib/net452/MongoDB.Bson.dll": {}
+        }
+      },
       "NLog/4.7.4": {
         "type": "package",
         "frameworkAssemblies": [
@@ -128,6 +155,15 @@
       }
     },
     ".NETFramework,Version=v4.8/win-x86": {
+      "MongoDB.Bson/2.11.1": {
+        "type": "package",
+        "compile": {
+          "lib/net452/MongoDB.Bson.dll": {}
+        },
+        "runtime": {
+          "lib/net452/MongoDB.Bson.dll": {}
+        }
+      },
       "NLog/4.7.4": {
         "type": "package",
         "frameworkAssemblies": [
@@ -171,6 +207,25 @@
     }
   },
   "libraries": {
+    "MongoDB.Bson/2.11.1": {
+      "sha512": "HlSksNZHP71lPJmVPwZwDheN85GYzQDecq/hLr6ARFcnmoz2WR2Tdk3vcfCNEaXIQnkpE5ai0nTOJ/206mOTrQ==",
+      "type": "package",
+      "path": "mongodb.bson/2.11.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "License.txt",
+        "lib/net452/MongoDB.Bson.dll",
+        "lib/net452/MongoDB.Bson.xml",
+        "lib/netstandard1.5/MongoDB.Bson.dll",
+        "lib/netstandard1.5/MongoDB.Bson.xml",
+        "lib/netstandard2.0/MongoDB.Bson.dll",
+        "lib/netstandard2.0/MongoDB.Bson.xml",
+        "mongodb.bson.2.11.1.nupkg.sha512",
+        "mongodb.bson.nuspec",
+        "packageIcon.png"
+      ]
+    },
     "NLog/4.7.4": {
       "sha512": "gSGX/ur0P3jp17H37HW7ycXR6L1578tQbilf4HLX1t2viCDFgtwEsfHMPf0/jcuf7/qqGgoU/vKgyQ9hzxuOEQ==",
       "type": "package",
@@ -233,6 +288,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.8": [
+      "MongoDB.Bson >= 2.11.1",
       "NLog >= 4.7.4",
       "NLog.Schema >= 4.7.4",
       "ScriptHookVDotNet3 >= 3.0.4"
@@ -271,6 +327,10 @@
     "frameworks": {
       "net48": {
         "dependencies": {
+          "MongoDB.Bson": {
+            "target": "Package",
+            "version": "[2.11.1, )"
+          },
           "NLog": {
             "target": "Package",
             "version": "[4.7.4, )"
