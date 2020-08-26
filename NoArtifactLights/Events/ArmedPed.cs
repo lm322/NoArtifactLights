@@ -1,4 +1,5 @@
 ﻿using GTA;
+using NLog;
 using NoArtifactLights.Managers;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,8 @@ namespace NoArtifactLights.Events
 {
     public class ArmedPed : IEvent
     {
+        private static Logger logger = LogManager.GetCurrentClassLogger();
+
         public void End()
         {
             
@@ -27,7 +30,13 @@ namespace NoArtifactLights.Events
             {
                 return;
             }
+            logger.Trace("Equipping weapon");
             p.EquipWeapon();
+            Blip b = p.AddBlip();
+            b.IsFriendly = false;
+            b.Sprite = BlipSprite.Enemy;
+            b.Scale = 0.5f;
+            b.Color = BlipColor.Red;
             GameContentManager.AddWeaponedPed(p);
         }
     }

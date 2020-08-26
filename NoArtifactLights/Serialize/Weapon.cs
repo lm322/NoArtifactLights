@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GTA;
+using System;
 
 namespace NoArtifactLights.Serialize
 {
@@ -11,6 +12,7 @@ namespace NoArtifactLights.Serialize
             Existence = exists;
         }
 
+        // public WeaponHash Weapon { get; set; }
         public bool Existence { get; set; }
         public int Ammo { get; set; }
     }

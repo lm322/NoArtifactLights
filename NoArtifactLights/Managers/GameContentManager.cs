@@ -1,4 +1,7 @@
-﻿using GTA;
+﻿// NoArtifactLights
+// (C) RelaperCrystal 2020
+
+using GTA;
 using GTA.Native;
 using NLog;
 using System;
@@ -87,7 +90,7 @@ namespace NoArtifactLights.Managers
             }
             catch(Exception ex)
             {
-                logger.Error(ex, "Failed to create delivery");
+                logger.Error(ex);
                 car = null;
                 driver = null;
                 return false;
@@ -127,11 +130,8 @@ namespace NoArtifactLights.Managers
                     break;
             }
             ped.Weapons.Give(wp, 9999, true, true);
-            ped.AddBlip();
-            ped.AttachedBlip.IsFriendly = false;
-            ped.AttachedBlip.Sprite = BlipSprite.Enemy;
-            ped.AttachedBlip.Scale = 0.5f;
-            ped.AttachedBlip.Color = BlipColor.Red;
+            ped.Weapons.Select(wp);
+            ped.Task.FightAgainstHatedTargets(15f);
         }
     }
 }

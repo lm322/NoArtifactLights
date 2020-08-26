@@ -14,3 +14,4 @@ C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\obj\Debug\NoArtifa
 C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\NLog.dll
 C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\ScriptHookVDotNet3.dll
 C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\NativeUI.dll
+C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\NLog.config

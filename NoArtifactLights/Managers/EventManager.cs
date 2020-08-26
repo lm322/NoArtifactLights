@@ -24,13 +24,24 @@ namespace NoArtifactLights.Managers
 
         public static void StartRandomEvent(Ped p)
         {
+            logger.Info("Random event has been marked as started");
+            logger.Info("Random events are: " + registeredEvents.Count);
             if (registeredEvents.Count == 0) return;
             if (disable) return;
+            logger.Info("Checks accomplished");
             Random r = new Random();
-            int result = r.Next(0, registeredEvents.Count + 1);
-            if (registeredEvents.Count > result) return;
+            logger.Info("Random Created");
+            int result = r.Next(0, registeredEvents.Count);
+            logger.Info("Tracked: " + (registeredEvents.Count));
+            logger.Info("Result: " + result);
+            if (registeredEvents.Count - 1 > result)
+            {
+                logger.Info("It is bigger than Tracked!");
+                return;
+            }
             
             object obj = Activator.CreateInstance(registeredEvents[result]);
+            logger.Info(obj.GetType().Name + " is starting");
             IEvent @event = (IEvent)obj;
             
             try

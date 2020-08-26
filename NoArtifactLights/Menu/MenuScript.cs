@@ -31,6 +31,8 @@ namespace NoArtifactLights.Menu
         private UIMenuItem itemPumpShotgun;
         private UIMenuItem itemBodyArmor;
 
+        Blip repairBlip;
+
         // private Vector3 ammu = new Vector3(18.18945f, -1120.384f, 28.91654f);
         private Vector3 repair = new Vector3(140.683f, -1081.387f, 28.56039f);
 
@@ -92,12 +94,14 @@ namespace NoArtifactLights.Menu
                 itemPumpShotgun.Activated += ItemPumpShotgun_Activated;
                 itemBodyArmor.Activated += ItemBodyArmor_Activated;
 
-                Blip repairBlip = World.CreateBlip(repair);
+                repairBlip = World.CreateBlip(repair);
                 repairBlip.IsFriendly = true;
                 repairBlip.IsShortRange = true;
                 repairBlip.Sprite = BlipSprite.Garage;
                 repairBlip.Color = BlipColor.Blue;
                 repairBlip.Name = Strings.RepairBlip;
+
+                this.Aborted += MenuScript_Aborted;
             }
             catch (Exception ex)
             {
@@ -108,20 +112,36 @@ namespace NoArtifactLights.Menu
             }
         }
 
-        private void Common_Unload(object sender, EventArgs e)
+        private void MenuScript_Aborted(object sender, EventArgs e)
         {
-            if(!sender.Equals(this))
+            if(repairBlip != null && repairBlip.Exists())
+            {
+                repairBlip.Delete();
+                
+            }
+
+            if (buyMenu != null) buyMenu.Visible = false;
+            if (mainMenu != null)
             {
                 mainMenu.Visible = false;
-                buyMenu.Visible = false;
-                Tick -= MenuScript_Tick;
-                KeyDown -= MenuScript_KeyDown;
                 itemLights.CheckboxEvent -= ItemLights_CheckboxEvent;
                 itemSave.Activated -= ItemSave_Activated;
                 itemLoad.Activated -= ItemLoad_Activated;
                 itemCallCops.Activated -= ItemCallCops_Activated;
-                mainMenu = null;
-                buyMenu = null;
+            }
+            
+            Tick -= MenuScript_Tick;
+            KeyDown -= MenuScript_KeyDown;
+
+            mainMenu = null;
+            buyMenu = null;
+
+        }
+
+        private void Common_Unload(object sender, EventArgs e)
+        {
+            if(!sender.Equals(this))
+            {
                 Abort();
             }
         }

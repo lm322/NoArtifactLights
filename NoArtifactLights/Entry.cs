@@ -63,6 +63,7 @@ namespace NoArtifactLights
                 Screen.FadeIn(1000);
                 Common.Unload += Common_Unload;
                 EventManager.RegisterEvent(typeof(ArmedPed));
+                this.Aborted += Entry_Aborted;
             }
             catch(Exception ex)
             {
@@ -70,6 +71,11 @@ namespace NoArtifactLights
                 logger.Fatal(ex, "Excepting during initial load process");
                 Abort();
             }
+        }
+
+        private void Entry_Aborted(object sender, EventArgs e)
+        {
+            
         }
 
         private void Common_Unload(object sender, EventArgs e)
@@ -102,15 +108,27 @@ namespace NoArtifactLights
                     {
                         continue;
                     }
+                    if(ped == null)
+                    {
+                        continue;
+                    }
                     if (ped.Exists() && ped.HasBeenDamagedBy(Game.Player.Character) && ped.IsDead && !killedPeds.IsDuplicate(ped))
                     {
                         killedPeds.Add(ped);
+                        logger.Debug("A ped has been killed");
+                        if(Game.Player.Character.Position.DistanceTo(ped.Position) <= 2.5f)
+                        {
+                            Common.Earn(new Random().Next(4, 16));
+                        }
                         Common.counter++;
                         if (weaponedPeds.IsDuplicate(ped))
                         {
                             Common.Earn(10);
                             GameUI.DisplayHelp(Strings.ArmedBonus);
-                            ped.AttachedBlip.Delete();
+                            if(ped.AttachedBlip != null && ped.AttachedBlip.Exists())
+                            {
+                                ped.AttachedBlip.Delete();
+                            }
                         }
                         switch (Common.counter)
                         {
@@ -218,7 +236,7 @@ namespace NoArtifactLights
             catch (Exception ex)
             {
                 GameUI.DisplayHelp(Strings.ExceptionMain);
-                logger.Fatal(ex, "Fatal error during main loop");
+                logger.Fatal(ex);
                 throw;
             }
         }
