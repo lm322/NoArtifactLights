@@ -29,6 +29,11 @@ namespace NoArtifactLights
         private Logger logger = LogManager.GetCurrentClassLogger();
         internal static bool forcestart;
 
+        public static void ForceStartEvent()
+        {
+            Entry.forcestart = true;
+        }
+
         public Entry()
         {
             try
