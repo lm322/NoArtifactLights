@@ -159,6 +159,7 @@ namespace NoArtifactLights.Menu
             {
                 return;
             }
+            Common.Bank += result;
             GameUI.DisplayHelp(Strings.TransactionSuccess);
         }
 
