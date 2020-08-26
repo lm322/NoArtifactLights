@@ -27,6 +27,7 @@ namespace NoArtifactLights
         private Ped delivery;
 
         private Logger logger = LogManager.GetCurrentClassLogger();
+        internal static bool forcestart;
 
         public Entry()
         {
@@ -97,6 +98,8 @@ namespace NoArtifactLights
         {
         }
 
+
+
         private void Entry_Tick(object sender, EventArgs e)
         {
             try
@@ -104,11 +107,11 @@ namespace NoArtifactLights
                 Ped[] peds = World.GetAllPeds();
                 foreach (Ped ped in peds)
                 {
-                    if(ped == delivery)
+                    if (ped == delivery)
                     {
                         continue;
                     }
-                    if(ped == null)
+                    if (ped == null)
                     {
                         continue;
                     }
@@ -116,7 +119,7 @@ namespace NoArtifactLights
                     {
                         killedPeds.Add(ped);
                         logger.Debug("A ped has been killed");
-                        if(Game.Player.Character.Position.DistanceTo(ped.Position) <= 2.5f)
+                        if (Game.Player.Character.Position.DistanceTo(ped.Position) <= 2.5f)
                         {
                             Common.Earn(new Random().Next(4, 16));
                         }
@@ -125,7 +128,7 @@ namespace NoArtifactLights
                         {
                             Common.Earn(10);
                             GameUI.DisplayHelp(Strings.ArmedBonus);
-                            if(ped.AttachedBlip != null && ped.AttachedBlip.Exists())
+                            if (ped.AttachedBlip != null && ped.AttachedBlip.Exists())
                             {
                                 ped.AttachedBlip.Delete();
                             }
@@ -170,19 +173,20 @@ namespace NoArtifactLights
                         continue;
                     }
                     peds1.Add(ped);
-                    if (new Random().Next(1000000, 2000001) == 1100000 &&(delivery == null || !delivery.Exists() || !deliveryCar.Exists()))
+                    if (new Random().Next(1000000, 2000001) == 1100000 && (delivery == null || !delivery.Exists() || !deliveryCar.Exists()))
                     {
                         logger.Debug("Hit deliverycar");
                         bool success = GameContentManager.CreateDelivery(out deliveryCar, out delivery);
-                        if(!success)
+                        if (!success)
                         {
                             deliveryCar = null;
                             delivery = null;
                         }
                     }
 
-                    if (new Random().Next(9, 89) == 10)
+                    if (new Random().Next(9, 89) == 10 || forcestart == true)
                     {
+                        forcestart = false;
                         EventManager.StartRandomEvent(ped);
                     }
                 }

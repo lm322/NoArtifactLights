@@ -22,6 +22,11 @@ namespace NoArtifactLights.Managers
             registeredEvents.Add(t);
         }
 
+        public static void ForceStartEvent()
+        {
+            Entry.forcestart = true;
+        }
+
         public static void StartRandomEvent(Ped p)
         {
             logger.Info("Random event has been marked as started");
