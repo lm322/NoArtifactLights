@@ -249,6 +249,7 @@ namespace NoArtifactLights.Menu
                     itemDifficulty.SetRightLabel(Strings.ResourceManager.GetString("Difficulty" + Common.difficulty.ToString()));
                     itemKills.SetRightLabel(Common.counter.ToString());
                     itemCash.SetRightLabel("$" + Common.Cash.ToString());
+                    itemBank.SetRightLabel("$" + Common.Bank.ToString());
                     break;
                 case Keys.E:
                     if (mainMenu.Visible) return;
