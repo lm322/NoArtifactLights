@@ -66,7 +66,7 @@ namespace NoArtifactLights.Managers
         internal static void Save(bool blackout)
         {
             SaveFile sf = new SaveFile();
-            sf.Version = 2;
+            sf.Version = 3;
             sf.Status = new WorldStatus(World.Weather, World.CurrentTimeOfDay.Hours, World.CurrentTimeOfDay.Minutes);
             sf.PlayerX = Game.Player.Character.Position.X;
             sf.PlayerY = Game.Player.Character.Position.Y;
