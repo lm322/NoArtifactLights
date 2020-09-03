@@ -69,6 +69,7 @@ namespace NoArtifactLights
                 Screen.FadeIn(1000);
                 Common.Unload += Common_Unload;
                 EventManager.RegisterEvent(typeof(ArmedPed));
+                EventManager.RegisterEvent(typeof(StealCar));
                 this.Aborted += Entry_Aborted;
             }
             catch(Exception ex)

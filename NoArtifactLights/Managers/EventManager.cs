@@ -22,10 +22,7 @@ namespace NoArtifactLights.Managers
             registeredEvents.Add(t);
         }
 
-        public static void ForceStartEvent()
-        {
-            Entry.forcestart = true;
-        }
+       
 
         public static void StartRandomEvent(Ped p)
         {
@@ -39,11 +36,15 @@ namespace NoArtifactLights.Managers
             int result = r.Next(0, registeredEvents.Count);
             logger.Info("Tracked: " + (registeredEvents.Count));
             logger.Info("Result: " + result);
-            if (registeredEvents.Count - 1 > result)
+            if (p.IsInVehicle())
             {
-                logger.Info("It is bigger than Tracked!");
-                return;
+                p.Task.ReactAndFlee(Game.Player.Character);
             }
+            //if (registeredEvents.Count > result)
+            //{
+            //    logger.Info("It is bigger than Tracked!");
+            //    return;
+            //}
             
             object obj = Activator.CreateInstance(registeredEvents[result]);
             logger.Info(obj.GetType().Name + " is starting");

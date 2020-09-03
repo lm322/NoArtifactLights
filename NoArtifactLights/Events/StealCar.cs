@@ -25,6 +25,8 @@ namespace NoArtifactLights.Events
         {
             p.Task.EnterAnyVehicle(VehicleSeat.Driver, -1, 1, EnterVehicleFlags.AllowJacking);
             b = p.AddBlip();
+            b.Scale = 0.5f;
+            b.Color = BlipColor.BlueLight;
             b.IsFlashing = true;
             b.Sprite = BlipSprite.PointOfInterest;
         }
