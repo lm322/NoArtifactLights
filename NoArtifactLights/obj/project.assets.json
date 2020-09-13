@@ -2,13 +2,13 @@
   "version": 3,
   "targets": {
     ".NETFramework,Version=v4.8": {
-      "MongoDB.Bson/2.11.1": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
-          "lib/net452/MongoDB.Bson.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {}
         },
         "runtime": {
-          "lib/net452/MongoDB.Bson.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
       "NLog/4.7.4": {
@@ -53,13 +53,13 @@
       }
     },
     ".NETFramework,Version=v4.8/win": {
-      "MongoDB.Bson/2.11.1": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
-          "lib/net452/MongoDB.Bson.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {}
         },
         "runtime": {
-          "lib/net452/MongoDB.Bson.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
       "NLog/4.7.4": {
@@ -104,13 +104,13 @@
       }
     },
     ".NETFramework,Version=v4.8/win-x64": {
-      "MongoDB.Bson/2.11.1": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
-          "lib/net452/MongoDB.Bson.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {}
         },
         "runtime": {
-          "lib/net452/MongoDB.Bson.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
       "NLog/4.7.4": {
@@ -155,13 +155,13 @@
       }
     },
     ".NETFramework,Version=v4.8/win-x86": {
-      "MongoDB.Bson/2.11.1": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
-          "lib/net452/MongoDB.Bson.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {}
         },
         "runtime": {
-          "lib/net452/MongoDB.Bson.dll": {}
+          "lib/net45/Newtonsoft.Json.dll": {}
         }
       },
       "NLog/4.7.4": {
@@ -207,22 +207,34 @@
     }
   },
   "libraries": {
-    "MongoDB.Bson/2.11.1": {
-      "sha512": "HlSksNZHP71lPJmVPwZwDheN85GYzQDecq/hLr6ARFcnmoz2WR2Tdk3vcfCNEaXIQnkpE5ai0nTOJ/206mOTrQ==",
+    "Newtonsoft.Json/12.0.3": {
+      "sha512": "6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
       "type": "package",
-      "path": "mongodb.bson/2.11.1",
+      "path": "newtonsoft.json/12.0.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "License.txt",
-        "lib/net452/MongoDB.Bson.dll",
-        "lib/net452/MongoDB.Bson.xml",
-        "lib/netstandard1.5/MongoDB.Bson.dll",
-        "lib/netstandard1.5/MongoDB.Bson.xml",
-        "lib/netstandard2.0/MongoDB.Bson.dll",
-        "lib/netstandard2.0/MongoDB.Bson.xml",
-        "mongodb.bson.2.11.1.nupkg.sha512",
-        "mongodb.bson.nuspec",
+        "LICENSE.md",
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/netstandard1.0/Newtonsoft.Json.dll",
+        "lib/netstandard1.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.xml",
+        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.xml",
+        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
+        "newtonsoft.json.12.0.3.nupkg.sha512",
+        "newtonsoft.json.nuspec",
         "packageIcon.png"
       ]
     },
@@ -288,9 +300,9 @@
   },
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.8": [
-      "MongoDB.Bson >= 2.11.1",
       "NLog >= 4.7.4",
       "NLog.Schema >= 4.7.4",
+      "Newtonsoft.Json >= 12.0.3",
       "ScriptHookVDotNet3 >= 3.0.4"
     ]
   },
@@ -327,10 +339,6 @@
     "frameworks": {
       "net48": {
         "dependencies": {
-          "MongoDB.Bson": {
-            "target": "Package",
-            "version": "[2.11.1, )"
-          },
           "NLog": {
             "target": "Package",
             "version": "[4.7.4, )"
@@ -338,6 +346,10 @@
           "NLog.Schema": {
             "target": "Package",
             "version": "[4.7.4, )"
+          },
+          "Newtonsoft.Json": {
+            "target": "Package",
+            "version": "[12.0.3, )"
           },
           "ScriptHookVDotNet3": {
             "target": "Package",

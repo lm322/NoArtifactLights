@@ -34,10 +34,6 @@
       "frameworks": {
         "net48": {
           "dependencies": {
-            "MongoDB.Bson": {
-              "target": "Package",
-              "version": "[2.11.1, )"
-            },
             "NLog": {
               "target": "Package",
               "version": "[4.7.4, )"
@@ -45,6 +41,10 @@
             "NLog.Schema": {
               "target": "Package",
               "version": "[4.7.4, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
             },
             "ScriptHookVDotNet3": {
               "target": "Package",

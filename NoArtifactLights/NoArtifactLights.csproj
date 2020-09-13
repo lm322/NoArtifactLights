@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>
@@ -39,6 +41,7 @@
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
@@ -49,6 +52,7 @@
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="NativeUI, Version=1.9.0.0, Culture=neutral, processorArchitecture=AMD64">
@@ -69,6 +73,8 @@
   <ItemGroup>
     <Compile Include="Common.cs" />
     <Compile Include="Difficulty.cs" />
+    <Compile Include="Engine\Entities\Extentions\AEntity.cs" />
+    <Compile Include="Engine\Process\Initializer.cs" />
     <Compile Include="Entry.cs" />
     <Compile Include="Events\AbstractEvent.cs" />
     <Compile Include="Events\ArmedPed.cs" />
@@ -104,8 +110,8 @@
     <Compile Include="Serialize\WorldStatus.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="MongoDB.Bson">
-      <Version>2.11.1</Version>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.3</Version>
     </PackageReference>
     <PackageReference Include="NLog">
       <Version>4.7.4</Version>
@@ -129,12 +135,16 @@
     <EmbeddedResource Include="Resources\Strings.zh-CN.resx" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".editorconfig" />
     <None Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Prologue.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Engine\Entities\Scripts\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

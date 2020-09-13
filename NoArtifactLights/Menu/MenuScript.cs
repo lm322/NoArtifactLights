@@ -32,6 +32,7 @@ namespace NoArtifactLights.Menu
         private UIMenu buyMenu;
         private UIMenuItem itemPistol;
         private UIMenuItem itemPumpShotgun;
+        private UIMenuItem itemCarbineRifle;
         private UIMenuItem itemBodyArmor;
 
         Blip repairBlip;
@@ -92,6 +93,7 @@ namespace NoArtifactLights.Menu
                 buyMenu = new UIMenu(Strings.AmmuTitle, Strings.AmmuSubtitle);
                 itemPistol = WeaponShopManager.GenerateWeaponSellerItem(Strings.AmmuPistol, Strings.AmmuPistolSubtitle, 100);
                 itemPumpShotgun = WeaponShopManager.GenerateWeaponSellerItem(Strings.AmmuPumpShotgun, Strings.AmmuPumpShotgunSubtitle, 200);
+                itemCarbineRifle = WeaponShopManager.GenerateWeaponSellerItem(Strings.AmmuCarbineRifle, Strings.AmmuCarbineRifleSubtitle, 350);
                 itemBodyArmor = new UIMenuItem(Strings.WeaponBodyArmor, Strings.WeaponBodyArmorDescription);
                 itemBodyArmor.SetRightLabel("$380");
                 logger.Trace("Instances created");
@@ -103,6 +105,7 @@ namespace NoArtifactLights.Menu
                 pool.Add(buyMenu);
                 itemPistol.Activated += ItemPistol_Activated;
                 itemPumpShotgun.Activated += ItemPumpShotgun_Activated;
+                itemCarbineRifle.Activated += ItemCarbineRifle_Activated;
                 itemBodyArmor.Activated += ItemBodyArmor_Activated;
 
                 repairBlip = World.CreateBlip(repair);
@@ -121,6 +124,11 @@ namespace NoArtifactLights.Menu
                 Common.UnloadMod(this);
                 this.Abort();
             }
+        }
+
+        private void ItemCarbineRifle_Activated(UIMenu sender, UIMenuItem selectedItem)
+        {
+            WeaponShopManager.SellWeapon(350, 50, WeaponHash.CarbineRifle);
         }
 
         private void ItemWithdraw_Activated(UIMenu sender, UIMenuItem selectedItem)

@@ -61,6 +61,24 @@ namespace NoArtifactLights.Resources {
         }
         
         /// <summary>
+        ///   查找类似 Carbine Rifle Ammo x50 的本地化字符串。
+        /// </summary>
+        public static string AmmuCarbineRifle {
+            get {
+                return ResourceManager.GetString("AmmuCarbineRifle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 A widely-used assault rifle, mostly used by security staffs and law enforcement agencies. 的本地化字符串。
+        /// </summary>
+        public static string AmmuCarbineRifleSubtitle {
+            get {
+                return ResourceManager.GetString("AmmuCarbineRifleSubtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Press ~INPUT_CONTEXT~ to buy weapons. 的本地化字符串。
         /// </summary>
         public static string AmmuOpenShop {

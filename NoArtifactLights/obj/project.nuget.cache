@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "mWKii7EfWc6NCnZ8cca4kSYGDdImbmbytwaVr4YOhGffOpzYp0IGtQOSpiIjdTYgnuA6kxKgP+625VVG27cgSQ==",
+  "dgSpecHash": "mKeGn5ySWtCeY0k8ijP5S8/mTll6h6jIxa7jgz9TQt0bbPVowZSBigidvwkFFpYSXrxPB/acuOTgROCgME3KmQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Ender\\source\\repos\\NoArtifactLights\\NoArtifactLights\\NoArtifactLights.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Ender\\.nuget\\packages\\mongodb.bson\\2.11.1\\mongodb.bson.2.11.1.nupkg.sha512",
+    "C:\\Users\\Ender\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
     "C:\\Users\\Ender\\.nuget\\packages\\nlog\\4.7.4\\nlog.4.7.4.nupkg.sha512",
     "C:\\Users\\Ender\\.nuget\\packages\\nlog.schema\\4.7.4\\nlog.schema.4.7.4.nupkg.sha512",
     "C:\\Users\\Ender\\.nuget\\packages\\scripthookvdotnet3\\3.0.4\\scripthookvdotnet3.3.0.4.nupkg.sha512"
