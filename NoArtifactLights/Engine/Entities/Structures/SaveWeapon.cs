@@ -1,7 +1,9 @@
-﻿using GTA;
+﻿// NoArtifactLights
+// (C) RelaperCrystal and contributors. Licensed under GPLv3 or later.
+
 using System;
 
-namespace NoArtifactLights.Serialize
+namespace NoArtifactLights.Engine.Entities.Structures
 {
     [Serializable]
     public struct SaveWeapon

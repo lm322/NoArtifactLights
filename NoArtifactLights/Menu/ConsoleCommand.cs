@@ -1,7 +1,5 @@
 ﻿// NoArtifactLights
-// (C) RelaperCrystal 2020
-
-using System;
+// (C) RelaperCrystal and contributors. Licensed under GPLv3 or later.
 
 namespace NoArtifactLights.Menu
 {

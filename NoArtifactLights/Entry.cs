@@ -1,5 +1,5 @@
 ﻿// NoArtifactLights
-// (C) RelaperCrystal 2020-2021
+// (C) RelaperCrystal and contributors. Licensed under GPLv3 or later.
 
 using GTA;
 using GTA.Native;
@@ -8,7 +8,6 @@ using NativeUI;
 using NLog;
 using NoArtifactLights.Engine.Mod.API;
 using NoArtifactLights.Engine.Mod.Controller;
-using NoArtifactLights.Managers;
 using NoArtifactLights.Resources;
 using System;
 using System.IO;
@@ -16,6 +15,7 @@ using System.Timers;
 using Logger = NLog.Logger;
 using NoArtifactLights.Engine.Process;
 using NoArtifactLights.Engine.Entities;
+using NoArtifactLights.Engine.Entities.Enums;
 
 namespace NoArtifactLights
 {
@@ -176,6 +176,7 @@ namespace NoArtifactLights
 						continue;
 					}
 					peds1.Add(ped);
+					EventController.Process();
 					if (new Random().Next(1000000, 2000001) == 1100000 && (delivery == null || !delivery.Exists() || !deliveryCar.Exists()))
 					{
 						logger.Debug("Hit deliverycar");

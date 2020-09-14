@@ -1,19 +1,16 @@
-﻿// Sources from SHVDN core ASI
-// Copyright (C) crosire and contributors 2015-2020
+﻿// NoArtifactLights
+// (C) RelaperCrystal and contributors. Licensed under GPLv3 or later.
 
-// NAL Commands & Registers
-// Copyright (C) RelaperCrystal 2020
+// Partially Licensed under:
+// Copyright (C) 2015 crosire & contributors
+// License: https://github.com/crosire/scripthookvdotnet#license
 
-using GTA;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace NoArtifactLights.Menu
 {

@@ -1,9 +1,10 @@
 ﻿// NoArtifactLights
-// (C) RelaperCrystal 2020
+// (C) RelaperCrystal and contributors. Licensed under GPLv3 or later.
 
 using GTA;
 using GTA.Native;
 using NLog;
+using NoArtifactLights.Engine.Entities.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace NoArtifactLights.Engine.Mod.Controller
 {
-    public static class GameController
+	public static class GameController
     {
         private static NLog.Logger logger = LogManager.GetCurrentClassLogger();
 

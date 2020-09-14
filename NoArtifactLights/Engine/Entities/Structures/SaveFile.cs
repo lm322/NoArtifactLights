@@ -1,9 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿// NoArtifactLights
+// (C) RelaperCrystal and contributors. Licensed under GPLv3 or later.
 
-namespace NoArtifactLights.Serialize
+using System;
+using System.Collections.Generic;
+using NoArtifactLights.Engine.Entities.Enums;
+
+namespace NoArtifactLights.Engine.Entities.Structures
 {
-    [Serializable]
+	[Serializable]
     public struct SaveFile
     {
         public int Version { get; set; }

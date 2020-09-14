@@ -72,14 +72,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common.cs" />
-    <Compile Include="Difficulty.cs" />
+    <Compile Include="Engine\Entities\Enums\Difficulty.cs" />
     <Compile Include="Engine\Entities\Extentions\AEntity.cs" />
     <Compile Include="Engine\Process\Initializer.cs" />
     <Compile Include="Entry.cs" />
-    <Compile Include="Events\AbstractEvent.cs" />
-    <Compile Include="Events\ArmedPed.cs" />
-    <Compile Include="Events\IEvent.cs" />
-    <Compile Include="Events\StealCar.cs" />
+    <Compile Include="Engine\Mod\API\Event.cs" />
+    <Compile Include="Engine\Mod\API\Events\ArmedPed.cs" />
+    <Compile Include="Engine\Mod\API\Events\StealCar.cs" />
     <Compile Include="ForceFadeIn.cs" />
     <Compile Include="Engine\Entities\HandleableList.cs" />
     <Compile Include="Engine\Mod\Controller\EventController.cs" />
@@ -88,7 +87,7 @@
     <Compile Include="Engine\Mod\Controller\SaveController.cs" />
     <Compile Include="Engine\Mod\Controller\AmmuController.cs" />
     <Compile Include="Menu\ConsoleCommand.cs" />
-    <Compile Include="Menu\MenuScript.cs" />
+    <Compile Include="Engine\Mod\Scripts\MenuScript.cs" />
     <Compile Include="Menu\NALConsole.cs" />
     <Compile Include="Missions\Mission.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -103,10 +102,9 @@
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
     <Compile Include="Serialize\MissionManifest.cs" />
-    <Compile Include="Serialize\SaveFile.cs" />
-    <Compile Include="Serialize\Stat.cs" />
-    <Compile Include="Serialize\Weapon.cs" />
-    <Compile Include="Serialize\WorldStatus.cs" />
+    <Compile Include="Engine\Entities\Structures\SaveFile.cs" />
+    <Compile Include="Engine\Entities\Structures\SaveWeapon.cs" />
+    <Compile Include="Engine\Entities\Structures\WorldStatus.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json">

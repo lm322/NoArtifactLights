@@ -1,13 +1,12 @@
 ﻿// NoArtifactLights
-// (C) RelaperCrystal 2020-2021
+// (C) RelaperCrystal and contributors. Licensed under GPLv3 or later.
 
 using GTA;
 using GTA.Native;
 using GTA.UI;
 using NLog;
-using NoArtifactLights.Managers;
+using NoArtifactLights.Engine.Entities.Structures;
 using NoArtifactLights.Resources;
-using NoArtifactLights.Serialize;
 using System;
 using System.IO;
 using System.Xml.Serialization;

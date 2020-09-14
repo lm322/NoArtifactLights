@@ -1,6 +1,8 @@
-﻿using GTA;
+﻿// NoArtifactLights
+// (C) RelaperCrystal and contributors. Licensed under GPLv3 or later.
+
+using GTA;
 using GTA.Math;
-using GTA.Native;
 using GTA.UI;
 using NativeUI;
 using NLog;

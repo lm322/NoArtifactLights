@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// NoArtifactLights
+// (C) RelaperCrystal and contributors. Licensed under GPLv3 or later.
+
+using System;
 using GTA;
 using GTA.UI;
 using GTA.Math;
 using GTA.Native;
-using NoArtifactLights.Managers;
 using NLog;
-using NoArtifactLights.Events;
 using NoArtifactLights.Engine.Mod.Controller;
+using NoArtifactLights.Engine.Mod.API.Events;
+using NoArtifactLights.Engine.Entities.Enums;
 
 namespace NoArtifactLights.Engine.Process
 {

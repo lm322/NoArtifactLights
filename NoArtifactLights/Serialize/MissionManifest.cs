@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// NoArtifactLights
+// (C) RelaperCrystal and contributors. Licensed under GPLv3 or later.
+
+using System;
 
 namespace NoArtifactLights.Serialize
 {
-    [Serializable]
-    internal struct MissionManifest
-    {
-        public int Chapter { get; set; }
-        public int Version { get; set; }
-        public string Name { get; set; }
-    }
+	[Serializable]
+	[Obsolete]
+	internal struct MissionManifest
+	{
+		public int Chapter { get; set; }
+		public int Version { get; set; }
+		public string Name { get; set; }
+	}
 }

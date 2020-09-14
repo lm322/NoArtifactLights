@@ -1,4 +1,6 @@
-﻿// AEntity.cs
+﻿// NoArtifactLights
+// (C) RelaperCrystal and contributors. Licensed under GPLv3 or later.
+
 // Partially Licensed under:
 // Copyright (C) 2015 crosire & contributors
 // License: https://github.com/crosire/scripthookvdotnet#license

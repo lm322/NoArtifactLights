@@ -1,4 +1,7 @@
-﻿using GTA;
+﻿// NoArtifactLights
+// (C) RelaperCrystal and contributors. Licensed under GPLv3 or later.
+
+using GTA;
 using GTA.Math;
 using GTA.Native;
 using GTA.UI;
@@ -12,7 +15,7 @@ using System.IO;
 using System.Windows.Forms;
 using Screen = GTA.UI.Screen;
 
-namespace NoArtifactLights.Menu
+namespace NoArtifactLights.Engine.Mod.Scripts
 {
     public class MenuScript : Script
     {

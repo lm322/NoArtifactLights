@@ -1,15 +1,15 @@
-﻿using GTA;
+﻿// NoArtifactLights
+// (C) RelaperCrystal and contributors. Licensed under GPLv3 or later.
+
 using GTA.UI;
 using NLog;
-using NoArtifactLights.Managers;
+using NoArtifactLights.Engine.Entities.Enums;
 using NoArtifactLights.Resources;
 using System;
-using System.IO;
-using System.Runtime.CompilerServices;
 
 namespace NoArtifactLights
 {
-    internal static class Common
+	internal static class Common
     {
         internal static int counter = 0;
         internal static Difficulty difficulty = Difficulty.Initial;
