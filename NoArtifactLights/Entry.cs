@@ -2,20 +2,20 @@
 // (C) RelaperCrystal 2020-2021
 
 using GTA;
-using GTA.Math;
 using GTA.Native;
 using GTA.UI;
 using NativeUI;
-using NoArtifactLights.Events;
 using NLog;
+using NoArtifactLights.Engine.Mod.API;
+using NoArtifactLights.Engine.Mod.Controller;
 using NoArtifactLights.Managers;
 using NoArtifactLights.Resources;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Timers;
 using Logger = NLog.Logger;
 using NoArtifactLights.Engine.Process;
+using NoArtifactLights.Engine.Entities;
 
 namespace NoArtifactLights
 {
@@ -23,9 +23,9 @@ namespace NoArtifactLights
 	{
 		private Pickup weapon;
 		private Blip weaponBlip;
-		internal static DuplicateManager peds1 = new DuplicateManager();
-		internal static DuplicateManager killedPeds = new DuplicateManager();
-		internal static DuplicateManager weaponedPeds = new DuplicateManager();
+		internal static HandleableList peds1 = new HandleableList();
+		internal static HandleableList killedPeds = new HandleableList();
+		internal static HandleableList weaponedPeds = new HandleableList();
 		private int eplased = 0;
 		private Vehicle deliveryCar;
 		private Ped delivery;
@@ -84,8 +84,8 @@ namespace NoArtifactLights
 		{
 			if(!sender.Equals(this))
 			{
-				GameContentManager.SetRelationshipBetGroupsUInt(Relationship.Pedestrians, 0x02B8FA80, 0x47033600);
-				GameContentManager.SetRelationshipBetGroupsUInt(Relationship.Pedestrians, 0x47033600, 0x02B8FA80);
+				GameController.SetRelationshipBetGroupsUInt(Relationship.Pedestrians, 0x02B8FA80, 0x47033600);
+				GameController.SetRelationshipBetGroupsUInt(Relationship.Pedestrians, 0x47033600, 0x02B8FA80);
 				this.Tick -= Entry_Tick;
 				Abort();
 			}
@@ -146,28 +146,28 @@ namespace NoArtifactLights
 								Common.difficulty = Difficulty.Easy;
 								BigMessageThread.MessageInstance.ShowSimpleShard(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyEasy));
 								GameUI.DisplayHelp(string.Format(Strings.DifficultyHelp, Strings.DifficultyEasy));
-								GameContentManager.SetRelationship(Difficulty.Easy);
+								GameController.SetRelationship(Difficulty.Easy);
 								break;
 
 							case 300:
 								Common.difficulty = Difficulty.Normal;
 								BigMessageThread.MessageInstance.ShowSimpleShard(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyNormal));
 								GameUI.DisplayHelp(string.Format(Strings.DifficultyHelp, Strings.DifficultyNormal));
-								GameContentManager.SetRelationship(Difficulty.Normal);
+								GameController.SetRelationship(Difficulty.Normal);
 								break;
 
 							case 700:
 								Common.difficulty = Difficulty.Hard;
 								BigMessageThread.MessageInstance.ShowSimpleShard(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyHard));
 								GameUI.DisplayHelp(string.Format(Strings.DifficultyHelp, Strings.DifficultyHard));
-								GameContentManager.SetRelationship(Difficulty.Hard);
+								GameController.SetRelationship(Difficulty.Hard);
 								break;
 
 							case 1500:
 								Common.difficulty = Difficulty.Nether;
 								BigMessageThread.MessageInstance.ShowSimpleShard(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyNether));
 								GameUI.DisplayHelp(string.Format(Strings.DifficultyHelp, Strings.DifficultyNether));
-								GameContentManager.SetRelationship(Difficulty.Nether);
+								GameController.SetRelationship(Difficulty.Nether);
 								break;
 						}
 					}
@@ -179,7 +179,7 @@ namespace NoArtifactLights
 					if (new Random().Next(1000000, 2000001) == 1100000 && (delivery == null || !delivery.Exists() || !deliveryCar.Exists()))
 					{
 						logger.Debug("Hit deliverycar");
-						bool success = GameContentManager.CreateDelivery(out deliveryCar, out delivery);
+						bool success = GameController.CreateDelivery(out deliveryCar, out delivery);
 						if (!success)
 						{
 							deliveryCar = null;
@@ -190,7 +190,7 @@ namespace NoArtifactLights
 					if (new Random().Next(9, 89) == 10 || forcestart == true)
 					{
 						forcestart = false;
-						EventManager.StartRandomEvent(ped);
+						EventController.StartRandomEvent(ped);
 					}
 				}
 

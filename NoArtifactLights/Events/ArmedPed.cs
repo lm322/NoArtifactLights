@@ -1,5 +1,6 @@
 ﻿using GTA;
 using NLog;
+using NoArtifactLights.Engine.Mod.Controller;
 using NoArtifactLights.Managers;
 using System;
 using System.Collections.Generic;
@@ -37,7 +38,7 @@ namespace NoArtifactLights.Events
             b.Sprite = BlipSprite.Enemy;
             b.Scale = 0.5f;
             b.Color = BlipColor.Red;
-            GameContentManager.AddWeaponedPed(p);
+            GameController.AddWeaponedPed(p);
         }
     }
 }

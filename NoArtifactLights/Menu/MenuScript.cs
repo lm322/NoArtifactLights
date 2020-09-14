@@ -4,7 +4,8 @@ using GTA.Native;
 using GTA.UI;
 using NativeUI;
 using NLog;
-using NoArtifactLights.Managers;
+using NoArtifactLights.Engine.Mod.Controller;
+using NoArtifactLights.Engine.Mod.API;
 using NoArtifactLights.Resources;
 using System;
 using System.IO;
@@ -91,9 +92,9 @@ namespace NoArtifactLights.Menu
                 logger.Trace("Loading Ammu-Nation Menu");
 
                 buyMenu = new UIMenu(Strings.AmmuTitle, Strings.AmmuSubtitle);
-                itemPistol = WeaponShopManager.GenerateWeaponSellerItem(Strings.AmmuPistol, Strings.AmmuPistolSubtitle, 100);
-                itemPumpShotgun = WeaponShopManager.GenerateWeaponSellerItem(Strings.AmmuPumpShotgun, Strings.AmmuPumpShotgunSubtitle, 200);
-                itemCarbineRifle = WeaponShopManager.GenerateWeaponSellerItem(Strings.AmmuCarbineRifle, Strings.AmmuCarbineRifleSubtitle, 350);
+                itemPistol = AmmuController.GenerateWeaponSellerItem(Strings.AmmuPistol, Strings.AmmuPistolSubtitle, 100);
+                itemPumpShotgun = AmmuController.GenerateWeaponSellerItem(Strings.AmmuPumpShotgun, Strings.AmmuPumpShotgunSubtitle, 200);
+                itemCarbineRifle = AmmuController.GenerateWeaponSellerItem(Strings.AmmuCarbineRifle, Strings.AmmuCarbineRifleSubtitle, 350);
                 itemBodyArmor = new UIMenuItem(Strings.WeaponBodyArmor, Strings.WeaponBodyArmorDescription);
                 itemBodyArmor.SetRightLabel("$380");
                 logger.Trace("Instances created");
@@ -128,7 +129,7 @@ namespace NoArtifactLights.Menu
 
         private void ItemCarbineRifle_Activated(UIMenu sender, UIMenuItem selectedItem)
         {
-            WeaponShopManager.SellWeapon(350, 50, WeaponHash.CarbineRifle);
+            AmmuController.SellWeapon(350, 50, WeaponHash.CarbineRifle);
         }
 
         private void ItemWithdraw_Activated(UIMenu sender, UIMenuItem selectedItem)
@@ -205,9 +206,9 @@ namespace NoArtifactLights.Menu
             }
         }
 
-        private void ItemBodyArmor_Activated(UIMenu sender, UIMenuItem selectedItem) => WeaponShopManager.SellArmor(50, 380);
-        private void ItemPumpShotgun_Activated(UIMenu sender, UIMenuItem selectedItem) => WeaponShopManager.SellWeapon(200, 50, WeaponHash.PumpShotgun);
-        private void ItemPistol_Activated(UIMenu sender, UIMenuItem selectedItem) => WeaponShopManager.SellWeapon(100, 100, WeaponHash.Pistol);
+        private void ItemBodyArmor_Activated(UIMenu sender, UIMenuItem selectedItem) => AmmuController.SellArmor(50, 380);
+        private void ItemPumpShotgun_Activated(UIMenu sender, UIMenuItem selectedItem) => AmmuController.SellWeapon(200, 50, WeaponHash.PumpShotgun);
+        private void ItemPistol_Activated(UIMenu sender, UIMenuItem selectedItem) => AmmuController.SellWeapon(100, 100, WeaponHash.Pistol);
 
         private void Common_CashChanged(object sender, EventArgs e)
         {
@@ -221,7 +222,7 @@ namespace NoArtifactLights.Menu
 
         private void ItemLoad_Activated(UIMenu sender, UIMenuItem selectedItem)
         {
-            SaveManager.Load();
+            SaveController.Load();
             itemLights.Checked = Common.blackout;
             itemDifficulty.SetRightLabel(Strings.ResourceManager.GetString("Difficulty" + Common.difficulty.ToString()));
             itemKills.SetRightLabel(Common.counter.ToString());
@@ -229,7 +230,7 @@ namespace NoArtifactLights.Menu
             Notification.Show(Strings.GameLoaded);
         }
 
-        private void ItemSave_Activated(UIMenu sender, UIMenuItem selectedItem) => SaveManager.Save(itemLights.Checked);
+        private void ItemSave_Activated(UIMenu sender, UIMenuItem selectedItem) => SaveController.Save(itemLights.Checked);
 
         private void ItemLights_CheckboxEvent(UIMenuCheckboxItem sender, bool Checked)
         {
@@ -239,7 +240,7 @@ namespace NoArtifactLights.Menu
         private void MenuScript_Tick(object sender, EventArgs e)
         {
             pool.ProcessMenus();
-            if (WeaponShopManager.DistanceToAmmu())
+            if (AmmuController.DistanceToAmmu())
             {
                 GameUI.DisplayHelp(Strings.AmmuOpenShop);
             }
@@ -267,7 +268,7 @@ namespace NoArtifactLights.Menu
                         buyMenu.Visible = false;
                         return;
                     }
-                    if (WeaponShopManager.DistanceToAmmu())
+                    if (AmmuController.DistanceToAmmu())
                     {
                         buyMenu.Visible = true;
                     }

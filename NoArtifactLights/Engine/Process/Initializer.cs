@@ -10,6 +10,7 @@ using GTA.Native;
 using NoArtifactLights.Managers;
 using NLog;
 using NoArtifactLights.Events;
+using NoArtifactLights.Engine.Mod.Controller;
 
 namespace NoArtifactLights.Engine.Process
 {
@@ -39,15 +40,15 @@ namespace NoArtifactLights.Engine.Process
 			logger.Trace("Setting player position and giving weapons");
 			Game.Player.Character.Position = new Vector3(459.8501f, -1001.404f, 24.91487f);
 			logger.Trace("Setting relationship and game settings");
-			GameContentManager.SetRelationship(Difficulty.Initial);
+			GameController.SetRelationship(Difficulty.Initial);
 			Game.MaxWantedLevel = 0;
 			Game.Player.IgnoredByPolice = true;
 			Game.Player.ChangeModel("a_m_m_bevhills_02");
 			Game.Player.Character.Weapons.Give(WeaponHash.Flashlight, 1, true, true);
 			Game.Player.Character.Weapons.Give(WeaponHash.Pistol, 50, false, false);
 			Screen.FadeIn(1000);
-			EventManager.RegisterEvent(typeof(ArmedPed));
-			EventManager.RegisterEvent(typeof(StealCar));
+			EventController.RegisterEvent(typeof(ArmedPed));
+			EventController.RegisterEvent(typeof(StealCar));
 
 			// END INITIAL LOADING PROCESS
 

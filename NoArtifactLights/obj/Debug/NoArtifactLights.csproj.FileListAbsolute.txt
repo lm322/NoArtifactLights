@@ -15,4 +15,4 @@ C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\NLog.dll
 C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\ScriptHookVDotNet3.dll
 C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\NativeUI.dll
 C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\NLog.config
-C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\MongoDB.Bson.dll
+C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\Newtonsoft.Json.dll

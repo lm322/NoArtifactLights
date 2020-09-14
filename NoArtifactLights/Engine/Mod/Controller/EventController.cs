@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NoArtifactLights.Managers
 {
-    internal static class EventManager
+    internal static class EventController
     {
         public static List<Type> registeredEvents = new List<Type>();
         public static bool disable = false;

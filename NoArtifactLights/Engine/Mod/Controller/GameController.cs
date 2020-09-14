@@ -10,9 +10,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NoArtifactLights.Managers
+namespace NoArtifactLights.Engine.Mod.Controller
 {
-    public static class GameContentManager
+    public static class GameController
     {
         private static NLog.Logger logger = LogManager.GetCurrentClassLogger();
 

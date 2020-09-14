@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NoArtifactLights.Managers
+namespace NoArtifactLights.Engine.Entities
 {
-    public class DuplicateManager : IList<Ped>
+    public class HandleableList : IList<Ped>
     {
         private List<int> peds = new List<int>();
 

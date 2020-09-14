@@ -5,15 +5,16 @@ using GTA;
 using GTA.Native;
 using GTA.UI;
 using NLog;
+using NoArtifactLights.Managers;
 using NoArtifactLights.Resources;
 using NoArtifactLights.Serialize;
 using System;
 using System.IO;
 using System.Xml.Serialization;
 
-namespace NoArtifactLights.Managers
+namespace NoArtifactLights.Engine.Mod.Controller
 {
-	internal static class SaveManager
+	internal static class SaveController
 	{
 		private static Logger logger = LogManager.GetLogger("SaveManager");
 		private const string savePath = "NAL\\Save.xml";
@@ -53,7 +54,7 @@ namespace NoArtifactLights.Managers
 			Common.Cash = sf.Cash;
 			Common.Bank = sf.Bank;
 			Common.difficulty = sf.CurrentDifficulty;
-			GameContentManager.SetRelationship(sf.CurrentDifficulty);
+			GameController.SetRelationship(sf.CurrentDifficulty);
 			Game.Player.Character.Weapons.RemoveAll();
 			Game.Player.Character.Weapons.Give(WeaponHash.Flashlight, 1, false, true);
 			if(sf.PlayerHealth > 0)

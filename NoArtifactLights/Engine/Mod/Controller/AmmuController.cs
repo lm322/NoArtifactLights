@@ -6,11 +6,11 @@ using NativeUI;
 using NLog;
 using NoArtifactLights.Resources;
 
-namespace NoArtifactLights.Managers
+namespace NoArtifactLights.Engine.Mod.Controller
 {
-    internal static class WeaponShopManager
+    internal static class AmmuController
     {
-        private static NLog.Logger logger = LogManager.GetCurrentClassLogger();
+        private static NLog.Logger logger = LogManager.GetLogger("AmmuController");
         private static Vector3[] ammus = { new Vector3(18.18945f, -1120.384f, 28.91654f), new Vector3(-325.6184f, 6072.246f, 31.21228f) };
         internal static UIMenuItem GenerateWeaponSellerItem(string displayName, string description, int price)
         {
