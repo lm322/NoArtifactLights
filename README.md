@@ -1,4 +1,6 @@
 # NoArtifactLights
+![AppVeyor](https://img.shields.io/appveyor/build/RelaperCrystal/NoArtifactLights?style=flat-square)
+
 NoArtifactLights is a GTA5 survival mod based on Blackouts and NPCs fights eachother.
 
 ## Building
