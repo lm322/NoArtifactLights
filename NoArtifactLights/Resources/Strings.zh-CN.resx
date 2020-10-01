@@ -156,6 +156,9 @@
   <data name="DepositNoMoney" xml:space="preserve">
     <value>您的现金不足以存款。</value>
   </data>
+  <data name="DeprecatedXMLSave" xml:space="preserve">
+    <value>在您的数据文件夹中发现了一个~h~过时的存档~s~。这个存档不再会被加载。</value>
+  </data>
   <data name="DifficultyCarbineRifle" xml:space="preserve">
     <value>卡宾步枪</value>
   </data>

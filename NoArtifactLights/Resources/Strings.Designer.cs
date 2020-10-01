@@ -196,6 +196,15 @@ namespace NoArtifactLights.Resources {
         }
         
         /// <summary>
+        ///   查找类似 You have a ~h~deprecated save~s~ in your NOAR save directory. It will no longer be loaded. 的本地化字符串。
+        /// </summary>
+        public static string DeprecatedXMLSave {
+            get {
+                return ResourceManager.GetString("DeprecatedXMLSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Carbine Rifle 的本地化字符串。
         /// </summary>
         public static string DifficultyCarbineRifle {

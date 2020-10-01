@@ -162,6 +162,9 @@
   <data name="DepositNoMoney" xml:space="preserve">
     <value>You don't have enough cash to deposit.</value>
   </data>
+  <data name="DeprecatedXMLSave" xml:space="preserve">
+    <value>You have a ~h~deprecated save~s~ in your NOAR save directory. It will no longer be loaded.</value>
+  </data>
   <data name="DifficultyCarbineRifle" xml:space="preserve">
     <value>Carbine Rifle</value>
   </data>

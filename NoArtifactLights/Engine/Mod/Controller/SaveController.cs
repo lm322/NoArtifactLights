@@ -4,24 +4,79 @@
 using GTA;
 using GTA.Native;
 using GTA.UI;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using NLog;
 using NoArtifactLights.Engine.Entities.Structures;
 using NoArtifactLights.Resources;
 using System;
 using System.IO;
-using System.Xml.Serialization;
+using System.IO.Compression;
+using System.Text;
 
 namespace NoArtifactLights.Engine.Mod.Controller
 {
 	internal static class SaveController
 	{
 		private static Logger logger = LogManager.GetLogger("SaveManager");
-		private const string savePath = "NAL\\Save.xml";
+		private const string savePath = "NAL\\game.dat";
+		private const int saveVersion = 4;
 
 		internal static void CheckAndFixDataFolder()
 		{
 			if (!Directory.Exists("NAL")) Directory.CreateDirectory("NAL");
 			if (File.Exists("NALSave.xml")) File.Move("NALSave.xml", "NAL\\Save.xml");
+			if (File.Exists("NAL\\Save.xml"))
+			{
+				logger.Warn("Deprecated save found - will not load it!");
+				Notification.Show(Strings.DeprecatedXMLSave);
+			}
+		}
+
+		internal static void SaveGameFile(SaveFile sf)
+		{
+			DefaultContractResolver contractResolver = new DefaultContractResolver
+			{
+				NamingStrategy = new SnakeCaseNamingStrategy()
+			};
+
+			string json = JsonConvert.SerializeObject(sf, new JsonSerializerSettings
+			{
+				ContractResolver = contractResolver,
+				Formatting = Formatting.None
+			});
+
+			byte[] data = Encoding.UTF8.GetBytes(json);
+			string dat = Convert.ToBase64String(data);
+
+			Directory.CreateDirectory("NAL\\tmp");
+			string tmpPath = "NAL\\tmp\\raw.dat";
+			File.WriteAllText(tmpPath, dat);
+
+			ZipFile.CreateFromDirectory(tmpPath, "NAL\\game.dat");
+			Directory.Delete("NAL\\tmp", true);
+		}
+
+		internal static SaveFile LoadGameFile()
+		{
+			Directory.CreateDirectory("NAL\\tmp");
+			ZipFile.ExtractToDirectory("NAL\\game.dat", "NAL\\tmp");
+			string datBase64 = File.ReadAllText("NAL\\tmp\\raw.dat");
+			byte[] jsonBytes = Convert.FromBase64String(datBase64);
+			string json = Encoding.UTF8.GetString(jsonBytes);
+
+			DefaultContractResolver contractResolver = new DefaultContractResolver
+			{
+				NamingStrategy = new SnakeCaseNamingStrategy()
+			};
+
+			SaveFile result = JsonConvert.DeserializeObject<SaveFile>(json, new JsonSerializerSettings
+			{
+				ContractResolver = contractResolver,
+				Formatting = Formatting.None
+			});
+
+			return result;
 		}
 
 		internal static void Load()
@@ -33,13 +88,8 @@ namespace NoArtifactLights.Engine.Mod.Controller
 				Notification.Show(Strings.NoSave);
 				return;
 			}
-			FileStream fs = File.OpenRead(savePath);
-			XmlSerializer serializer = new XmlSerializer(typeof(SaveFile));
-			
-			sf = (SaveFile)serializer.Deserialize(fs);
-			fs.Close();
-			fs.Dispose();
-			if (sf.Version != 3)
+			sf = LoadGameFile();
+			if (sf.Version != saveVersion)
 			{
 				Notification.Show(Strings.SaveVersion);
 				return;
@@ -61,21 +111,14 @@ namespace NoArtifactLights.Engine.Mod.Controller
 				Game.Player.Character.Health = sf.PlayerHealth;
 			}
 			Game.Player.Character.Armor = sf.PlayerArmor;
-			if (sf.Pistol.Existence)
-			{
-				Game.Player.Character.Weapons.Give(WeaponHash.Pistol, sf.Pistol.Ammo, true, true);
-			}
-			if (sf.PumpShotgun.Existence)
-			{
-				Game.Player.Character.Weapons.Give(WeaponHash.PumpShotgun, sf.PumpShotgun.Ammo, true, true);
-			}
+			Common.weaponSaving.FromSerializationWeapons(sf.Weapons);
 		}
 
 		internal static void Save(bool blackout)
 		{
 			CheckAndFixDataFolder();
 			SaveFile sf = new SaveFile();
-			sf.Version = 3;
+			sf.Version = saveVersion;
 			sf.Status = new WorldStatus(World.Weather, World.CurrentTimeOfDay.Hours, World.CurrentTimeOfDay.Minutes);
 			sf.PlayerX = Game.Player.Character.Position.X;
 			sf.PlayerY = Game.Player.Character.Position.Y;
@@ -87,30 +130,10 @@ namespace NoArtifactLights.Engine.Mod.Controller
 			sf.Bank = Common.Bank;
 			sf.PlayerHealth = Game.Player.Character.Health;
 			sf.PlayerArmor = Game.Player.Character.Armor;
-			sf.Pistol = GetSaveWeapon(WeaponHash.Pistol);
-			sf.PumpShotgun = GetSaveWeapon(WeaponHash.PumpShotgun);
-			FileStream fs = File.Create(savePath);
-			XmlSerializer serializer = new XmlSerializer(typeof(SaveFile));
-			serializer.Serialize(fs, sf);
-			Notification.Show(Strings.GameSaved);
-			fs.Close();
-			fs.Dispose();
-		}
 
-		private static SaveWeapon GetSaveWeapon(WeaponHash weapon)
-		{
-			logger.Info("Acquring weapon " + weapon.ToString());
-			SaveWeapon result;
-			if(Game.Player.Character.Weapons.HasWeapon(weapon))
-			{
-				Weapon wp = Game.Player.Character.Weapons[weapon];
-				result = new SaveWeapon(wp.Ammo + wp.AmmoInClip, true);
-			}
-			else
-			{
-				result = new SaveWeapon(0, false);
-			}
-			return result;
+			sf.Weapons = Common.weaponSaving.GetSerializationWeapons();
+
+			SaveGameFile(sf);
 		}
 	}
 }
