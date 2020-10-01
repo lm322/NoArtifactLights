@@ -30,7 +30,7 @@ namespace NoArtifactLights
 		private Vehicle deliveryCar;
 		private Ped delivery;
 
-		private Logger logger = LogManager.GetCurrentClassLogger();
+		private Logger logger = LogManager.GetLogger("Entry");
 		internal static bool forcestart;
 
 		public static void ForceStartEvent()

@@ -73,7 +73,6 @@
   <ItemGroup>
     <Compile Include="Common.cs" />
     <Compile Include="Engine\Entities\Enums\Difficulty.cs" />
-    <Compile Include="Engine\Entities\Extentions\AEntity.cs" />
     <Compile Include="Engine\Process\Initializer.cs" />
     <Compile Include="Entry.cs" />
     <Compile Include="Engine\Mod\API\Event.cs" />
@@ -89,7 +88,6 @@
     <Compile Include="Menu\ConsoleCommand.cs" />
     <Compile Include="Engine\Mod\Scripts\MenuScript.cs" />
     <Compile Include="Menu\NALConsole.cs" />
-    <Compile Include="Missions\Mission.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Missions.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -101,7 +99,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Strings.resx</DependentUpon>
     </Compile>
-    <Compile Include="Serialize\MissionManifest.cs" />
     <Compile Include="Engine\Entities\Structures\SaveFile.cs" />
     <Compile Include="Engine\Entities\Structures\SaveWeapon.cs" />
     <Compile Include="Engine\Entities\Structures\WorldStatus.cs" />
@@ -141,6 +138,7 @@
     <Content Include="Resources\Prologue.xml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Engine\Entities\Extentions\" />
     <Folder Include="Engine\Entities\Scripts\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
