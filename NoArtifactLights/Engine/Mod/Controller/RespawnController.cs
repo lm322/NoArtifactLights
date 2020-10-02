@@ -49,7 +49,7 @@ namespace NoArtifactLights.Engine.Mod.Controller
 			}
 			if(proceeding)
 			{
-				if (GetMsPassed() != 1000) return;
+				if (GetMsPassed() != 7000) return;
 				logger.Info("Proceeding to respawn!");
 				if (Screen.IsFadedIn) Screen.FadeIn(500);
 				proceeding = false;
