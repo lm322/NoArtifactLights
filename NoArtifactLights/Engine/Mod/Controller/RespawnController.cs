@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GTA;
 using GTA.Native;
 using GTA.UI;
+using NLog;
 
 namespace NoArtifactLights.Engine.Mod.Controller
 {
@@ -14,6 +15,8 @@ namespace NoArtifactLights.Engine.Mod.Controller
 		private static int callMarker;
 		private static bool fitRespawn;
 		private static bool proceeding;
+
+		private static readonly Logger logger = LogManager.GetLogger("RespawnController");
 
 		internal static bool IsPlayerJustFitRespawn()
 		{
@@ -37,6 +40,7 @@ namespace NoArtifactLights.Engine.Mod.Controller
 			if(!fitRespawn && IsPlayerJustFitRespawn())
 			{
 				fitRespawn = true;
+				logger.Info("Player is respawning");
 			}
 			if(fitRespawn && !proceeding)
 			{
@@ -46,6 +50,7 @@ namespace NoArtifactLights.Engine.Mod.Controller
 			if(proceeding)
 			{
 				if (GetMsPassed() != 1000) return;
+				logger.Info("Proceeding to respawn!");
 				if (Screen.IsFadedIn) Screen.FadeIn(500);
 				proceeding = false;
 				fitRespawn = false;
