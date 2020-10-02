@@ -37,21 +37,22 @@ namespace NoArtifactLights.Engine.Mod.Controller
 
 		internal static void Loop()
 		{
-			if(!fitRespawn && IsPlayerJustFitRespawn())
+			if(!fitRespawn && !proceeding && IsPlayerJustFitRespawn())
 			{
 				fitRespawn = true;
 				logger.Info("Player is respawning");
 			}
 			if(fitRespawn && !proceeding)
 			{
+				logger.Info("Respawn fit, marking respawn!");
 				ResetCallMarker();
 				proceeding = true;
 			}
 			if(proceeding)
 			{
-				if (GetMsPassed() != 7000) return;
+				if (GetMsPassed() <= 16000) return;
 				logger.Info("Proceeding to respawn!");
-				if (Screen.IsFadedIn) Screen.FadeIn(500);
+				if (Screen.IsFadedOut) Screen.FadeIn(500);
 				proceeding = false;
 				fitRespawn = false;
 			}
