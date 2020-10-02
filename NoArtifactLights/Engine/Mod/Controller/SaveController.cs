@@ -85,6 +85,12 @@ namespace NoArtifactLights.Engine.Mod.Controller
 
 		internal static SaveFile LoadGameFile()
 		{
+			if(Directory.Exists("NAL\\tmp"))
+			{
+				logger.Info("Overwritten temponary files");
+				Directory.Delete("NAL\\tmp", true);
+			}
+
 			Directory.CreateDirectory("NAL\\tmp");
 			ZipFile.ExtractToDirectory("NAL\\game.dat", "NAL\\tmp");
 			string datBase64 = File.ReadAllText("NAL\\tmp\\raw.dat");
@@ -102,6 +108,7 @@ namespace NoArtifactLights.Engine.Mod.Controller
 				Formatting = Formatting.None
 			});
 
+			Directory.Delete("NAL\\tmp", true);
 			return result;
 		}
 
