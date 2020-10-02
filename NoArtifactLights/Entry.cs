@@ -46,12 +46,7 @@ namespace NoArtifactLights
 				logger.Info("Initialized");
 				Function.Call(Hash.SET_ARTIFICIAL_LIGHTS_STATE, true);
 				GameUI.DisplayHelp(Strings.Start);
-				if (!File.Exists("scripts\\PlayerReliveNoResetModel.dll"))
-				{
-					logger.Warn("No PlayerReliveNoResetModel to provide Screen.FadeIn upon player wasted or busted. The game will faded out and never fade in upon death or arrest.");
-					Notification.Show(Strings.NoModelWarning);
-					Notification.Show(Strings.NoModelWarning2);
-				}
+				logger.Warn("You are in 0.3 alpha. This is pretty not excepted. Good luck.");
 				if (!File.Exists("scripts\\NoArtifactLights.pdb"))
 				{
 					logger.Warn("Attention: No debug database found in game scripts folder. This means logs cannot provide additional information related to exception.");

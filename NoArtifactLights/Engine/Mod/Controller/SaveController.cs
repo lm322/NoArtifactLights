@@ -53,7 +53,7 @@ namespace NoArtifactLights.Engine.Mod.Controller
 			string tmpPath = "NAL\\tmp\\raw.dat";
 			File.WriteAllText(tmpPath, dat);
 
-			ZipFile.CreateFromDirectory(tmpPath, "NAL\\game.dat");
+			ZipFile.CreateFromDirectory("NAL\\tmp", "NAL\\game.dat");
 			Directory.Delete("NAL\\tmp", true);
 		}
 
