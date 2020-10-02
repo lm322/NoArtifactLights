@@ -10,6 +10,7 @@ using NLog;
 using NoArtifactLights.Engine.Entities.Structures;
 using NoArtifactLights.Resources;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Text;
@@ -18,7 +19,7 @@ namespace NoArtifactLights.Engine.Mod.Controller
 {
 	internal static class SaveController
 	{
-		private static Logger logger = LogManager.GetLogger("SaveManager");
+		private static Logger logger = LogManager.GetLogger("SaveController");
 		private const string savePath = "NAL\\game.dat";
 		private const int saveVersion = 4;
 
@@ -35,26 +36,51 @@ namespace NoArtifactLights.Engine.Mod.Controller
 
 		internal static void SaveGameFile(SaveFile sf)
 		{
-			DefaultContractResolver contractResolver = new DefaultContractResolver
+			Stopwatch sw = new Stopwatch();
+			sw.Start();
+			try
 			{
-				NamingStrategy = new SnakeCaseNamingStrategy()
-			};
+				DefaultContractResolver contractResolver = new DefaultContractResolver
+				{
+					NamingStrategy = new SnakeCaseNamingStrategy()
+				};
 
-			string json = JsonConvert.SerializeObject(sf, new JsonSerializerSettings
+				string json = JsonConvert.SerializeObject(sf, new JsonSerializerSettings
+				{
+					ContractResolver = contractResolver,
+					Formatting = Formatting.None
+				});
+
+				byte[] data = Encoding.UTF8.GetBytes(json);
+				string dat = Convert.ToBase64String(data);
+
+				if(Directory.Exists("NAL\\tmp"))
+				{
+					logger.Info("Cleaning up uncleaned temponary files");
+					Directory.Delete("NAL\\tmp", true);
+				}
+
+				Directory.CreateDirectory("NAL\\tmp");
+				string tmpPath = "NAL\\tmp\\raw.dat";
+				File.WriteAllText(tmpPath, dat);
+
+				if(File.Exists("NAL\\game.dat"))
+				{
+					logger.Info("Overwritten save file");
+					File.Delete("NAL\\game.dat");
+				}
+
+				ZipFile.CreateFromDirectory("NAL\\tmp", "NAL\\game.dat");
+				Directory.Delete("NAL\\tmp", true);
+			}
+			catch (IOException ioex)
 			{
-				ContractResolver = contractResolver,
-				Formatting = Formatting.None
-			});
-
-			byte[] data = Encoding.UTF8.GetBytes(json);
-			string dat = Convert.ToBase64String(data);
-
-			Directory.CreateDirectory("NAL\\tmp");
-			string tmpPath = "NAL\\tmp\\raw.dat";
-			File.WriteAllText(tmpPath, dat);
-
-			ZipFile.CreateFromDirectory("NAL\\tmp", "NAL\\game.dat");
-			Directory.Delete("NAL\\tmp", true);
+				logger.Error("Error while saving game file: \r\n" + ioex.ToString());
+				logger.Error("Operation is aborted.");
+				Screen.ShowSubtitle("Error");
+			}
+			sw.Stop();
+			logger.Trace("File save cost " + sw.ElapsedMilliseconds + "ms.");
 		}
 
 		internal static SaveFile LoadGameFile()
