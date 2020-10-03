@@ -270,6 +270,12 @@
   <data name="ItemLoadTitle" xml:space="preserve">
     <value>Load Game</value>
   </data>
+  <data name="ItemModels" xml:space="preserve">
+    <value>Appearance</value>
+  </data>
+  <data name="ItemModelsDescription" xml:space="preserve">
+    <value>Change your look and feel.</value>
+  </data>
   <data name="ItemSaveSubtitle" xml:space="preserve">
     <value>Saves the current game status.</value>
   </data>
@@ -299,6 +305,9 @@
   </data>
   <data name="MenuMarketTitle" xml:space="preserve">
     <value>Market</value>
+  </data>
+  <data name="MenuModel" xml:space="preserve">
+    <value>Models</value>
   </data>
   <data name="NoModelWarning" xml:space="preserve">
     <value>~r~Warning~s~: You must use this mod together with ~b~MrTank's~h~ Player Death No Reset Model~s~ script or ~r~you will stuck~s~ on death screen.</value>

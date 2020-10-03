@@ -26,6 +26,7 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 		private UIMenuItem itemSave;
 		private UIMenuItem itemLoad;
 		private UIMenuItem itemCallCops;
+		private UIMenuItem itemModels;
 		private UIMenuItem itemDifficulty;
 		private UIMenuItem itemKills;
 		private UIMenuItem itemDeposit;
@@ -33,6 +34,10 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 		private UIMenuCheckboxItem itemLights;
 		private UIMenuItem itemCash;
 		private UIMenuItem itemBank;
+
+		private UIMenu modelMenu;
+		private UIMenuItem itemDefaultModel;
+		private UIMenuItem itemCopModel;
 
 		private UIMenu buyMenu;
 		private UIMenuItem itemPistol;
@@ -71,11 +76,26 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 				itemWithdraw = new UIMenuItem(Strings.ItemWithdrawTitle, Strings.ItemWithdrawSubtitle);
 				itemCash = new UIMenuItem(Strings.ItemCashTitle, Strings.ItemCashSubtitle);
 				itemBank = new UIMenuItem(Strings.ItemBankTitle, Strings.ItemBankSubtitle);
+				itemModels = new UIMenuItem(Strings.ItemModels, Strings.ItemModelsDescription);
+
+				modelMenu = new UIMenu("", Strings.MenuModel);
+				modelMenu.SetBannerType("scripts\\nal.png");
+
+				itemDefaultModel = new UIMenuItem("Default", "The classic NAL Model.");
+				itemCopModel = new UIMenuItem("LSPD Officer", "The cop.");
+				modelMenu.AddItem(itemDefaultModel);
+				modelMenu.AddItem(itemCopModel);
+				itemDefaultModel.Activated += ItemDefaultModel_Activated;
+				itemCopModel.Activated += ItemCopModel_Activated;
+
 				logger.Trace("All instances initialized");
 				mainMenu.AddItem(itemLights);
 				mainMenu.AddItem(itemSave);
 				mainMenu.AddItem(itemLoad);
 				mainMenu.AddItem(itemCallCops);
+
+				mainMenu.BindMenuToItem(modelMenu, itemModels);
+
 				mainMenu.AddItem(itemDifficulty);
 				mainMenu.AddItem(itemKills);
 				mainMenu.AddItem(itemDeposit);
@@ -85,6 +105,7 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 				logger.Trace("Refreshing Index");
 				mainMenu.RefreshIndex();
 				pool.Add(mainMenu);
+				pool.Add(modelMenu);
 				logger.Trace("Main Menu Done");
 				Tick += MenuScript_Tick;
 				KeyDown += MenuScript_KeyDown;
@@ -135,6 +156,16 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 				Common.UnloadMod(this);
 				this.Abort();
 			}
+		}
+
+		private void ItemCopModel_Activated(UIMenu sender, UIMenuItem selectedItem)
+		{
+			Game.Player.ChangeModel("s_m_y_cop_01");
+		}
+
+		private void ItemDefaultModel_Activated(UIMenu sender, UIMenuItem selectedItem)
+		{
+			Game.Player.ChangeModel("a_m_m_bevhills_02");
 		}
 
 		private void ItemCarbineRifle_Activated(UIMenu sender, UIMenuItem selectedItem)

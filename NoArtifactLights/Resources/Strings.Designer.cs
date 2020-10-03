@@ -520,6 +520,24 @@ namespace NoArtifactLights.Resources {
         }
         
         /// <summary>
+        ///   查找类似 Appearance 的本地化字符串。
+        /// </summary>
+        public static string ItemModels {
+            get {
+                return ResourceManager.GetString("ItemModels", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Change your look and feel. 的本地化字符串。
+        /// </summary>
+        public static string ItemModelsDescription {
+            get {
+                return ResourceManager.GetString("ItemModelsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Saves the current game status. 的本地化字符串。
         /// </summary>
         public static string ItemSaveSubtitle {
@@ -606,6 +624,15 @@ namespace NoArtifactLights.Resources {
         public static string MenuMarketTitle {
             get {
                 return ResourceManager.GetString("MenuMarketTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Models 的本地化字符串。
+        /// </summary>
+        public static string MenuModel {
+            get {
+                return ResourceManager.GetString("MenuModel", resourceCulture);
             }
         }
         

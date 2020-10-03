@@ -261,6 +261,12 @@
   <data name="ItemLoadTitle" xml:space="preserve">
     <value>载入游戏</value>
   </data>
+  <data name="ItemModels" xml:space="preserve">
+    <value>外观</value>
+  </data>
+  <data name="ItemModelsDescription" xml:space="preserve">
+    <value>更改玩家的外观。</value>
+  </data>
   <data name="ItemSaveSubtitle" xml:space="preserve">
     <value>保存当前游戏状态。</value>
   </data>
@@ -287,6 +293,9 @@
   </data>
   <data name="MenuMarketTitle" xml:space="preserve">
     <value>市场</value>
+  </data>
+  <data name="MenuModel" xml:space="preserve">
+    <value>玩家模型 </value>
   </data>
   <data name="NoModelWarning" xml:space="preserve">
     <value>~r~警告~s~: 必须与~b~BV1C7411c7Ss~s~提供的下载配套使用否则玩家死亡后会卡在黑屏。</value>
