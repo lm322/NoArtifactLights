@@ -14,6 +14,7 @@ using System;
 using System.IO;
 using System.Windows.Forms;
 using Screen = GTA.UI.Screen;
+using System.Drawing;
 
 namespace NoArtifactLights.Engine.Mod.Scripts
 {
@@ -53,7 +54,13 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 				logger.Trace("Loading Main Menu");
 				pool = new MenuPool();
 				logger.Trace("Menu Pool created");
-				mainMenu = new UIMenu("NoArtifactLights", Strings.MenuMainTitle);
+				mainMenu = new UIMenu("", Strings.MenuMainTitle);
+				if(!File.Exists("scripts\\nal.png"))
+				{
+					Bitmap bm = Properties.Resources.nal;
+					bm.Save("scripts\\nal.png");
+				}
+				mainMenu.SetBannerType("scripts\\nal.png");
 				itemLights = new UIMenuCheckboxItem(Strings.ItemLightsTitle, true, Strings.ItemLightsSubtitle);
 				itemSave = new UIMenuItem(Strings.ItemSaveTitle, Strings.ItemSaveSubtitle);
 				itemLoad = new UIMenuItem(Strings.ItemLoadTitle, Strings.ItemLoadSubtitle);

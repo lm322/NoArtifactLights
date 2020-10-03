@@ -23,7 +23,6 @@ namespace NoArtifactLights.Engine.Process
 		internal static void LoadProgram()
 		{
 			if (!LoadInternal()) throw new InvalidProgramException();
-			
 		}
 
 		private static bool LoadInternal()

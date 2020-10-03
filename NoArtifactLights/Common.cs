@@ -19,6 +19,8 @@ namespace NoArtifactLights
 		internal static readonly WeaponSavingController weaponSaving = new WeaponSavingController();
 		internal static event EventHandler Unload;
 
+		internal static int intervalToRespawn;
+
 		// internal static event EventHandler CashChanged;
 
 		public static int Cash { get; set; } = 0;
