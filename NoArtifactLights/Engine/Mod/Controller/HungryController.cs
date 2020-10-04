@@ -84,7 +84,7 @@ namespace NoArtifactLights.Engine.Mod.Controller
 
 			if(Hungry != 0f)
 			{
-				if(Game.Player.Character.Health >= 100 && !Game.Player.Character.IsRunning)
+				if(Game.Player.Character.Health >= 100 && !Game.Player.Character.IsSprinting)
 				{
 					MenuScript.ChangeHungryBarColor(Color.White);	
 					Hungry -= 0.01f;
