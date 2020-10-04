@@ -113,7 +113,7 @@ namespace NoArtifactLights.Engine.Mod.Controller
 		internal static UIMenuItem CreateFoodSellerItem(string context, Foods food, int price)
 		{
 			UIMenuItem result = new UIMenuItem(context);
-			result.SetRightLabel(price.ToString());
+			result.SetRightLabel("$" + price.ToString());
 			result.Activated += (s, i) =>
 			{
 				SellFood(food, price);

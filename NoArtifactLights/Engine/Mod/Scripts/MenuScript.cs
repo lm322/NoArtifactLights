@@ -101,7 +101,7 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 				foodMenu.SetBannerType("scripts\\nal.png");
 
 				itemHamburger = HungryController.CreateFoodSellerItem(Strings.FoodBurger, Foods.Hamburger, 1);
-				itemChicken = HungryController.CreateFoodSellerItem(Strings.FoodBurger, Foods.Chicken, 3);
+				itemChicken = HungryController.CreateFoodSellerItem(Strings.FoodChicken, Foods.Chicken, 3);
 
 				foodMenu.AddItem(itemHamburger);
 				foodMenu.AddItem(itemChicken);

@@ -214,7 +214,7 @@
     <value>鸡腿</value>
   </data>
   <data name="FoodOpenShop" xml:space="preserve">
-    <value>按~INPUT_CONTEXT~打开商店。</value>
+    <value>按 ~INPUT_CONTEXT~ 打开商店。</value>
   </data>
   <data name="GameLoaded" xml:space="preserve">
     <value>游戏已成功~b~加载~s~。</value>
