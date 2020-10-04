@@ -4,7 +4,7 @@
 using GTA;
 using GTA.Math;
 using GTA.UI;
-using NativeUI;
+using LemonUI.Menus;
 using NLog;
 using NoArtifactLights.Resources;
 
@@ -14,11 +14,11 @@ namespace NoArtifactLights.Engine.Mod.Controller
 	{
 		private static NLog.Logger logger = LogManager.GetLogger("AmmuController");
 		private static Vector3[] ammus = { new Vector3(18.18945f, -1120.384f, 28.91654f), new Vector3(-325.6184f, 6072.246f, 31.21228f) };
-		internal static UIMenuItem GenerateWeaponSellerItem(string displayName, string description, int price)
+		internal static NativeItem GenerateWeaponSellerItem(string displayName, string description, int price)
 		{
 			logger.Trace("Creating weapon sell item for: " + displayName + " at price " + price);
-			UIMenuItem result = new UIMenuItem(displayName, description);
-			result.SetRightLabel("$" + price);
+			NativeItem result = new NativeItem(displayName, description);
+			result.AltTitle = "$" + price;
 			logger.Trace("Created weapon sell item for: " + displayName);
 			return result;
 		}

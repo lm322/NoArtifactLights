@@ -5,7 +5,7 @@ using System.Drawing;
 using GTA;
 using GTA.Math;
 using GTA.UI;
-using NativeUI;
+using LemonUI.Menus;
 using NoArtifactLights.Engine.Mod.API;
 using NoArtifactLights.Engine.Mod.Scripts;
 using NoArtifactLights.Resources;
@@ -124,10 +124,10 @@ namespace NoArtifactLights.Engine.Mod.Controller
 			EatFood(food);
 		}
 
-		internal static UIMenuItem CreateFoodSellerItem(string context, Foods food, int price)
+		internal static NativeItem CreateFoodSellerItem(string context, Foods food, int price)
 		{
-			UIMenuItem result = new UIMenuItem(context);
-			result.SetRightLabel("$" + price.ToString());
+			NativeItem result = new NativeItem(context);
+			result.AltTitle = "$" + price.ToString();
 			result.Activated += (s, i) =>
 			{
 				SellFood(food, price);

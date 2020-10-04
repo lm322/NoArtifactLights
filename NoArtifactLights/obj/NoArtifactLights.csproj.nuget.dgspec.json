@@ -34,6 +34,10 @@
       "frameworks": {
         "net48": {
           "dependencies": {
+            "LemonUI.SHVDN3": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
             "NLog": {
               "target": "Package",
               "version": "[4.7.4, )"

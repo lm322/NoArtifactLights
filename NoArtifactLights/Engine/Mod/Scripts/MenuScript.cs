@@ -5,54 +5,55 @@ using GTA;
 using GTA.Math;
 using GTA.Native;
 using GTA.UI;
-using NativeUI;
 using NLog;
 using NoArtifactLights.Engine.Mod.Controller;
 using NoArtifactLights.Engine.Mod.API;
 using NoArtifactLights.Resources;
 using System;
-using System.IO;
 using System.Windows.Forms;
 using Screen = GTA.UI.Screen;
 using System.Drawing;
+using LemonUI;
+using LemonUI.Menus;
+using LemonUI.TimerBars;
 
 namespace NoArtifactLights.Engine.Mod.Scripts
 {
 	[ScriptAttributes(Author = "RelaperCrystal", SupportURL = "https://hotworkshop.atlassian.net/projects/NAL")]
 	public class MenuScript : Script
 	{
-		private MenuPool pool;
-		private UIMenu mainMenu;
-		private UIMenuItem itemSave;
-		private UIMenuItem itemLoad;
-		private UIMenuItem itemCallCops;
-		private UIMenuItem itemModels;
-		private UIMenuItem itemDifficulty;
-		private UIMenuItem itemKills;
-		private UIMenuItem itemDeposit;
-		private UIMenuItem itemWithdraw;
-		private UIMenuCheckboxItem itemLights;
-		private UIMenuItem itemCash;
-		private UIMenuItem itemBank;
+		private ObjectPool lemonPool;
+		private NativeMenu mainMenu;
+		private NativeItem itemSave;
+		private NativeItem itemLoad;
+		private NativeItem itemCallCops;
+		private NativeItem itemModels;
+		private NativeItem itemDifficulty;
+		private NativeItem itemKills;
+		private NativeItem itemDeposit;
+		private NativeItem itemWithdraw;
+		private NativeCheckboxItem itemLights;
+		private NativeItem itemCash;
+		private NativeItem itemBank;
 
-		private UIMenu modelMenu;
-		private UIMenuItem itemDefaultModel;
-		private UIMenuItem itemCopModel;
+		private NativeMenu modelMenu;
+		private NativeItem itemDefaultModel;
+		private NativeItem itemCopModel;
 
-		private UIMenu buyMenu;
-		private UIMenuItem itemPistol;
-		private UIMenuItem itemPumpShotgun;
-		private UIMenuItem itemCarbineRifle;
-		private UIMenuItem itemBodyArmor;
+		private NativeMenu buyMenu;
+		private NativeItem itemPistol;
+		private NativeItem itemPumpShotgun;
+		private NativeItem itemCarbineRifle;
+		private NativeItem itemBodyArmor;
 
-		private UIMenu foodMenu;
-		private UIMenuItem itemChicken;
-		private UIMenuItem itemHamburger;
+		private NativeMenu foodMenu;
+		private NativeItem itemChicken;
+		private NativeItem itemHamburger;
 
 		Blip repairBlip;
 
-		private TimerBarPool timePool = new TimerBarPool();
-		internal BarTimerBar hungryBar = new BarTimerBar(Strings.BarHungry);
+		private TimerBarCollection timerBars = new TimerBarCollection();
+		internal TimerBarProgress hungryBar = new TimerBarProgress(Strings.BarHungry);
 
 		// private Vector3 ammu = new Vector3(18.18945f, -1120.384f, 28.91654f);
 		private Vector3 repair = new Vector3(140.683f, -1081.387f, 28.56039f);
@@ -71,94 +72,90 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 			try
 			{
 				logger.Trace("Loading Main Menu");
-				pool = new MenuPool();
+				lemonPool = new ObjectPool();
 				logger.Trace("Menu Pool created");
-				mainMenu = new UIMenu("", Strings.MenuMainTitle);
-				if(!File.Exists("scripts\\nal.png"))
-				{
-					Bitmap bm = Properties.Resources.nal;
-					bm.Save("scripts\\nal.png");
-				}
-				mainMenu.SetBannerType("scripts\\nal.png");
-				itemLights = new UIMenuCheckboxItem(Strings.ItemLightsTitle, true, Strings.ItemLightsSubtitle);
-				itemSave = new UIMenuItem(Strings.ItemSaveTitle, Strings.ItemSaveSubtitle);
-				itemLoad = new UIMenuItem(Strings.ItemLoadTitle, Strings.ItemLoadSubtitle);
-				itemCallCops = new UIMenuItem(Strings.ItemCopsTitle, Strings.ItemCopsSubtitle);
-				itemDifficulty = new UIMenuItem(Strings.ItemDifficulty, Strings.ItemDIfficultySubtitle);
-				itemKills = new UIMenuItem(Strings.ItemKills, Strings.ItemKillsSubtitle);
-				itemDeposit = new UIMenuItem(Strings.ItemDepositTitle, Strings.ItemDepositSubtitle);
-				itemWithdraw = new UIMenuItem(Strings.ItemWithdrawTitle, Strings.ItemWithdrawSubtitle);
-				itemCash = new UIMenuItem(Strings.ItemCashTitle, Strings.ItemCashSubtitle);
-				itemBank = new UIMenuItem(Strings.ItemBankTitle, Strings.ItemBankSubtitle);
-				itemModels = new UIMenuItem(Strings.ItemModels, Strings.ItemModelsDescription);
+				mainMenu = new NativeMenu("NAL", Strings.MenuMainTitle);
+				//if(!File.Exists("scripts\\nal.png"))
+				//{
+				//	Bitmap bm = Properties.Resources.nal;
+				//	bm.Save("scripts\\nal.png");
+				//}
+				itemLights = new NativeCheckboxItem(Strings.ItemLightsTitle, Strings.ItemLightsSubtitle, true );
+				itemSave = new NativeItem(Strings.ItemSaveTitle, Strings.ItemSaveSubtitle);
+				itemLoad = new NativeItem(Strings.ItemLoadTitle, Strings.ItemLoadSubtitle);
+				itemCallCops = new NativeItem(Strings.ItemCopsTitle, Strings.ItemCopsSubtitle);
+				itemDifficulty = new NativeItem(Strings.ItemDifficulty, Strings.ItemDIfficultySubtitle);
+				itemKills = new NativeItem(Strings.ItemKills, Strings.ItemKillsSubtitle);
+				itemDeposit = new NativeItem(Strings.ItemDepositTitle, Strings.ItemDepositSubtitle);
+				itemWithdraw = new NativeItem(Strings.ItemWithdrawTitle, Strings.ItemWithdrawSubtitle);
+				itemCash = new NativeItem(Strings.ItemCashTitle, Strings.ItemCashSubtitle);
+				itemBank = new NativeItem(Strings.ItemBankTitle, Strings.ItemBankSubtitle);
+				itemModels = new NativeItem(Strings.ItemModels, Strings.ItemModelsDescription);
 
-				modelMenu = new UIMenu("", Strings.MenuModel);
-				modelMenu.SetBannerType("scripts\\nal.png");
+				modelMenu = new NativeMenu("Models", Strings.MenuModel);
 
-				itemDefaultModel = new UIMenuItem("Default", "The classic NAL Model.");
-				itemCopModel = new UIMenuItem("LSPD Officer", "The cop.");
-				modelMenu.AddItem(itemDefaultModel);
-				modelMenu.AddItem(itemCopModel);
+				itemDefaultModel = new NativeItem("Default", "The classic NAL Model.");
+				itemCopModel = new NativeItem("LSPD Officer", "The cop.");
+				modelMenu.Add(itemDefaultModel);
+				modelMenu.Add(itemCopModel);
 				itemDefaultModel.Activated += ItemDefaultModel_Activated;
 				itemCopModel.Activated += ItemCopModel_Activated;
 
-				foodMenu = new UIMenu("", Strings.MenuFoodShopSubtitle);
-				foodMenu.SetBannerType("scripts\\nal.png");
+				foodMenu = new NativeMenu("Food", Strings.MenuFoodShopSubtitle);
 
 				itemHamburger = HungryController.CreateFoodSellerItem(Strings.FoodBurger, Foods.Hamburger, 1);
 				itemChicken = HungryController.CreateFoodSellerItem(Strings.FoodChicken, Foods.Chicken, 3);
 
-				foodMenu.AddItem(itemHamburger);
-				foodMenu.AddItem(itemChicken);
+				foodMenu.Add(itemHamburger);
+				foodMenu.Add(itemChicken);
 
 				logger.Trace("All instances initialized");
-				mainMenu.AddItem(itemLights);
-				mainMenu.AddItem(itemSave);
-				mainMenu.AddItem(itemLoad);
-				mainMenu.AddItem(itemCallCops);
+				mainMenu.Add(itemLights);
+				mainMenu.Add(itemSave);
+				mainMenu.Add(itemLoad);
+				mainMenu.Add(itemCallCops);
 
-				mainMenu.BindMenuToItem(modelMenu, itemModels);
+				itemModels = mainMenu.AddSubMenu(modelMenu);
+				itemModels.Title = Strings.ItemModels;
+				itemModels.Description = Strings.ItemModelsDescription;
 
-				mainMenu.AddItem(itemDifficulty);
-				mainMenu.AddItem(itemKills);
-				mainMenu.AddItem(itemDeposit);
-				mainMenu.AddItem(itemWithdraw);
-				mainMenu.AddItem(itemCash);
-				mainMenu.AddItem(itemBank);
-				logger.Trace("Refreshing Index");
-				mainMenu.RefreshIndex();
-				pool.Add(mainMenu);
-				pool.Add(modelMenu);
-				pool.Add(foodMenu);
+				mainMenu.Add(itemDifficulty);
+				mainMenu.Add(itemKills);
+				mainMenu.Add(itemDeposit);
+				mainMenu.Add(itemWithdraw);
+				mainMenu.Add(itemCash);
+				mainMenu.Add(itemBank);
+				lemonPool.Add(mainMenu);
+				lemonPool.Add(modelMenu);
+				lemonPool.Add(foodMenu);
 				logger.Trace("Main Menu Done");
 				Tick += MenuScript_Tick;
 				KeyDown += MenuScript_KeyDown;
-				itemLights.CheckboxEvent += ItemLights_CheckboxEvent;
+				itemLights.CheckboxChanged += ItemLights_CheckboxEvent;
 				itemSave.Activated += ItemSave_Activated;
 				itemLoad.Activated += ItemLoad_Activated;
 				itemCallCops.Activated += ItemCallCops_Activated;
 				itemDeposit.Activated += ItemDeposit_Activated;
 				itemWithdraw.Activated += ItemWithdraw_Activated;
 
-				timePool.Add(hungryBar);
+				timerBars.Add(hungryBar);
 
 				Common.Unload += Common_Unload;
 
 				logger.Trace("Loading Ammu-Nation Menu");
 
-				buyMenu = new UIMenu(Strings.AmmuTitle, Strings.AmmuSubtitle);
+				buyMenu = new NativeMenu(Strings.AmmuTitle, Strings.AmmuSubtitle);
 				itemPistol = AmmuController.GenerateWeaponSellerItem(Strings.AmmuPistol, Strings.AmmuPistolSubtitle, 100);
 				itemPumpShotgun = AmmuController.GenerateWeaponSellerItem(Strings.AmmuPumpShotgun, Strings.AmmuPumpShotgunSubtitle, 200);
 				itemCarbineRifle = AmmuController.GenerateWeaponSellerItem(Strings.AmmuCarbineRifle, Strings.AmmuCarbineRifleSubtitle, 350);
-				itemBodyArmor = new UIMenuItem(Strings.WeaponBodyArmor, Strings.WeaponBodyArmorDescription);
-				itemBodyArmor.SetRightLabel("$380");
+				itemBodyArmor = new NativeItem(Strings.WeaponBodyArmor, Strings.WeaponBodyArmorDescription);
+				itemBodyArmor.AltTitle = "$380";
 				logger.Trace("Instances created");
-				buyMenu.AddItem(itemCash);
-				buyMenu.AddItem(itemPistol);
-				buyMenu.AddItem(itemPumpShotgun);
-				buyMenu.AddItem(itemBodyArmor);
-				buyMenu.RefreshIndex();
-				pool.Add(buyMenu);
+				buyMenu.Add(itemCash);
+				buyMenu.Add(itemPistol);
+				buyMenu.Add(itemPumpShotgun);
+				buyMenu.Add(itemBodyArmor);
+				lemonPool.Add(buyMenu);
 				itemPistol.Activated += ItemPistol_Activated;
 				itemPumpShotgun.Activated += ItemPumpShotgun_Activated;
 				itemCarbineRifle.Activated += ItemCarbineRifle_Activated;
@@ -185,28 +182,28 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 			}
 		}
 
-		private void ItemCopModel_Activated(UIMenu sender, UIMenuItem selectedItem)
+		private void ItemCopModel_Activated(object sender, EventArgs args)
 		{
 			Game.Player.ChangeModel("s_m_y_cop_01");
-			selectedItem.SetRightBadge(UIMenuItem.BadgeStyle.Clothes);
-			itemDefaultModel.SetRightBadge(UIMenuItem.BadgeStyle.None);
+			//selectedItem.SetRightBadge(UIMenuItem.BadgeStyle.Clothes);
+			//itemDefaultModel.SetRightBadge(UIMenuItem.BadgeStyle.None);
 			itemSave.Enabled = false;
 		}
 
-		private void ItemDefaultModel_Activated(UIMenu sender, UIMenuItem selectedItem)
+		private void ItemDefaultModel_Activated(object sender, EventArgs args)
 		{
 			Game.Player.ChangeModel("a_m_m_bevhills_02");
-			selectedItem.SetRightBadge(UIMenuItem.BadgeStyle.Clothes);
-			itemCopModel.SetRightBadge(UIMenuItem.BadgeStyle.None);
+			//selectedItem.SetRightBadge(UIMenuItem.BadgeStyle.Clothes);
+			//itemCopModel.SetRightBadge(UIMenuItem.BadgeStyle.None);
 			itemSave.Enabled = false;
 		}
 
-		private void ItemCarbineRifle_Activated(UIMenu sender, UIMenuItem selectedItem)
+		private void ItemCarbineRifle_Activated(object sender, EventArgs args)
 		{
 			AmmuController.SellWeapon(350, 50, WeaponHash.CarbineRifle);
 		}
 
-		private void ItemWithdraw_Activated(UIMenu sender, UIMenuItem selectedItem)
+		private void ItemWithdraw_Activated(object sender, EventArgs args)
 		{
 			mainMenu.Visible = false;
 			string cash = Game.GetUserInput(WindowTitle.EnterMessage20, "", 20);
@@ -227,7 +224,7 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 			GameUI.DisplayHelp(Strings.TransactionSuccess);
 		}
 
-		private void ItemDeposit_Activated(UIMenu sender, UIMenuItem selectedItem)
+		private void ItemDeposit_Activated(object sender, EventArgs args)
 		{
 			mainMenu.Visible = false;
 			string cash = Game.GetUserInput(WindowTitle.EnterMessage20, "", 20);
@@ -258,7 +255,7 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 			if (mainMenu != null)
 			{
 				mainMenu.Visible = false;
-				itemLights.CheckboxEvent -= ItemLights_CheckboxEvent;
+				itemLights.CheckboxChanged -= ItemLights_CheckboxEvent;
 				itemSave.Activated -= ItemSave_Activated;
 				itemLoad.Activated -= ItemLoad_Activated;
 				itemCallCops.Activated -= ItemCallCops_Activated;
@@ -280,39 +277,39 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 			}
 		}
 
-		private void ItemBodyArmor_Activated(UIMenu sender, UIMenuItem selectedItem) => AmmuController.SellArmor(50, 380);
-		private void ItemPumpShotgun_Activated(UIMenu sender, UIMenuItem selectedItem) => AmmuController.SellWeapon(200, 50, WeaponHash.PumpShotgun);
-		private void ItemPistol_Activated(UIMenu sender, UIMenuItem selectedItem) => AmmuController.SellWeapon(100, 100, WeaponHash.Pistol);
+		private void ItemBodyArmor_Activated(object sender, EventArgs args) => AmmuController.SellArmor(50, 380);
+		private void ItemPumpShotgun_Activated(object sender, EventArgs args) => AmmuController.SellWeapon(200, 50, WeaponHash.PumpShotgun);
+		private void ItemPistol_Activated(object sender, EventArgs args) => AmmuController.SellWeapon(100, 100, WeaponHash.Pistol);
 
-		private void ItemCallCops_Activated(UIMenu sender, UIMenuItem selectedItem)
+		private void ItemCallCops_Activated(object sender, EventArgs args)
 		{
 			Function.Call(Hash.CREATE_INCIDENT, 7, Game.Player.Character.Position.X, Game.Player.Character.Position.Y, Game.Player.Character.Position.Z, 2, 3.0f, new OutputArgument());
 		}
 
-		private void ItemLoad_Activated(UIMenu sender, UIMenuItem selectedItem)
+		private void ItemLoad_Activated(object sender, EventArgs args)
 		{
 			SaveController.Load();
 			itemLights.Checked = Common.blackout;
-			itemDifficulty.SetRightLabel(Strings.ResourceManager.GetString("Difficulty" + Common.difficulty.ToString()));
-			itemKills.SetRightLabel(Common.counter.ToString());
-			itemCash.SetRightLabel("$" + Common.Cash.ToString());
+			itemDifficulty.AltTitle = Strings.ResourceManager.GetString("Difficulty" + Common.difficulty.ToString());
+			itemKills.AltTitle = Common.counter.ToString();
+			itemCash.AltTitle = "$" + Common.Cash.ToString();
 			itemSave.Enabled = true;
 			Notification.Show(Strings.GameLoaded);
 		}
 
-		private void ItemSave_Activated(UIMenu sender, UIMenuItem selectedItem) => SaveController.Save(itemLights.Checked);
+		private void ItemSave_Activated(object sender, EventArgs args) => SaveController.Save(itemLights.Checked);
 
-		private void ItemLights_CheckboxEvent(UIMenuCheckboxItem sender, bool Checked)
+		private void ItemLights_CheckboxEvent(object sender, EventArgs args)
 		{
-			Function.Call(Hash.SET_ARTIFICIAL_LIGHTS_STATE, Checked);
+			Function.Call(Hash.SET_ARTIFICIAL_LIGHTS_STATE, itemLights.Checked);
 		}
 
 		private void MenuScript_Tick(object sender, EventArgs e)
 		{
-			pool.ProcessMenus();
-			timePool.Draw();
+			lemonPool.Process();
+			timerBars.Process();
 
-			hungryBar.Percentage = HungryController.ProgressBarStatus;
+			hungryBar.Progress = HungryController.ProgressBarStatus;
 			if (AmmuController.DistanceToAmmu())
 			{
 				GameUI.DisplayHelp(Strings.AmmuOpenShop);
@@ -333,10 +330,10 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 			{
 				case Keys.N:
 					mainMenu.Visible = !mainMenu.Visible;
-					itemDifficulty.SetRightLabel(Strings.ResourceManager.GetString("Difficulty" + Common.difficulty.ToString()));
-					itemKills.SetRightLabel(Common.counter.ToString());
-					itemCash.SetRightLabel("$" + Common.Cash.ToString());
-					itemBank.SetRightLabel("$" + Common.Bank.ToString());
+					itemDifficulty.AltTitle = Strings.ResourceManager.GetString("Difficulty" + Common.difficulty.ToString());
+					itemKills.AltTitle = Common.counter.ToString();
+					itemCash.AltTitle = "$" + Common.Cash.ToString();
+					itemBank.AltTitle = "$" + Common.Bank.ToString();
 					break;
 				case Keys.E:
 					if (mainMenu.Visible) return;
@@ -345,11 +342,11 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 						buyMenu.Visible = false;
 						return;
 					}
-					if (AmmuController.DistanceToAmmu() && !pool.IsAnyMenuOpen())
+					if (AmmuController.DistanceToAmmu() && !lemonPool.AreAnyVisible)
 					{
 						buyMenu.Visible = true;
 					}
-					if (HungryController.IsPlayerCloseReseller() && !pool.IsAnyMenuOpen())
+					if (HungryController.IsPlayerCloseReseller() && !lemonPool.AreAnyVisible)
 					{
 						foodMenu.Visible = true;
 					}

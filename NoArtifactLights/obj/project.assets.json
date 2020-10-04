@@ -2,6 +2,18 @@
   "version": 3,
   "targets": {
     ".NETFramework,Version=v4.8": {
+      "LemonUI.SHVDN3/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "ScriptHookVDotNet3": "3.0.2"
+        },
+        "compile": {
+          "lib/net48/LemonUI.SHVDN3.dll": {}
+        },
+        "runtime": {
+          "lib/net48/LemonUI.SHVDN3.dll": {}
+        }
+      },
       "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
@@ -53,6 +65,18 @@
       }
     },
     ".NETFramework,Version=v4.8/win": {
+      "LemonUI.SHVDN3/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "ScriptHookVDotNet3": "3.0.2"
+        },
+        "compile": {
+          "lib/net48/LemonUI.SHVDN3.dll": {}
+        },
+        "runtime": {
+          "lib/net48/LemonUI.SHVDN3.dll": {}
+        }
+      },
       "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
@@ -104,6 +128,18 @@
       }
     },
     ".NETFramework,Version=v4.8/win-x64": {
+      "LemonUI.SHVDN3/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "ScriptHookVDotNet3": "3.0.2"
+        },
+        "compile": {
+          "lib/net48/LemonUI.SHVDN3.dll": {}
+        },
+        "runtime": {
+          "lib/net48/LemonUI.SHVDN3.dll": {}
+        }
+      },
       "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
@@ -155,6 +191,18 @@
       }
     },
     ".NETFramework,Version=v4.8/win-x86": {
+      "LemonUI.SHVDN3/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "ScriptHookVDotNet3": "3.0.2"
+        },
+        "compile": {
+          "lib/net48/LemonUI.SHVDN3.dll": {}
+        },
+        "runtime": {
+          "lib/net48/LemonUI.SHVDN3.dll": {}
+        }
+      },
       "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
@@ -207,6 +255,19 @@
     }
   },
   "libraries": {
+    "LemonUI.SHVDN3/1.0.0": {
+      "sha512": "4WZePaPWTq1Y5DMBInEYlBofOWGCAeU/0Y4w59sUuPK4Og7pcyN7HHiv9v+k4QztWh7fBuB3jYHUXgnpBIqDjA==",
+      "type": "package",
+      "path": "lemonui.shvdn3/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lemonui.shvdn3.1.0.0.nupkg.sha512",
+        "lemonui.shvdn3.nuspec",
+        "lib/net48/LemonUI.SHVDN3.dll",
+        "lib/net48/LemonUI.SHVDN3.xml"
+      ]
+    },
     "Newtonsoft.Json/12.0.3": {
       "sha512": "6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
       "type": "package",
@@ -300,6 +361,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.8": [
+      "LemonUI.SHVDN3 >= 1.0.0",
       "NLog >= 4.7.4",
       "NLog.Schema >= 4.7.4",
       "Newtonsoft.Json >= 12.0.3",
@@ -339,6 +401,10 @@
     "frameworks": {
       "net48": {
         "dependencies": {
+          "LemonUI.SHVDN3": {
+            "target": "Package",
+            "version": "[1.0.0, )"
+          },
           "NLog": {
             "target": "Package",
             "version": "[4.7.4, )"

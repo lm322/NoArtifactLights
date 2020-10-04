@@ -4,7 +4,6 @@
 using GTA;
 using GTA.Native;
 using GTA.UI;
-using NativeUI;
 using NLog;
 using NoArtifactLights.Engine.Mod.API;
 using NoArtifactLights.Engine.Mod.Controller;
@@ -17,6 +16,7 @@ using NoArtifactLights.Engine.Process;
 using NoArtifactLights.Engine.Entities;
 using NoArtifactLights.Engine.Entities.Enums;
 using System.Collections.Generic;
+using LemonUI.Scaleform;
 
 namespace NoArtifactLights
 {
@@ -135,7 +135,7 @@ namespace NoArtifactLights
 						Common.counter++;
 						if (weaponedPeds.IsDuplicate(ped))
 						{
-							Common.Earn(10);
+							Common.Earn(50);
 							GameUI.DisplayHelp(Strings.ArmedBonus);
 							if (ped.AttachedBlip != null && ped.AttachedBlip.Exists())
 							{
@@ -150,28 +150,28 @@ namespace NoArtifactLights
 
 							case 100:
 								Common.difficulty = Difficulty.Easy;
-								BigMessageThread.MessageInstance.ShowSimpleShard(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyEasy));
+								new BigMessage(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyEasy));
 								GameUI.DisplayHelp(string.Format(Strings.DifficultyHelp, Strings.DifficultyEasy));
 								GameController.SetRelationship(Difficulty.Easy);
 								break;
 
 							case 300:
 								Common.difficulty = Difficulty.Normal;
-								BigMessageThread.MessageInstance.ShowSimpleShard(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyNormal));
+								new BigMessage(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyNormal));
 								GameUI.DisplayHelp(string.Format(Strings.DifficultyHelp, Strings.DifficultyNormal));
 								GameController.SetRelationship(Difficulty.Normal);
 								break;
 
 							case 700:
 								Common.difficulty = Difficulty.Hard;
-								BigMessageThread.MessageInstance.ShowSimpleShard(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyHard));
+								new BigMessage(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyHard));
 								GameUI.DisplayHelp(string.Format(Strings.DifficultyHelp, Strings.DifficultyHard));
 								GameController.SetRelationship(Difficulty.Hard);
 								break;
 
 							case 1500:
 								Common.difficulty = Difficulty.Nether;
-								BigMessageThread.MessageInstance.ShowSimpleShard(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyNether));
+								new BigMessage(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyNether));
 								GameUI.DisplayHelp(string.Format(Strings.DifficultyHelp, Strings.DifficultyNether));
 								GameController.SetRelationship(Difficulty.Nether);
 								break;
@@ -220,7 +220,7 @@ namespace NoArtifactLights
 					weaponBlip = World.CreateBlip(weapon.Position);
 					weaponBlip.Sprite = BlipSprite.AmmuNation;
 					weaponBlip.Name = Strings.WeaponPistol;
-					BigMessageThread.MessageInstance.ShowSimpleShard(Strings.WeaponsShard, Strings.WeaponsShardSubtitle);
+					new BigMessage(Strings.WeaponsShard, Strings.WeaponsShardSubtitle);
 				}
 				if (peds1.Count >= 60000)
 				{
