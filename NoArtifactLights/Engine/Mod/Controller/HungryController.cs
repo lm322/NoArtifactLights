@@ -1,11 +1,13 @@
 ﻿// NoArtifactLights
 // (C) RelaperCrystal and contributors. Licensed under GPLv3 or later.
 
+using System.Drawing;
 using GTA;
 using GTA.Math;
 using GTA.UI;
 using NativeUI;
 using NoArtifactLights.Engine.Mod.API;
+using NoArtifactLights.Engine.Mod.Scripts;
 using NoArtifactLights.Resources;
 
 namespace NoArtifactLights.Engine.Mod.Controller
@@ -80,7 +82,19 @@ namespace NoArtifactLights.Engine.Mod.Controller
 			if (Hungry <= 1.5f) Game.Player.Character.Health -= 1;
 			if (Hungry <= 0.5f) Game.Player.Character.Health -= 10;
 
-			if(Hungry != 0f) Hungry -= 0.01f;
+			if(Hungry != 0f)
+			{
+				if(Game.Player.Character.Health >= 100 && !Game.Player.Character.IsRunning)
+				{
+					MenuScript.ChangeHungryBarColor(Color.White);	
+					Hungry -= 0.01f;
+				}
+				else
+				{
+					MenuScript.ChangeHungryBarColor(Color.Red);
+					Hungry -= 0.05f;
+				}
+			}	
 
 		}
 

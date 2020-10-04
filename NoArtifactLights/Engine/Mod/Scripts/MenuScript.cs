@@ -52,12 +52,17 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 		Blip repairBlip;
 
 		private TimerBarPool timePool = new TimerBarPool();
-		private BarTimerBar hungryBar = new BarTimerBar(Strings.BarHungry);
+		internal BarTimerBar hungryBar = new BarTimerBar(Strings.BarHungry);
 
 		// private Vector3 ammu = new Vector3(18.18945f, -1120.384f, 28.91654f);
 		private Vector3 repair = new Vector3(140.683f, -1081.387f, 28.56039f);
 
-		
+		internal static MenuScript instance;
+
+		internal static void ChangeHungryBarColor(Color cl)
+		{
+			instance.hungryBar.ForegroundColor = cl;
+		}
 
 		private NLog.Logger logger = LogManager.GetLogger("MenuScript");
 
@@ -167,6 +172,7 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 				repairBlip.Name = Strings.RepairBlip;
 
 				HungryController.AddBlipsToAllResellers();
+				instance = this;
 
 				this.Aborted += MenuScript_Aborted;
 			}
