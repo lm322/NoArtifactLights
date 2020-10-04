@@ -18,9 +18,9 @@ using System.Drawing;
 
 namespace NoArtifactLights.Engine.Mod.Scripts
 {
+	[ScriptAttributes(Author = "RelaperCrystal", SupportURL = "https://hotworkshop.atlassian.net/projects/NAL")]
 	public class MenuScript : Script
 	{
-		private TextTimerBar cashBar;
 		private MenuPool pool;
 		private UIMenu mainMenu;
 		private UIMenuItem itemSave;
@@ -115,8 +115,6 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 				itemCallCops.Activated += ItemCallCops_Activated;
 				itemDeposit.Activated += ItemDeposit_Activated;
 				itemWithdraw.Activated += ItemWithdraw_Activated;
-				cashBar = new TextTimerBar("Cash", "$0");
-			   // Common.CashChanged += Common_CashChanged;
 
 				Common.Unload += Common_Unload;
 
@@ -161,11 +159,17 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 		private void ItemCopModel_Activated(UIMenu sender, UIMenuItem selectedItem)
 		{
 			Game.Player.ChangeModel("s_m_y_cop_01");
+			selectedItem.SetRightBadge(UIMenuItem.BadgeStyle.Clothes);
+			itemDefaultModel.SetRightBadge(UIMenuItem.BadgeStyle.None);
+			itemSave.Enabled = false;
 		}
 
 		private void ItemDefaultModel_Activated(UIMenu sender, UIMenuItem selectedItem)
 		{
 			Game.Player.ChangeModel("a_m_m_bevhills_02");
+			selectedItem.SetRightBadge(UIMenuItem.BadgeStyle.Clothes);
+			itemCopModel.SetRightBadge(UIMenuItem.BadgeStyle.None);
+			itemSave.Enabled = false;
 		}
 
 		private void ItemCarbineRifle_Activated(UIMenu sender, UIMenuItem selectedItem)
@@ -251,11 +255,6 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 		private void ItemPumpShotgun_Activated(UIMenu sender, UIMenuItem selectedItem) => AmmuController.SellWeapon(200, 50, WeaponHash.PumpShotgun);
 		private void ItemPistol_Activated(UIMenu sender, UIMenuItem selectedItem) => AmmuController.SellWeapon(100, 100, WeaponHash.Pistol);
 
-		private void Common_CashChanged(object sender, EventArgs e)
-		{
-			// cashBar.Text = $"${Common.Cash}";
-		}
-
 		private void ItemCallCops_Activated(UIMenu sender, UIMenuItem selectedItem)
 		{
 			Function.Call(Hash.CREATE_INCIDENT, 7, Game.Player.Character.Position.X, Game.Player.Character.Position.Y, Game.Player.Character.Position.Z, 2, 3.0f, new OutputArgument());
@@ -268,6 +267,7 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 			itemDifficulty.SetRightLabel(Strings.ResourceManager.GetString("Difficulty" + Common.difficulty.ToString()));
 			itemKills.SetRightLabel(Common.counter.ToString());
 			itemCash.SetRightLabel("$" + Common.Cash.ToString());
+			itemSave.Enabled = true;
 			Notification.Show(Strings.GameLoaded);
 		}
 

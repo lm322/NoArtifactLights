@@ -219,6 +219,9 @@
   <data name="GameSaved" xml:space="preserve">
     <value>The game has been ~b~saved~s~.</value>
   </data>
+  <data name="Hungry" xml:space="preserve">
+    <value>You are now hungry and needs some food.</value>
+  </data>
   <data name="InputNotNumber" xml:space="preserve">
     <value>You may only enter numbers.</value>
   </data>
@@ -335,6 +338,9 @@
   </data>
   <data name="SellNoCar" xml:space="preserve">
     <value>You currently does not in a vehicle. Get in the car you wanna sell.</value>
+  </data>
+  <data name="SellNotHungry" xml:space="preserve">
+    <value>You are already full and cannot eat anymore.</value>
   </data>
   <data name="SellSuccess" xml:space="preserve">
     <value>You have successfully selled your vehicle.</value>

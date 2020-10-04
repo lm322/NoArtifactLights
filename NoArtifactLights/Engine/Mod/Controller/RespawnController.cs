@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// NoArtifactLights
+// (C) RelaperCrystal and contributors. Licensed under GPLv3 or later.
+
 using GTA;
 using GTA.Native;
 using GTA.UI;
@@ -53,6 +51,8 @@ namespace NoArtifactLights.Engine.Mod.Controller
 				if (GetMsPassed() <= 16000) return;
 				logger.Info("Proceeding to respawn!");
 				if (Screen.IsFadedOut) Screen.FadeIn(500);
+				HungryController.ResetHungry();
+				Common.Cash = 0;
 				proceeding = false;
 				fitRespawn = false;
 			}

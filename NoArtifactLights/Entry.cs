@@ -19,6 +19,7 @@ using NoArtifactLights.Engine.Entities.Enums;
 
 namespace NoArtifactLights
 {
+	[ScriptAttributes(Author = "RelaperCrystal", SupportURL = "https://hotworkshop.atlassian.net/projects/NAL")]
 	public class Entry : Script
 	{
 		private Pickup weapon;

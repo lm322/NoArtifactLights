@@ -367,6 +367,15 @@ namespace NoArtifactLights.Resources {
         }
         
         /// <summary>
+        ///   查找类似 You are now hungry and needs some food. 的本地化字符串。
+        /// </summary>
+        public static string Hungry {
+            get {
+                return ResourceManager.GetString("Hungry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 You may only enter numbers. 的本地化字符串。
         /// </summary>
         public static string InputNotNumber {
@@ -714,6 +723,15 @@ namespace NoArtifactLights.Resources {
         public static string SellNoCar {
             get {
                 return ResourceManager.GetString("SellNoCar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 You are already full and cannot eat anymore. 的本地化字符串。
+        /// </summary>
+        public static string SellNotHungry {
+            get {
+                return ResourceManager.GetString("SellNotHungry", resourceCulture);
             }
         }
         

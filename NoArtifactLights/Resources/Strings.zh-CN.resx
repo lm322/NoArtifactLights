@@ -210,6 +210,9 @@
   <data name="GameSaved" xml:space="preserve">
     <value>游戏已成功~b~保存~s~。</value>
   </data>
+  <data name="Hungry" xml:space="preserve">
+    <value>您当前过于饥饿。</value>
+  </data>
   <data name="InputNotNumber" xml:space="preserve">
     <value>请输入整数。</value>
   </data>
@@ -323,6 +326,9 @@
   </data>
   <data name="SellNoCar" xml:space="preserve">
     <value>您当前不在车辆中。进入您想出售的车辆。</value>
+  </data>
+  <data name="SellNotHungry" xml:space="preserve">
+    <value>您已经饱了，不能再吃了。</value>
   </data>
   <data name="SellSuccess" xml:space="preserve">
     <value>您已成功出售车辆。</value>
