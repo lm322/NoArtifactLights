@@ -35,7 +35,7 @@ namespace NoArtifactLights.Engine.Mod.Controller
 			Hungry = buffer;
 		}
 
-		internal static float ProgressBarStatus => Hungry / 10f;
+		internal static float ProgressBarStatus => Hungry * 10f;
 
 		internal static void AlterHungry(int value)
 		{

@@ -12,8 +12,8 @@ C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\obj\Debug\NoArtifa
 C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\obj\Debug\zh-CN\NoArtifactLights.resources.dll
 C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\NLog.dll
 C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\ScriptHookVDotNet3.dll
-C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\NativeUI.dll
 C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\NLog.config
 C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\nal.png
 C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\obj\Debug\NoArtifactLights.Properties.Resources.resources
+C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\LemonUI.SHVDN3.dll
