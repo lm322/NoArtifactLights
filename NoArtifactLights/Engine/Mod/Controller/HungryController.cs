@@ -89,13 +89,13 @@ namespace NoArtifactLights.Engine.Mod.Controller
 			switch(food)
 			{
 				default:
-					Hungry += 0.0f;
+					AddHungry(food,0.0f);
 					break;
 				case Foods.Hamburger:
-					Hungry += 2.5f;
+					AddHungry(food, 2.5f);
 					break;
 				case Foods.Chicken:
-					Hungry += 3.0f;
+					AddHungry(food, 3.0f);
 					break;
 			}
 		}
