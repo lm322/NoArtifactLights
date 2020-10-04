@@ -20,7 +20,7 @@ namespace NoArtifactLights.Engine.Mod.Controller
 		public static void RegisterEvent(Type t)
 		{
 			if (t == null) return;
-			if (!t.GetInterfaces().Contains(typeof(Event))) return;
+			if (!t.GetType().IsAssignableFrom(typeof(Event))) return;
 			registeredEvents.Add(t);
 		}
 

@@ -45,10 +45,16 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 		private UIMenuItem itemCarbineRifle;
 		private UIMenuItem itemBodyArmor;
 
+		private UIMenu foodMenu;
+		private UIMenuItem itemChicken;
+		private UIMenuItem itemHamburger;
+
 		Blip repairBlip;
 
 		// private Vector3 ammu = new Vector3(18.18945f, -1120.384f, 28.91654f);
 		private Vector3 repair = new Vector3(140.683f, -1081.387f, 28.56039f);
+
+		
 
 		private NLog.Logger logger = LogManager.GetLogger("MenuScript");
 
