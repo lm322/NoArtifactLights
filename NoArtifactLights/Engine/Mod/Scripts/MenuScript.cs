@@ -51,6 +51,9 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 
 		Blip repairBlip;
 
+		private TimerBarPool timePool = new TimerBarPool();
+		private BarTimerBar hungryBar = new BarTimerBar(Strings.BarHungry);
+
 		// private Vector3 ammu = new Vector3(18.18945f, -1120.384f, 28.91654f);
 		private Vector3 repair = new Vector3(140.683f, -1081.387f, 28.56039f);
 
@@ -94,6 +97,15 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 				itemDefaultModel.Activated += ItemDefaultModel_Activated;
 				itemCopModel.Activated += ItemCopModel_Activated;
 
+				foodMenu = new UIMenu("", Strings.MenuFoodShopSubtitle);
+				foodMenu.SetBannerType("scripts\\nal.png");
+
+				itemHamburger = HungryController.CreateFoodSellerItem(Strings.FoodBurger, Foods.Hamburger, 1);
+				itemChicken = HungryController.CreateFoodSellerItem(Strings.FoodBurger, Foods.Chicken, 3);
+
+				foodMenu.AddItem(itemHamburger);
+				foodMenu.AddItem(itemChicken);
+
 				logger.Trace("All instances initialized");
 				mainMenu.AddItem(itemLights);
 				mainMenu.AddItem(itemSave);
@@ -112,6 +124,7 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 				mainMenu.RefreshIndex();
 				pool.Add(mainMenu);
 				pool.Add(modelMenu);
+				pool.Add(foodMenu);
 				logger.Trace("Main Menu Done");
 				Tick += MenuScript_Tick;
 				KeyDown += MenuScript_KeyDown;
@@ -121,6 +134,8 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 				itemCallCops.Activated += ItemCallCops_Activated;
 				itemDeposit.Activated += ItemDeposit_Activated;
 				itemWithdraw.Activated += ItemWithdraw_Activated;
+
+				timePool.Add(hungryBar);
 
 				Common.Unload += Common_Unload;
 
@@ -150,6 +165,8 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 				repairBlip.Sprite = BlipSprite.Garage;
 				repairBlip.Color = BlipColor.Blue;
 				repairBlip.Name = Strings.RepairBlip;
+
+				HungryController.AddBlipsToAllResellers();
 
 				this.Aborted += MenuScript_Aborted;
 			}
@@ -287,9 +304,16 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 		private void MenuScript_Tick(object sender, EventArgs e)
 		{
 			pool.ProcessMenus();
+			timePool.Draw();
+
+			hungryBar.Percentage = HungryController.ProgressBarStatus;
 			if (AmmuController.DistanceToAmmu())
 			{
 				GameUI.DisplayHelp(Strings.AmmuOpenShop);
+			}
+			if (HungryController.IsPlayerCloseReseller())
+			{
+				GameUI.DisplayHelp(Strings.FoodOpenShop);
 			}
 			if (repair.DistanceTo(Game.Player.Character.Position) <= 10f && Game.Player.Character.IsInVehicle())
 			{
@@ -315,9 +339,13 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 						buyMenu.Visible = false;
 						return;
 					}
-					if (AmmuController.DistanceToAmmu())
+					if (AmmuController.DistanceToAmmu() && !pool.IsAnyMenuOpen())
 					{
 						buyMenu.Visible = true;
+					}
+					if (HungryController.IsPlayerCloseReseller() && !pool.IsAnyMenuOpen())
+					{
+						foodMenu.Visible = true;
 					}
 					if (repair.DistanceTo(Game.Player.Character.Position) <= 10f && Game.Player.Character.IsInVehicle())
 					{

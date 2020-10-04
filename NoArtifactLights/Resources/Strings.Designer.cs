@@ -160,6 +160,15 @@ namespace NoArtifactLights.Resources {
         }
         
         /// <summary>
+        ///   查找类似 Hungry 的本地化字符串。
+        /// </summary>
+        public static string BarHungry {
+            get {
+                return ResourceManager.GetString("BarHungry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 You already ~h~has~s~~b~ body armor~s~. 的本地化字符串。
         /// </summary>
         public static string BodyArmorAlreadyHad {
@@ -345,6 +354,33 @@ namespace NoArtifactLights.Resources {
         public static string FirstKill {
             get {
                 return ResourceManager.GetString("FirstKill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Hamburger 的本地化字符串。
+        /// </summary>
+        public static string FoodBurger {
+            get {
+                return ResourceManager.GetString("FoodBurger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Chicken 的本地化字符串。
+        /// </summary>
+        public static string FoodChicken {
+            get {
+                return ResourceManager.GetString("FoodChicken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Press ~INPUT_CONTEXT~ to open shop. 的本地化字符串。
+        /// </summary>
+        public static string FoodOpenShop {
+            get {
+                return ResourceManager.GetString("FoodOpenShop", resourceCulture);
             }
         }
         
@@ -606,6 +642,15 @@ namespace NoArtifactLights.Resources {
         public static string MazeBank {
             get {
                 return ResourceManager.GetString("MazeBank", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Food Shop 的本地化字符串。
+        /// </summary>
+        public static string MenuFoodShopSubtitle {
+            get {
+                return ResourceManager.GetString("MenuFoodShopSubtitle", resourceCulture);
             }
         }
         

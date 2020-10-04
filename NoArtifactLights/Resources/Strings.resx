@@ -150,6 +150,9 @@
   <data name="BankMaximum" xml:space="preserve">
     <value>Exchange failed because your bank account has reached 32-bit integer limit.</value>
   </data>
+  <data name="BarHungry" xml:space="preserve">
+    <value>Hungry</value>
+  </data>
   <data name="BodyArmorAlreadyHad" xml:space="preserve">
     <value>You already ~h~has~s~~b~ body armor~s~.</value>
   </data>
@@ -212,6 +215,15 @@
   </data>
   <data name="FirstKill" xml:space="preserve">
     <value>You have killed a person. Once you killed amount of persons, the difficulty will upgrade.</value>
+  </data>
+  <data name="FoodBurger" xml:space="preserve">
+    <value>Hamburger</value>
+  </data>
+  <data name="FoodChicken" xml:space="preserve">
+    <value>Chicken</value>
+  </data>
+  <data name="FoodOpenShop" xml:space="preserve">
+    <value>Press ~INPUT_CONTEXT~ to open shop.</value>
   </data>
   <data name="GameLoaded" xml:space="preserve">
     <value>The game has been ~b~loaded~s~.</value>
@@ -299,6 +311,9 @@
   </data>
   <data name="MazeBank" xml:space="preserve">
     <value>Maze Bank</value>
+  </data>
+  <data name="MenuFoodShopSubtitle" xml:space="preserve">
+    <value>Food Shop</value>
   </data>
   <data name="MenuMainTitle" xml:space="preserve">
     <value>Main Menu</value>

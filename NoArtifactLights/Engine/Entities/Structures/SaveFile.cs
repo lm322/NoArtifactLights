@@ -23,5 +23,6 @@ namespace NoArtifactLights.Engine.Entities.Structures
 		public SaveWeapon[] Weapons { get; set; }
 		public int PlayerArmor { get; set; }
 		public int PlayerHealth { get; set; }
+		public float PlayerHungry { get; set; }
 	}
 }

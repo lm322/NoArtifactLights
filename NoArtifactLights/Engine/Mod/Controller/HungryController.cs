@@ -21,7 +21,9 @@ namespace NoArtifactLights.Engine.Mod.Controller
 		public static float Hungry { get; private set; } = 10.0f;
 
 		private static bool hinted = false;
-		private static Vector3[] resellers = { new Vector3(386.585f, -872.4678f, 29.2917f), new Vector3(194.2787f, -1764.063f, 29.321f) };
+		private static Vector3[] resellers = { new Vector3(386.585f, -872.4678f, 29.2917f), new Vector3(194.2787f, -1764.063f, 29.321f), new Vector3(408.3806f, -1908.731f, 25.50163f) 
+			, new Vector3(1.830167f, -1604.896f, 29.25797f)
+		};
 
 		internal static void AddHungry(Foods food, float amount)
 		{
@@ -31,9 +33,40 @@ namespace NoArtifactLights.Engine.Mod.Controller
 			Hungry = buffer;
 		}
 
+		internal static float ProgressBarStatus => Hungry / 10f;
+
+		internal static void AlterHungry(int value)
+		{
+			float buffer = Hungry;
+			buffer = value;
+			if (buffer > 10.0f) buffer = 10.0f;
+			if (buffer < 0f) buffer = 0f;
+			Hungry = buffer;
+		}
+
 		internal static void ResetHungry()
 		{
 			Hungry = 10.0f;
+		}
+
+		internal static void AddBlipsToAllResellers()
+		{
+			foreach(Vector3 coord in resellers)
+			{
+				Blip b = World.CreateBlip(coord);
+				b.Sprite = BlipSprite.Store;
+				b.Name = "Food Resellers";
+				Entry.blips.Add(b);
+			}
+		}
+		internal static bool IsPlayerCloseReseller()
+		{
+			Vector3 player = Game.Player.Character.Position;
+			foreach(Vector3 coord in resellers)
+			{
+				if (player.DistanceTo(coord) <= 1.5f) return true;
+			}
+			return false;
 		}
 
 		internal static void Loop()
@@ -47,7 +80,7 @@ namespace NoArtifactLights.Engine.Mod.Controller
 			if (Hungry <= 1.5f) Game.Player.Character.Health -= 1;
 			if (Hungry <= 0.5f) Game.Player.Character.Health -= 10;
 
-			if(Hungry != 0f) Hungry -= 0.001f;
+			if(Hungry != 0f) Hungry -= 0.01f;
 
 		}
 

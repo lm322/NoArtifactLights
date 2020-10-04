@@ -16,6 +16,7 @@ using Logger = NLog.Logger;
 using NoArtifactLights.Engine.Process;
 using NoArtifactLights.Engine.Entities;
 using NoArtifactLights.Engine.Entities.Enums;
+using System.Collections.Generic;
 
 namespace NoArtifactLights
 {
@@ -30,6 +31,8 @@ namespace NoArtifactLights
 		private int eplased = 0;
 		private Vehicle deliveryCar;
 		private Ped delivery;
+
+		internal static List<Blip> blips = new List<Blip>();
 
 		private Logger logger = LogManager.GetLogger("Entry");
 		internal static bool forcestart;
@@ -73,7 +76,14 @@ namespace NoArtifactLights
 
 		private void Entry_Aborted(object sender, EventArgs e)
 		{
-			
+			GameController.SetRelationshipBetGroupsUInt(Relationship.Pedestrians, 0x02B8FA80, 0x47033600);
+			GameController.SetRelationshipBetGroupsUInt(Relationship.Pedestrians, 0x47033600, 0x02B8FA80);
+			this.Tick -= Entry_Tick;
+			foreach(Blip blip in blips)
+			{
+				if(blip.Exists())
+				blip.Delete();
+			}
 		}
 
 		private void Common_Unload(object sender, EventArgs e)
