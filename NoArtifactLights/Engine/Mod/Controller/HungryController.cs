@@ -79,7 +79,7 @@ namespace NoArtifactLights.Engine.Mod.Controller
 				hinted = true;
 				GameUI.DisplayHelp(Strings.Hungry);
 			}
-			if (Hungry <= 1.5f) Game.Player.Character.Health -= 1;
+			if (Hungry <= 1.5f && !(Hungry <= 0.5f)) Game.Player.Character.Health -= 1;
 			if (Hungry <= 0.5f) Game.Player.Character.Health -= 10;
 
 			if(Hungry != 0f)
