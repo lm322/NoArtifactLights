@@ -72,6 +72,7 @@
     <Compile Include="Common.cs" />
     <Compile Include="Engine\Entities\Enums\Difficulty.cs" />
     <Compile Include="Engine\Entities\Structures\Configuration.cs" />
+    <Compile Include="Engine\Entities\Structures\LastSaveFile.cs" />
     <Compile Include="Engine\Mod\Controller\HungryController.cs" />
     <Compile Include="Engine\Mod\Controller\RespawnController.cs" />
     <Compile Include="Engine\Mod\Controller\WeaponSavingController.cs" />

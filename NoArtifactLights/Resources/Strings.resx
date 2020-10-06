@@ -306,6 +306,9 @@
   <data name="ItemSellCarTitle" xml:space="preserve">
     <value>Sell Vehicle</value>
   </data>
+  <data name="ItemWater" xml:space="preserve">
+    <value>Bottle of Water</value>
+  </data>
   <data name="ItemWithdrawSubtitle" xml:space="preserve">
     <value>Withdraws currency into cash.</value>
   </data>

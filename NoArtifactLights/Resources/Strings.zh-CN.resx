@@ -297,6 +297,9 @@
   <data name="ItemSellCarTitle" xml:space="preserve">
     <value>出售车辆</value>
   </data>
+  <data name="ItemWater" xml:space="preserve">
+    <value>纯净水</value>
+  </data>
   <data name="ItemWithdrawSubtitle" xml:space="preserve">
     <value>将存款取出银行账户。</value>
   </data>

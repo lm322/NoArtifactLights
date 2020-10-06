@@ -628,6 +628,15 @@ namespace NoArtifactLights.Resources {
         }
         
         /// <summary>
+        ///   查找类似 Bottle of Water 的本地化字符串。
+        /// </summary>
+        public static string ItemWater {
+            get {
+                return ResourceManager.GetString("ItemWater", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Withdraws currency into cash. 的本地化字符串。
         /// </summary>
         public static string ItemWithdrawSubtitle {

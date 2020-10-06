@@ -1,6 +1,7 @@
 ﻿// NoArtifactLights
 // (C) RelaperCrystal and contributors. Licensed under GPLv3 or later.
 
+using System;
 using System.Drawing;
 using GTA;
 using GTA.Math;
@@ -57,6 +58,23 @@ namespace NoArtifactLights.Engine.Mod.Controller
 					Water -= 0.05f;
 				}
 			}
+		}
+
+		internal static NativeItem GenerateWaterSellItem(string context, int price)
+		{
+			NativeItem result = new NativeItem(context);
+			result.AltTitle = "$" + price.ToString();
+			result.Activated += (s, i) =>
+			{
+				RefillWaterBySale(price);
+			};
+			return result;
+		}
+
+		private static void RefillWaterBySale(int price)
+		{
+			if (!Common.Cost(price)) return;
+			RefillWater();
 		}
 
 		internal static void AddHungry(Foods food, float amount)

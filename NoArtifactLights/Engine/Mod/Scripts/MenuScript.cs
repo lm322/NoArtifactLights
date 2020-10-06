@@ -49,6 +49,7 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 		private NativeMenu foodMenu;
 		private NativeItem itemChicken;
 		private NativeItem itemHamburger;
+		private NativeItem itemWater;
 
 		Blip repairBlip;
 
@@ -111,9 +112,11 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 
 				itemHamburger = HungryController.CreateFoodSellerItem(Strings.FoodBurger, Foods.Hamburger, 1);
 				itemChicken = HungryController.CreateFoodSellerItem(Strings.FoodChicken, Foods.Chicken, 3);
+				itemWater = HungryController.GenerateWaterSellItem(Strings.ItemWater, 2);
 
 				foodMenu.Add(itemHamburger);
 				foodMenu.Add(itemChicken);
+				foodMenu.Add(itemWater);
 
 				logger.Trace("All instances initialized");
 				mainMenu.Add(itemLights);
