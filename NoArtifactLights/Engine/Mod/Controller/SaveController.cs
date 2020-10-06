@@ -21,7 +21,8 @@ namespace NoArtifactLights.Engine.Mod.Controller
 	{
 		private static Logger logger = LogManager.GetLogger("SaveController");
 		private const string savePath = "NAL\\game.dat";
-		private const int saveVersion = 4;
+		private const int saveVersion = 5;
+		private const int saveLastVersion = 4;
 
 		internal static void CheckAndFixDataFolder()
 		{
@@ -112,10 +113,40 @@ namespace NoArtifactLights.Engine.Mod.Controller
 			return result;
 		}
 
+		internal static LastSaveFile LoadOldSave()
+		{
+			if (Directory.Exists("NAL\\tmp"))
+			{
+				logger.Info("Overwritten temponary files");
+				Directory.Delete("NAL\\tmp", true);
+			}
+
+			Directory.CreateDirectory("NAL\\tmp");
+			ZipFile.ExtractToDirectory("NAL\\game.dat", "NAL\\tmp");
+			string datBase64 = File.ReadAllText("NAL\\tmp\\raw.dat");
+			byte[] jsonBytes = Convert.FromBase64String(datBase64);
+			string json = Encoding.UTF8.GetString(jsonBytes);
+
+			DefaultContractResolver contractResolver = new DefaultContractResolver
+			{
+				NamingStrategy = new SnakeCaseNamingStrategy()
+			};
+
+			LastSaveFile result = JsonConvert.DeserializeObject<LastSaveFile>(json, new JsonSerializerSettings
+			{
+				ContractResolver = contractResolver,
+				Formatting = Formatting.None
+			});
+
+			Directory.Delete("NAL\\tmp", true);
+			return result;
+		}
+
 		internal static void Load()
 		{
 			CheckAndFixDataFolder();
 			SaveFile sf;
+			LastSaveFile lsf;
 			if (!File.Exists(savePath))
 			{
 				Notification.Show(Strings.NoSave);
@@ -124,6 +155,11 @@ namespace NoArtifactLights.Engine.Mod.Controller
 			sf = LoadGameFile();
 			if (sf.Version != saveVersion)
 			{
+				if(sf.Version == saveLastVersion)
+				{
+					lsf = LoadOldSave();
+					sf = UpdateSaveFile(lsf);
+				}
 				Notification.Show(Strings.SaveVersion);
 				return;
 			}
@@ -163,10 +199,34 @@ namespace NoArtifactLights.Engine.Mod.Controller
 			sf.Bank = Common.Bank;
 			sf.PlayerHealth = Game.Player.Character.Health;
 			sf.PlayerArmor = Game.Player.Character.Armor;
+			sf.PlayerHungry = HungryController.Hungry;
+			sf.PlayerHydration = HungryController.Water;
 
 			sf.Weapons = Common.weaponSaving.GetSerializationWeapons();
 
 			SaveGameFile(sf);
+		}
+
+		internal static SaveFile UpdateSaveFile(LastSaveFile lsf)
+		{
+			SaveFile result = new SaveFile();
+			result.Bank = lsf.Bank;
+			result.Cash = lsf.Cash;
+			result.Blackout = lsf.Blackout;
+			result.CurrentDifficulty = lsf.CurrentDifficulty;
+			result.Kills = lsf.Kills;
+			result.Model = lsf.Model;
+			result.PlayerArmor = lsf.PlayerArmor;
+			result.PlayerHealth = lsf.PlayerHealth;
+			result.PlayerHungry = 10.0f;
+			result.PlayerHydration = 10.0f;
+			result.PlayerX = lsf.PlayerX;
+			result.PlayerY = lsf.PlayerY;
+			result.PlayerZ = lsf.PlayerZ;
+			result.Status = lsf.Status;
+			result.Version = saveVersion;
+			result.Weapons = lsf.Weapons;
+			return result;
 		}
 	}
 }

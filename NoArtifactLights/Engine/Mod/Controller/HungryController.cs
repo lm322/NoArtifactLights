@@ -185,5 +185,11 @@ namespace NoArtifactLights.Engine.Mod.Controller
 			};
 			return result;
 		}
+
+		internal static void ImportSfHungryHydration(float hungry, float hydration)
+		{
+			Hungry = hungry;
+			Water = hydration;
+		}
 	}
 }
