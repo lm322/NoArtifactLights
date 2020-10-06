@@ -54,6 +54,7 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 
 		private TimerBarCollection timerBars = new TimerBarCollection();
 		internal TimerBarProgress hungryBar = new TimerBarProgress(Strings.BarHungry);
+		internal TimerBarProgress waterBar = new TimerBarProgress(Strings.BarWater);
 
 		// private Vector3 ammu = new Vector3(18.18945f, -1120.384f, 28.91654f);
 		private Vector3 repair = new Vector3(140.683f, -1081.387f, 28.56039f);
@@ -63,6 +64,11 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 		internal static void ChangeHungryBarColor(Color cl)
 		{
 			instance.hungryBar.ForegroundColor = cl;
+		}
+
+		internal static void ChangeWaterBarColor(Color cl)
+		{
+			instance.waterBar.ForegroundColor = cl;
 		}
 
 		private NLog.Logger logger = LogManager.GetLogger("MenuScript");
@@ -310,6 +316,7 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 			timerBars.Process();
 
 			hungryBar.Progress = HungryController.ProgressBarStatus;
+			waterBar.Progress = HungryController.WaterBarStatus;
 			if (AmmuController.DistanceToAmmu())
 			{
 				GameUI.DisplayHelp(Strings.AmmuOpenShop);

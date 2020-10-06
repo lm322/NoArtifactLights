@@ -169,6 +169,15 @@ namespace NoArtifactLights.Resources {
         }
         
         /// <summary>
+        ///   查找类似 Water 的本地化字符串。
+        /// </summary>
+        public static string BarWater {
+            get {
+                return ResourceManager.GetString("BarWater", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 You already ~h~has~s~~b~ body armor~s~. 的本地化字符串。
         /// </summary>
         public static string BodyArmorAlreadyHad {
@@ -822,6 +831,15 @@ namespace NoArtifactLights.Resources {
         public static string Unload {
             get {
                 return ResourceManager.GetString("Unload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 You are dehydrating. Go to a shop to refill your water. 的本地化字符串。
+        /// </summary>
+        public static string WaterTooLow {
+            get {
+                return ResourceManager.GetString("WaterTooLow", resourceCulture);
             }
         }
         

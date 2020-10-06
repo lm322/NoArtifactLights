@@ -150,6 +150,9 @@
   <data name="BarHungry" xml:space="preserve">
     <value>饥饿度</value>
   </data>
+  <data name="BarWater" xml:space="preserve">
+    <value>水量</value>
+  </data>
   <data name="BodyArmorAlreadyHad" xml:space="preserve">
     <value>你~h~已经~s~穿上了~b~防弹衣~s~。</value>
   </data>
@@ -359,6 +362,9 @@
   </data>
   <data name="Unload" xml:space="preserve">
     <value>~h~正在退出模组~s~. ~b~再见~s~！</value>
+  </data>
+  <data name="WaterTooLow" xml:space="preserve">
+    <value>您正在脱水。到商店去补充水量。</value>
   </data>
   <data name="WeaponBodyArmor" xml:space="preserve">
     <value>防弹衣</value>

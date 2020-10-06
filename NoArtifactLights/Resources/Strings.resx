@@ -153,6 +153,9 @@
   <data name="BarHungry" xml:space="preserve">
     <value>Hungry</value>
   </data>
+  <data name="BarWater" xml:space="preserve">
+    <value>Water</value>
+  </data>
   <data name="BodyArmorAlreadyHad" xml:space="preserve">
     <value>You already ~h~has~s~~b~ body armor~s~.</value>
   </data>
@@ -371,6 +374,9 @@
   </data>
   <data name="Unload" xml:space="preserve">
     <value>~h~Unloading mod~s~. ~b~Bye!~s~</value>
+  </data>
+  <data name="WaterTooLow" xml:space="preserve">
+    <value>You are dehydrating. Go to a shop to refill your water.</value>
   </data>
   <data name="WeaponBodyArmor" xml:space="preserve">
     <value>Body Armor</value>

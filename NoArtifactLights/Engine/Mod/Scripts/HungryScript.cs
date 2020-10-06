@@ -15,6 +15,7 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 		private void HungryScript_Tick(object sender, System.EventArgs e)
 		{
 			HungryController.Loop();
+			HungryController.WaterLoop();
 		}
 	}
 }

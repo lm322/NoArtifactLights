@@ -21,11 +21,43 @@ namespace NoArtifactLights.Engine.Mod.Controller
 	public static class HungryController
 	{
 		public static float Hungry { get; private set; } = 10.0f;
+		public static float Water { get; private set; } = 10.0f;
 
 		private static bool hinted = false;
 		private static Vector3[] resellers = { new Vector3(386.585f, -872.4678f, 29.2917f), new Vector3(194.2787f, -1764.063f, 29.321f), new Vector3(408.3806f, -1908.731f, 25.50163f) 
 			, new Vector3(1.830167f, -1604.896f, 29.25797f)
 		};
+
+		internal static void RefillWater()
+		{
+			Water = 10.0f;
+		}
+
+		internal static void WaterLoop()
+		{
+			if (Water >= 2.0f && hinted) hinted = false;
+			if (Water <= 2.0f && !hinted)
+			{
+				hinted = true;
+				GameUI.DisplayHelp(Strings.WaterTooLow);
+			}
+			if (Water <= 1.5f && !(Water <= 0.5f)) Game.Player.Character.Health -= 1;
+			if (Water <= 0.5f) Game.Player.Character.Health -= 10;
+
+			if (Water != 0f)
+			{
+				if (Game.Player.Character.Health >= 100 && !Game.Player.Character.IsRunning && !Game.Player.Character.IsSprinting)
+				{
+					MenuScript.ChangeWaterBarColor(Color.Aquamarine);
+					Water -= 0.01f;
+				}
+				else
+				{
+					MenuScript.ChangeWaterBarColor(Color.OrangeRed);
+					Water -= 0.05f;
+				}
+			}
+		}
 
 		internal static void AddHungry(Foods food, float amount)
 		{
@@ -36,6 +68,7 @@ namespace NoArtifactLights.Engine.Mod.Controller
 		}
 
 		internal static float ProgressBarStatus => Hungry * 10f;
+		internal static float WaterBarStatus => Water * 10f;
 
 		internal static void AlterHungry(int value)
 		{
