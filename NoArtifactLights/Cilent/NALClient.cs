@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +34,9 @@ namespace NoArtifactLights.Cilent
 
 		public NALClient(Version version)
 		{
+			Stopwatch sw = new Stopwatch();
+			sw.Start();
+
 			Version = version;
 			logger.Info("Constructing NAL Client version " + version.ToString());
 			Function.Call(Hash.SET_ARTIFICIAL_LIGHTS_STATE, true);
@@ -42,8 +46,9 @@ namespace NoArtifactLights.Cilent
 
 			logger.Info("Starting Command Client...");
 			NAL.Cmds.client = this;
+			sw.Stop();
 
-			logger.Info("DONE!");
+			logger.Info("DONE! Client construction took " + sw.ElapsedMilliseconds);
 		}
 
 		internal void Tick()
