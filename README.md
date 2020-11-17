@@ -1,5 +1,5 @@
 # NoArtifactLights
-![AppVeyor](https://img.shields.io/appveyor/build/RelaperCrystal/NoArtifactLights?style=flat-square) :arrow_left: is the master branch ​
+![AppVeyor](https://img.shields.io/appveyor/build/rcdraft/noartifactlights?logo=appveyor&style=flat-square) :arrow_left: is the master branch 
 
 NoArtifactLights is a GTA5 survival mod based on Blackouts and NPCs fights each other.
 
@@ -7,13 +7,13 @@ NoArtifactLights is a GTA5 survival mod based on Blackouts and NPCs fights each 
 
 0.3 is the latest development version of NoArtifactLights. These features are planned:
 
-* :hammer: Create survival system that forces player to explore the map
-* :gun: Make more weapons available
-* :construction: Hunger system, which decreases health after starvation 
+* :hammer: **in progress** Create survival system that forces player to explore the map
+* :gun: **scheduled** Make more weapons available
+* :construction: **done** Hunger system, which decreases health after starvation 
 * :construction: Make difficulty kill amounts to increase more balanced
 * :moneybag: Make trading more balanced
 * :construction: **done** Save File Version 4 with no more XMLs
-* :bulb: **​scheduled** Auto Fade In Screen From Loading after Player respawned (such as Wasted/Busted)
+* :bulb: **​done** Auto Fade In Screen From Loading after Player respawned (such as Wasted/Busted)
 
 More features planned are going to be placed on JIRA.
 
