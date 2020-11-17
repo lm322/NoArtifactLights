@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using GTA;
 using NoArtifactLights.Engine.Mod.Controller;
@@ -12,6 +13,7 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 	{
 		public Respawner()
 		{
+			Thread.CurrentThread.Name = "Respawn Worker";
 			Tick += Respawner_Tick;
 		}
 

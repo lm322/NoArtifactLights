@@ -16,6 +16,7 @@ using System.Drawing;
 using LemonUI;
 using LemonUI.Menus;
 using LemonUI.TimerBars;
+using System.Threading;
 
 namespace NoArtifactLights.Engine.Mod.Scripts
 {
@@ -78,6 +79,7 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 		{
 			try
 			{
+				Thread.CurrentThread.Name = "UI Thread";
 				logger.Trace("Loading Main Menu");
 				lemonPool = new ObjectPool();
 				logger.Trace("Menu Pool created");

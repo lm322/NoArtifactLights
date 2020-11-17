@@ -1,4 +1,5 @@
-﻿using GTA;
+﻿using System.Threading;
+using GTA;
 using NoArtifactLights.Engine.Mod.Controller;
 
 namespace NoArtifactLights.Engine.Mod.Scripts
@@ -9,6 +10,7 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 		public HungryScript()
 		{
 			this.Interval = 1500;
+			Thread.CurrentThread.Name = "Hungry Worker Thread";
 			this.Tick += HungryScript_Tick;
 		}
 

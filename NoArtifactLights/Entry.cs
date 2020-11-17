@@ -17,6 +17,7 @@ using NoArtifactLights.Engine.Entities;
 using NoArtifactLights.Engine.Entities.Enums;
 using System.Collections.Generic;
 using LemonUI.Scaleform;
+using System.Threading;
 
 namespace NoArtifactLights
 {
@@ -46,6 +47,7 @@ namespace NoArtifactLights
 		{
 			try
 			{
+				Thread.CurrentThread.Name = "main";
 				Screen.FadeOut(1000);
 				logger.Info("Initialized");
 				Function.Call(Hash.SET_ARTIFICIAL_LIGHTS_STATE, true);
