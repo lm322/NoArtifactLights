@@ -5,12 +5,21 @@ using GTA;
 using GTA.Math;
 using GTA.UI;
 using NLog;
+using NoArtifactLights.Cilent;
 
 namespace NAL
 {
 	public class Cmds : Script
 	{
 		private static readonly Logger logger = LogManager.GetLogger("Cmds");
+		internal static NALClient client;
+
+
+		public static void ForceEvent()
+		{
+			if (client == null) return;
+			client.SetForceStart();
+		}
 
 		public static void PrnCoord()
 		{
