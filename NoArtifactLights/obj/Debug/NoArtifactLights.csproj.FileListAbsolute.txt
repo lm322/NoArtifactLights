@@ -17,3 +17,5 @@ C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\Newtonso
 C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\nal.png
 C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\obj\Debug\NoArtifactLights.Properties.Resources.resources
 C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\LemonUI.SHVDN3.dll
+C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\HotWorkshop.Flate.dll
+C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\HotWorkshop.Flate.pdb

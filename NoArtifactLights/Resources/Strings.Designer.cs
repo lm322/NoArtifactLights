@@ -736,6 +736,15 @@ namespace NoArtifactLights.Resources {
         }
         
         /// <summary>
+        ///   查找类似 joined the game. 的本地化字符串。
+        /// </summary>
+        public static string PlayerJoinedGame {
+            get {
+                return ResourceManager.GetString("PlayerJoinedGame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Vehicle Repair 的本地化字符串。
         /// </summary>
         public static string RepairBlip {

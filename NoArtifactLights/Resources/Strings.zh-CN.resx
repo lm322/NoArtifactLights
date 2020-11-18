@@ -330,6 +330,9 @@
   <data name="NoSave" xml:space="preserve">
     <value>没有存档文件可供加载。</value>
   </data>
+  <data name="PlayerJoinedGame" xml:space="preserve">
+    <value>加入了游戏。</value>
+  </data>
   <data name="RepairBlip" xml:space="preserve">
     <value>车辆修复</value>
   </data>

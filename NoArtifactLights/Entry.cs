@@ -18,6 +18,8 @@ using NoArtifactLights.Engine.Entities.Enums;
 using System.Collections.Generic;
 using LemonUI.Scaleform;
 using System.Threading;
+using NoArtifactLights.Cilent;
+using System.Reflection;
 
 namespace NoArtifactLights
 {
@@ -38,28 +40,61 @@ namespace NoArtifactLights
 		private Logger logger = LogManager.GetLogger("Entry");
 		internal static bool forcestart;
 
+		public NALClient Client { get; private set; }
+
 		public static void ForceStartEvent()
 		{
-			Entry.forcestart = true;
+			forcestart = true;
 		}
 
-		public Entry()
+		public void LoadMod()
 		{
 			try
 			{
 				Thread.CurrentThread.Name = "main";
 				Screen.FadeOut(1000);
-				logger.Info("Initialized");
-				Function.Call(Hash.SET_ARTIFICIAL_LIGHTS_STATE, true);
+				logger.Info("Starting NAL");
 				GameUI.DisplayHelp(Strings.Start);
-				logger.Warn("You are in 0.3 alpha. This is pretty not excepted. Good luck.");
 				if (!File.Exists("scripts\\NoArtifactLights.pdb"))
 				{
 					logger.Warn("Attention: No debug database found in game scripts folder. This means logs cannot provide additional information related to exception.");
 				}
-				Initializer.LoadProgram();
+				//Initializer.LoadProgram();
+
+
+				this.Client = new NALClient(Assembly.GetExecutingAssembly().GetName().Version);
 				this.Interval = 100;
-				this.Tick += Entry_Tick;
+				this.Tick += Ticking1;
+				Common.Unload += Common_Unload1;
+				this.Aborted += Entry_Aborted;
+			}
+			catch (Exception ex)
+			{
+				Screen.FadeIn(500);
+				logger.Fatal(ex, "Excepting during initial load process");
+				Abort();
+			}
+		}
+
+		public Entry()
+		{
+			this.KeyDown += Entry_KeyDown;
+
+			try
+			{
+				Thread.CurrentThread.Name = "main";
+				Screen.FadeOut(1000);
+				logger.Info("Starting NAL");
+				GameUI.DisplayHelp(Strings.Start);
+				if (!File.Exists("scripts\\NoArtifactLights.pdb"))
+				{
+					logger.Warn("Attention: No debug database found in game scripts folder. This means logs cannot provide additional information related to exception.");
+				}
+				//Initializer.LoadProgram();
+
+				this.Client = new NALClient(Assembly.GetExecutingAssembly().GetName().Version);
+				this.Interval = 100;
+				this.Tick += Ticking1;
 				Common.Unload += Common_Unload1;
 				this.Aborted += Entry_Aborted;
 			}
@@ -70,6 +105,17 @@ namespace NoArtifactLights
 				Abort();
 			}
 		}
+
+		private void Entry_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+		{
+			if(e.KeyCode == System.Windows.Forms.Keys.L && e.Alt)
+			{
+				this.KeyDown -= Entry_KeyDown;
+				LoadMod();
+			}
+		}
+
+		private void Ticking1(object sender, EventArgs e) => Client.Tick();
 
 		private void Common_Unload1(object sender, EventArgs e)
 		{

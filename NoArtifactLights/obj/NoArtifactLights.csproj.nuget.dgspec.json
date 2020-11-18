@@ -8,12 +8,7 @@
       "restore": {
         "projectUniqueName": "C:\\Users\\Ender\\source\\repos\\NoArtifactLights\\HotWorkshop.Flate\\HotWorkshop.Flate.csproj",
         "projectName": "HotWorkshop.Flate",
-        "projectPath": "C:\\Users\\Ender\\source\\repos\\NoArtifactLights\\HotWorkshop.Flate\\HotWorkshop.Flate.csproj",
-        "frameworks": {
-          "net48": {
-            "projectReferences": {}
-          }
-        }
+        "projectPath": "C:\\Users\\Ender\\source\\repos\\NoArtifactLights\\HotWorkshop.Flate\\HotWorkshop.Flate.csproj"
       },
       "frameworks": {
         "net48": {}
@@ -38,7 +33,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://mirrors.huaweicloud.com/repository/nuget/v3/index.json": {}
         },
         "frameworks": {
           "net48": {

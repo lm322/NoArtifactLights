@@ -342,6 +342,9 @@
   <data name="NoSave" xml:space="preserve">
     <value>You do not have a save file.</value>
   </data>
+  <data name="PlayerJoinedGame" xml:space="preserve">
+    <value>joined the game.</value>
+  </data>
   <data name="RepairBlip" xml:space="preserve">
     <value>Vehicle Repair</value>
   </data>

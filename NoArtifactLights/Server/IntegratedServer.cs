@@ -1,61 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GTA;
-using GTA.Native;
+using GTA.UI;
 using LemonUI.Scaleform;
 using NLog;
 using NoArtifactLights.Engine.Entities;
 using NoArtifactLights.Engine.Entities.Enums;
 using NoArtifactLights.Engine.Mod.API;
 using NoArtifactLights.Engine.Mod.Controller;
-using NoArtifactLights.Engine.Process;
 using NoArtifactLights.Resources;
-using NoArtifactLights.Server;
 
-namespace NoArtifactLights.Cilent
+namespace NoArtifactLights.Server
 {
-	public class NALClient : NetworkClient
+	internal class IntegratedServer : IServer
 	{
+		private Logger logger = LogManager.GetLogger("IntegratedServer");
+
 		internal static HandleableList peds1 = new HandleableList();
 		internal static HandleableList killedPeds = new HandleableList();
 		internal static HandleableList weaponedPeds = new HandleableList();
-
-		public Version Version { get; }
-		private Logger logger = LogManager.GetLogger("Client");
 		private bool forcestart;
 
-		internal void SetForceStart()
+		public List<NetworkClient> Clients { get; private set; } = new List<NetworkClient>();
+
+		public void ConnectingWithoutIndex(NetworkClient client)
 		{
-			forcestart = true;
+			Connecting(client);
 		}
 
-		public NALClient(Version version)
+		public int Connecting(NetworkClient client)
 		{
-			Stopwatch sw = new Stopwatch();
-			sw.Start();
-
-			Version = version;
-			logger.Info("Constructing NAL Client version " + version.ToString());
-			Function.Call(Hash.SET_ARTIFICIAL_LIGHTS_STATE, true);
-
-			logger.Info("Initializing NAL Program...");
-			Initializer.LoadProgram();
-
-			logger.Info("Starting Command Client...");
-			NAL.Cmds.client = this;
-			sw.Stop();
-
-			logger.Info("DONE! Client construction took " + sw.ElapsedMilliseconds);
+			logger.Info("Client " + client.Name + " connecting!");
+			Clients.Add(client);
+			Notification.Show($"{client.Name} {Strings.PlayerJoinedGame}");
+			return Clients.IndexOf(client);
 		}
 
-		internal void Tick()
+		public void Tick()
 		{
 			try
 			{
+
+
 				Ped[] peds = World.GetAllPeds();
 				foreach (Ped ped in peds)
 				{
@@ -151,18 +140,18 @@ namespace NoArtifactLights.Cilent
 				throw;
 			}
 		}
-		public override void ConnectTo(IServer server)
+
+		public void Disconnect(int playerIndex)
 		{
-			logger.Info("Connecting to a server object");
-			base.ConnectTo(server);
+			
 		}
 
-		public override void LeaveForcefully()
+		public void GetPerference(int perference)
 		{
 			throw new NotImplementedException();
 		}
 
-		public override void Leave()
+		public void UpdatePerferences<T>(int perferences, T value)
 		{
 			throw new NotImplementedException();
 		}

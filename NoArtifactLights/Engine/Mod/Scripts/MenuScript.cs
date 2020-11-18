@@ -57,8 +57,6 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 		private TimerBarCollection timerBars = new TimerBarCollection();
 		internal TimerBarProgress hungryBar = new TimerBarProgress(Strings.BarHungry);
 		internal TimerBarProgress waterBar = new TimerBarProgress(Strings.BarWater);
-
-		// private Vector3 ammu = new Vector3(18.18945f, -1120.384f, 28.91654f);
 		private Vector3 repair = new Vector3(140.683f, -1081.387f, 28.56039f);
 
 		internal static MenuScript instance;
@@ -83,12 +81,11 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 				logger.Trace("Loading Main Menu");
 				lemonPool = new ObjectPool();
 				logger.Trace("Menu Pool created");
+#if DEBUG
+				mainMenu = new NativeMenu("NAL Beta", Strings.MenuMainTitle);
+#else
 				mainMenu = new NativeMenu("NAL", Strings.MenuMainTitle);
-				//if(!File.Exists("scripts\\nal.png"))
-				//{
-				//	Bitmap bm = Properties.Resources.nal;
-				//	bm.Save("scripts\\nal.png");
-				//}
+#endif
 				itemLights = new NativeCheckboxItem(Strings.ItemLightsTitle, Strings.ItemLightsSubtitle, true );
 				itemSave = new NativeItem(Strings.ItemSaveTitle, Strings.ItemSaveSubtitle);
 				itemLoad = new NativeItem(Strings.ItemLoadTitle, Strings.ItemLoadSubtitle);
