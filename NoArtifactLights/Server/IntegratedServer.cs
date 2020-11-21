@@ -155,5 +155,10 @@ namespace NoArtifactLights.Server
 		{
 			throw new NotImplementedException();
 		}
+
+		public void Process()
+		{
+			Tick();
+		}
 	}
 }

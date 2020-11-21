@@ -17,5 +17,7 @@ namespace NoArtifactLights.Server
 		void GetPerference(int perference);
 
 		List<NetworkClient> Clients { get; }
+
+		void Process();
 	}
 }
