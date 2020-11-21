@@ -62,15 +62,6 @@
         "runtime": {
           "lib/net48/ScriptHookVDotNet3.dll": {}
         }
-      },
-      "HotWorkshop.Flate/1.0.0": {
-        "type": "project",
-        "compile": {
-          "bin/placeholder/HotWorkshop.Flate.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/HotWorkshop.Flate.dll": {}
-        }
       }
     },
     ".NETFramework,Version=v4.8/win": {
@@ -133,15 +124,6 @@
         },
         "runtime": {
           "lib/net48/ScriptHookVDotNet3.dll": {}
-        }
-      },
-      "HotWorkshop.Flate/1.0.0": {
-        "type": "project",
-        "compile": {
-          "bin/placeholder/HotWorkshop.Flate.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/HotWorkshop.Flate.dll": {}
         }
       }
     },
@@ -206,15 +188,6 @@
         "runtime": {
           "lib/net48/ScriptHookVDotNet3.dll": {}
         }
-      },
-      "HotWorkshop.Flate/1.0.0": {
-        "type": "project",
-        "compile": {
-          "bin/placeholder/HotWorkshop.Flate.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/HotWorkshop.Flate.dll": {}
-        }
       }
     },
     ".NETFramework,Version=v4.8/win-x86": {
@@ -277,15 +250,6 @@
         },
         "runtime": {
           "lib/net48/ScriptHookVDotNet3.dll": {}
-        }
-      },
-      "HotWorkshop.Flate/1.0.0": {
-        "type": "project",
-        "compile": {
-          "bin/placeholder/HotWorkshop.Flate.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/HotWorkshop.Flate.dll": {}
         }
       }
     }
@@ -393,16 +357,10 @@
         "scripthookvdotnet3.3.0.4.nupkg.sha512",
         "scripthookvdotnet3.nuspec"
       ]
-    },
-    "HotWorkshop.Flate/1.0.0": {
-      "type": "project",
-      "path": "../HotWorkshop.Flate/HotWorkshop.Flate.csproj",
-      "msbuildProject": "../HotWorkshop.Flate/HotWorkshop.Flate.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.8": [
-      "HotWorkshop.Flate >= 1.0.0",
       "LemonUI.SHVDN3 >= 1.0.0",
       "NLog >= 4.7.5",
       "NLog.Schema >= 4.7.4",
@@ -437,11 +395,7 @@
       },
       "frameworks": {
         "net48": {
-          "projectReferences": {
-            "C:\\Users\\Ender\\source\\repos\\NoArtifactLights\\HotWorkshop.Flate\\HotWorkshop.Flate.csproj": {
-              "projectPath": "C:\\Users\\Ender\\source\\repos\\NoArtifactLights\\HotWorkshop.Flate\\HotWorkshop.Flate.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       }
     },

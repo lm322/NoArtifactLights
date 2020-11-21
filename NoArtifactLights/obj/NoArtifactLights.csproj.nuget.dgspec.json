@@ -4,16 +4,6 @@
     "C:\\Users\\Ender\\source\\repos\\NoArtifactLights\\NoArtifactLights\\NoArtifactLights.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ender\\source\\repos\\NoArtifactLights\\HotWorkshop.Flate\\HotWorkshop.Flate.csproj": {
-      "restore": {
-        "projectUniqueName": "C:\\Users\\Ender\\source\\repos\\NoArtifactLights\\HotWorkshop.Flate\\HotWorkshop.Flate.csproj",
-        "projectName": "HotWorkshop.Flate",
-        "projectPath": "C:\\Users\\Ender\\source\\repos\\NoArtifactLights\\HotWorkshop.Flate\\HotWorkshop.Flate.csproj"
-      },
-      "frameworks": {
-        "net48": {}
-      }
-    },
     "C:\\Users\\Ender\\source\\repos\\NoArtifactLights\\NoArtifactLights\\NoArtifactLights.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -38,11 +28,7 @@
         },
         "frameworks": {
           "net48": {
-            "projectReferences": {
-              "C:\\Users\\Ender\\source\\repos\\NoArtifactLights\\HotWorkshop.Flate\\HotWorkshop.Flate.csproj": {
-                "projectPath": "C:\\Users\\Ender\\source\\repos\\NoArtifactLights\\HotWorkshop.Flate\\HotWorkshop.Flate.csproj"
-              }
-            }
+            "projectReferences": {}
           }
         }
       },

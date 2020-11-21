@@ -66,7 +66,7 @@ namespace NoArtifactLights.Cilent
 					if (ped.Exists() && ped.HasBeenDamagedBy(Game.Player.Character) && ped.IsDead && !killedPeds.IsDuplicate(ped))
 					{
 						killedPeds.Add(ped);
-						logger.Debug("A ped has been killed");
+						logger.Debug("Pedestrian down by player");
 						Game.MaxWantedLevel = 0;
 						Game.Player.IgnoredByPolice = true;
 						if (Game.Player.Character.Position.DistanceTo(ped.Position) <= 2.5f)
