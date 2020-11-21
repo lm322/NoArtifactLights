@@ -23,7 +23,8 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {},
+          "https://mirrors.huaweicloud.com/repository/nuget/v3/index.json": {}
         },
         "frameworks": {
           "net48": {
@@ -34,9 +35,13 @@
       "frameworks": {
         "net48": {
           "dependencies": {
+            "LemonUI.SHVDN3": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
             "NLog": {
               "target": "Package",
-              "version": "[4.7.4, )"
+              "version": "[4.7.5, )"
             },
             "NLog.Schema": {
               "target": "Package",

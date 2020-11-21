@@ -4,6 +4,7 @@
 using GTA.UI;
 using NLog;
 using NoArtifactLights.Engine.Entities.Enums;
+using NoArtifactLights.Engine.Mod.Controller;
 using NoArtifactLights.Resources;
 using System;
 
@@ -15,7 +16,10 @@ namespace NoArtifactLights
 		internal static Difficulty difficulty = Difficulty.Initial;
 		internal static bool blackout;
 		internal static NLog.Logger logger = LogManager.GetLogger("Common");
+		internal static readonly WeaponSavingController weaponSaving = new WeaponSavingController();
 		internal static event EventHandler Unload;
+
+		internal static int intervalToRespawn;
 
 		// internal static event EventHandler CashChanged;
 

@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "mKeGn5ySWtCeY0k8ijP5S8/mTll6h6jIxa7jgz9TQt0bbPVowZSBigidvwkFFpYSXrxPB/acuOTgROCgME3KmQ==",
+  "dgSpecHash": "P2K2B6yYimVCFSfsl2G/rBo6Rbn/IPsUwNlsLusS+DBbpV0YxltWg1thsR5SCqyM4mATbmsZJdPlv/KNb0m6+w==",
   "success": true,
   "projectFilePath": "C:\\Users\\Ender\\source\\repos\\NoArtifactLights\\NoArtifactLights\\NoArtifactLights.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Ender\\.nuget\\packages\\lemonui.shvdn3\\1.0.0\\lemonui.shvdn3.1.0.0.nupkg.sha512",
     "C:\\Users\\Ender\\.nuget\\packages\\newtonsoft.json\\12.0.3\\newtonsoft.json.12.0.3.nupkg.sha512",
-    "C:\\Users\\Ender\\.nuget\\packages\\nlog\\4.7.4\\nlog.4.7.4.nupkg.sha512",
+    "C:\\Users\\Ender\\.nuget\\packages\\nlog\\4.7.5\\nlog.4.7.5.nupkg.sha512",
     "C:\\Users\\Ender\\.nuget\\packages\\nlog.schema\\4.7.4\\nlog.schema.4.7.4.nupkg.sha512",
     "C:\\Users\\Ender\\.nuget\\packages\\scripthookvdotnet3\\3.0.4\\scripthookvdotnet3.3.0.4.nupkg.sha512"
   ],

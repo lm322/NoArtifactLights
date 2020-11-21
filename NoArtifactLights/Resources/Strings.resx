@@ -150,6 +150,12 @@
   <data name="BankMaximum" xml:space="preserve">
     <value>Exchange failed because your bank account has reached 32-bit integer limit.</value>
   </data>
+  <data name="BarHungry" xml:space="preserve">
+    <value>Hungry</value>
+  </data>
+  <data name="BarWater" xml:space="preserve">
+    <value>Water</value>
+  </data>
   <data name="BodyArmorAlreadyHad" xml:space="preserve">
     <value>You already ~h~has~s~~b~ body armor~s~.</value>
   </data>
@@ -161,6 +167,9 @@
   </data>
   <data name="DepositNoMoney" xml:space="preserve">
     <value>You don't have enough cash to deposit.</value>
+  </data>
+  <data name="DeprecatedXMLSave" xml:space="preserve">
+    <value>You have a ~h~deprecated save~s~ in your NOAR save directory. It will no longer be loaded.</value>
   </data>
   <data name="DifficultyCarbineRifle" xml:space="preserve">
     <value>Carbine Rifle</value>
@@ -210,11 +219,23 @@
   <data name="FirstKill" xml:space="preserve">
     <value>You have killed a person. Once you killed amount of persons, the difficulty will upgrade.</value>
   </data>
+  <data name="FoodBurger" xml:space="preserve">
+    <value>Hamburger</value>
+  </data>
+  <data name="FoodChicken" xml:space="preserve">
+    <value>Chicken</value>
+  </data>
+  <data name="FoodOpenShop" xml:space="preserve">
+    <value>Press ~INPUT_CONTEXT~ to open shop.</value>
+  </data>
   <data name="GameLoaded" xml:space="preserve">
     <value>The game has been ~b~loaded~s~.</value>
   </data>
   <data name="GameSaved" xml:space="preserve">
     <value>The game has been ~b~saved~s~.</value>
+  </data>
+  <data name="Hungry" xml:space="preserve">
+    <value>You are now hungry and needs some food.</value>
   </data>
   <data name="InputNotNumber" xml:space="preserve">
     <value>You may only enter numbers.</value>
@@ -267,6 +288,12 @@
   <data name="ItemLoadTitle" xml:space="preserve">
     <value>Load Game</value>
   </data>
+  <data name="ItemModels" xml:space="preserve">
+    <value>Appearance</value>
+  </data>
+  <data name="ItemModelsDescription" xml:space="preserve">
+    <value>Change your look and feel.</value>
+  </data>
   <data name="ItemSaveSubtitle" xml:space="preserve">
     <value>Saves the current game status.</value>
   </data>
@@ -279,6 +306,9 @@
   <data name="ItemSellCarTitle" xml:space="preserve">
     <value>Sell Vehicle</value>
   </data>
+  <data name="ItemWater" xml:space="preserve">
+    <value>Bottle of Water</value>
+  </data>
   <data name="ItemWithdrawSubtitle" xml:space="preserve">
     <value>Withdraws currency into cash.</value>
   </data>
@@ -287,6 +317,9 @@
   </data>
   <data name="MazeBank" xml:space="preserve">
     <value>Maze Bank</value>
+  </data>
+  <data name="MenuFoodShopSubtitle" xml:space="preserve">
+    <value>Food Shop</value>
   </data>
   <data name="MenuMainTitle" xml:space="preserve">
     <value>Main Menu</value>
@@ -297,6 +330,9 @@
   <data name="MenuMarketTitle" xml:space="preserve">
     <value>Market</value>
   </data>
+  <data name="MenuModel" xml:space="preserve">
+    <value>Models</value>
+  </data>
   <data name="NoModelWarning" xml:space="preserve">
     <value>~r~Warning~s~: You must use this mod together with ~b~MrTank's~h~ Player Death No Reset Model~s~ script or ~r~you will stuck~s~ on death screen.</value>
   </data>
@@ -305,6 +341,9 @@
   </data>
   <data name="NoSave" xml:space="preserve">
     <value>You do not have a save file.</value>
+  </data>
+  <data name="PlayerJoinedGame" xml:space="preserve">
+    <value>joined the game.</value>
   </data>
   <data name="RepairBlip" xml:space="preserve">
     <value>Vehicle Repair</value>
@@ -324,6 +363,9 @@
   <data name="SellNoCar" xml:space="preserve">
     <value>You currently does not in a vehicle. Get in the car you wanna sell.</value>
   </data>
+  <data name="SellNotHungry" xml:space="preserve">
+    <value>You are already full and cannot eat anymore.</value>
+  </data>
   <data name="SellSuccess" xml:space="preserve">
     <value>You have successfully selled your vehicle.</value>
   </data>
@@ -338,6 +380,9 @@
   </data>
   <data name="Unload" xml:space="preserve">
     <value>~h~Unloading mod~s~. ~b~Bye!~s~</value>
+  </data>
+  <data name="WaterTooLow" xml:space="preserve">
+    <value>You are dehydrating. Go to a shop to refill your water.</value>
   </data>
   <data name="WeaponBodyArmor" xml:space="preserve">
     <value>Body Armor</value>

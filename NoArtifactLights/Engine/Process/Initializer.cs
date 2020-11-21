@@ -23,7 +23,6 @@ namespace NoArtifactLights.Engine.Process
 		internal static void LoadProgram()
 		{
 			if (!LoadInternal()) throw new InvalidProgramException();
-			
 		}
 
 		private static bool LoadInternal()
@@ -44,7 +43,7 @@ namespace NoArtifactLights.Engine.Process
 			Game.Player.IgnoredByPolice = true;
 			Game.Player.ChangeModel("a_m_m_bevhills_02");
 			Game.Player.Character.Weapons.Give(WeaponHash.Flashlight, 1, true, true);
-			Game.Player.Character.Weapons.Give(WeaponHash.Pistol, 50, false, false);
+			Common.weaponSaving.GiveAndRegisterWeapon(WeaponHash.Pistol, 50, false);
 			Screen.FadeIn(1000);
 			EventController.RegisterEvent(typeof(ArmedPed));
 			EventController.RegisterEvent(typeof(StealCar));

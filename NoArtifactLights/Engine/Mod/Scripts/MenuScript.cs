@@ -5,290 +5,374 @@ using GTA;
 using GTA.Math;
 using GTA.Native;
 using GTA.UI;
-using NativeUI;
 using NLog;
 using NoArtifactLights.Engine.Mod.Controller;
 using NoArtifactLights.Engine.Mod.API;
 using NoArtifactLights.Resources;
 using System;
-using System.IO;
 using System.Windows.Forms;
 using Screen = GTA.UI.Screen;
+using System.Drawing;
+using LemonUI;
+using LemonUI.Menus;
+using LemonUI.TimerBars;
+using System.Threading;
 
 namespace NoArtifactLights.Engine.Mod.Scripts
 {
-    public class MenuScript : Script
-    {
-        private TextTimerBar cashBar;
-        private MenuPool pool;
-        private UIMenu mainMenu;
-        private UIMenuItem itemSave;
-        private UIMenuItem itemLoad;
-        private UIMenuItem itemCallCops;
-        private UIMenuItem itemDifficulty;
-        private UIMenuItem itemKills;
-        private UIMenuItem itemDeposit;
-        private UIMenuItem itemWithdraw;
-        private UIMenuCheckboxItem itemLights;
-        private UIMenuItem itemCash;
-        private UIMenuItem itemBank;
+	[ScriptAttributes(Author = "RelaperCrystal", SupportURL = "https://hotworkshop.atlassian.net/projects/NAL")]
+	public class MenuScript : Script
+	{
+		private ObjectPool lemonPool;
+		private NativeMenu mainMenu;
+		private NativeItem itemSave;
+		private NativeItem itemLoad;
+		private NativeItem itemCallCops;
+		private NativeItem itemModels;
+		private NativeItem itemDifficulty;
+		private NativeItem itemKills;
+		private NativeItem itemDeposit;
+		private NativeItem itemWithdraw;
+		private NativeCheckboxItem itemLights;
+		private NativeItem itemCash;
+		private NativeItem itemBank;
 
-        private UIMenu buyMenu;
-        private UIMenuItem itemPistol;
-        private UIMenuItem itemPumpShotgun;
-        private UIMenuItem itemCarbineRifle;
-        private UIMenuItem itemBodyArmor;
+		private NativeMenu modelMenu;
+		private NativeItem itemDefaultModel;
+		private NativeItem itemCopModel;
 
-        Blip repairBlip;
+		private NativeMenu buyMenu;
+		private NativeItem itemPistol;
+		private NativeItem itemPumpShotgun;
+		private NativeItem itemCarbineRifle;
+		private NativeItem itemBodyArmor;
 
-        // private Vector3 ammu = new Vector3(18.18945f, -1120.384f, 28.91654f);
-        private Vector3 repair = new Vector3(140.683f, -1081.387f, 28.56039f);
+		private NativeMenu foodMenu;
+		private NativeItem itemChicken;
+		private NativeItem itemHamburger;
+		private NativeItem itemWater;
 
-        private NLog.Logger logger = LogManager.GetCurrentClassLogger();
+		Blip repairBlip;
 
-        public MenuScript()
-        {
-            try
-            {
-                logger.Trace("Loading Main Menu");
-                pool = new MenuPool();
-                logger.Trace("Menu Pool created");
-                mainMenu = new UIMenu("NoArtifactLights", Strings.MenuMainTitle);
-                itemLights = new UIMenuCheckboxItem(Strings.ItemLightsTitle, true, Strings.ItemLightsSubtitle);
-                itemSave = new UIMenuItem(Strings.ItemSaveTitle, Strings.ItemSaveSubtitle);
-                itemLoad = new UIMenuItem(Strings.ItemLoadTitle, Strings.ItemLoadSubtitle);
-                itemCallCops = new UIMenuItem(Strings.ItemCopsTitle, Strings.ItemCopsSubtitle);
-                itemDifficulty = new UIMenuItem(Strings.ItemDifficulty, Strings.ItemDIfficultySubtitle);
-                itemKills = new UIMenuItem(Strings.ItemKills, Strings.ItemKillsSubtitle);
-                itemDeposit = new UIMenuItem(Strings.ItemDepositTitle, Strings.ItemDepositSubtitle);
-                itemWithdraw = new UIMenuItem(Strings.ItemWithdrawTitle, Strings.ItemWithdrawSubtitle);
-                itemCash = new UIMenuItem(Strings.ItemCashTitle, Strings.ItemCashSubtitle);
-                itemBank = new UIMenuItem(Strings.ItemBankTitle, Strings.ItemBankSubtitle);
-                logger.Trace("All instances initialized");
-                mainMenu.AddItem(itemLights);
-                mainMenu.AddItem(itemSave);
-                mainMenu.AddItem(itemLoad);
-                mainMenu.AddItem(itemCallCops);
-                mainMenu.AddItem(itemDifficulty);
-                mainMenu.AddItem(itemKills);
-                mainMenu.AddItem(itemDeposit);
-                mainMenu.AddItem(itemWithdraw);
-                mainMenu.AddItem(itemCash);
-                mainMenu.AddItem(itemBank);
-                logger.Trace("Refreshing Index");
-                mainMenu.RefreshIndex();
-                pool.Add(mainMenu);
-                logger.Trace("Main Menu Done");
-                Tick += MenuScript_Tick;
-                KeyDown += MenuScript_KeyDown;
-                itemLights.CheckboxEvent += ItemLights_CheckboxEvent;
-                itemSave.Activated += ItemSave_Activated;
-                itemLoad.Activated += ItemLoad_Activated;
-                itemCallCops.Activated += ItemCallCops_Activated;
-                itemDeposit.Activated += ItemDeposit_Activated;
-                itemWithdraw.Activated += ItemWithdraw_Activated;
-                cashBar = new TextTimerBar("Cash", "$0");
-               // Common.CashChanged += Common_CashChanged;
+		private TimerBarCollection timerBars = new TimerBarCollection();
+		internal TimerBarProgress hungryBar = new TimerBarProgress(Strings.BarHungry);
+		internal TimerBarProgress waterBar = new TimerBarProgress(Strings.BarWater);
+		private Vector3 repair = new Vector3(140.683f, -1081.387f, 28.56039f);
 
-                Common.Unload += Common_Unload;
+		internal static MenuScript instance;
 
-                logger.Trace("Loading Ammu-Nation Menu");
+		internal static void ChangeHungryBarColor(Color cl)
+		{
+			instance.hungryBar.ForegroundColor = cl;
+		}
 
-                buyMenu = new UIMenu(Strings.AmmuTitle, Strings.AmmuSubtitle);
-                itemPistol = AmmuController.GenerateWeaponSellerItem(Strings.AmmuPistol, Strings.AmmuPistolSubtitle, 100);
-                itemPumpShotgun = AmmuController.GenerateWeaponSellerItem(Strings.AmmuPumpShotgun, Strings.AmmuPumpShotgunSubtitle, 200);
-                itemCarbineRifle = AmmuController.GenerateWeaponSellerItem(Strings.AmmuCarbineRifle, Strings.AmmuCarbineRifleSubtitle, 350);
-                itemBodyArmor = new UIMenuItem(Strings.WeaponBodyArmor, Strings.WeaponBodyArmorDescription);
-                itemBodyArmor.SetRightLabel("$380");
-                logger.Trace("Instances created");
-                buyMenu.AddItem(itemCash);
-                buyMenu.AddItem(itemPistol);
-                buyMenu.AddItem(itemPumpShotgun);
-                buyMenu.AddItem(itemBodyArmor);
-                buyMenu.RefreshIndex();
-                pool.Add(buyMenu);
-                itemPistol.Activated += ItemPistol_Activated;
-                itemPumpShotgun.Activated += ItemPumpShotgun_Activated;
-                itemCarbineRifle.Activated += ItemCarbineRifle_Activated;
-                itemBodyArmor.Activated += ItemBodyArmor_Activated;
+		internal static void ChangeWaterBarColor(Color cl)
+		{
+			instance.waterBar.ForegroundColor = cl;
+		}
 
-                repairBlip = World.CreateBlip(repair);
-                repairBlip.IsFriendly = true;
-                repairBlip.IsShortRange = true;
-                repairBlip.Sprite = BlipSprite.Garage;
-                repairBlip.Color = BlipColor.Blue;
-                repairBlip.Name = Strings.RepairBlip;
+		private NLog.Logger logger = LogManager.GetLogger("MenuScript");
 
-                this.Aborted += MenuScript_Aborted;
-            }
-            catch (Exception ex)
-            {
-                GameUI.DisplayHelp(Strings.ExceptionMenu);
-                logger.Fatal(ex, "Error while loading menu");
-                Common.UnloadMod(this);
-                this.Abort();
-            }
-        }
+		public MenuScript()
+		{
+			try
+			{
+				Thread.CurrentThread.Name = "UI Thread";
+				logger.Trace("Loading Main Menu");
+				lemonPool = new ObjectPool();
+				logger.Trace("Menu Pool created");
+#if DEBUG
+				mainMenu = new NativeMenu("NAL Beta", Strings.MenuMainTitle);
+#else
+				mainMenu = new NativeMenu("NAL", Strings.MenuMainTitle);
+#endif
+				itemLights = new NativeCheckboxItem(Strings.ItemLightsTitle, Strings.ItemLightsSubtitle, true );
+				itemSave = new NativeItem(Strings.ItemSaveTitle, Strings.ItemSaveSubtitle);
+				itemLoad = new NativeItem(Strings.ItemLoadTitle, Strings.ItemLoadSubtitle);
+				itemCallCops = new NativeItem(Strings.ItemCopsTitle, Strings.ItemCopsSubtitle);
+				itemDifficulty = new NativeItem(Strings.ItemDifficulty, Strings.ItemDIfficultySubtitle);
+				itemKills = new NativeItem(Strings.ItemKills, Strings.ItemKillsSubtitle);
+				itemDeposit = new NativeItem(Strings.ItemDepositTitle, Strings.ItemDepositSubtitle);
+				itemWithdraw = new NativeItem(Strings.ItemWithdrawTitle, Strings.ItemWithdrawSubtitle);
+				itemCash = new NativeItem(Strings.ItemCashTitle, Strings.ItemCashSubtitle);
+				itemBank = new NativeItem(Strings.ItemBankTitle, Strings.ItemBankSubtitle);
+				itemModels = new NativeItem(Strings.ItemModels, Strings.ItemModelsDescription);
 
-        private void ItemCarbineRifle_Activated(UIMenu sender, UIMenuItem selectedItem)
-        {
-            AmmuController.SellWeapon(350, 50, WeaponHash.CarbineRifle);
-        }
+				modelMenu = new NativeMenu("Models", Strings.MenuModel);
 
-        private void ItemWithdraw_Activated(UIMenu sender, UIMenuItem selectedItem)
-        {
-            mainMenu.Visible = false;
-            string cash = Game.GetUserInput(WindowTitle.EnterMessage20, "", 20);
-            int result;
-            bool success = int.TryParse(cash, out result);
-            if (!success)
-            {
-                Screen.ShowSubtitle(Strings.InputNotNumber);
-                return;
-            }
-            if(Common.Bank < result)
-            {
-                Screen.ShowSubtitle(Strings.WithdrawNoCurrency);
-                return;
-            }
-            Common.Bank -= result;
-            Common.Cash += result;
-            GameUI.DisplayHelp(Strings.TransactionSuccess);
-        }
+				itemDefaultModel = new NativeItem("Default", "The classic NAL Model.");
+				itemCopModel = new NativeItem("LSPD Officer", "The cop.");
+				modelMenu.Add(itemDefaultModel);
+				modelMenu.Add(itemCopModel);
+				itemDefaultModel.Activated += ItemDefaultModel_Activated;
+				itemCopModel.Activated += ItemCopModel_Activated;
 
-        private void ItemDeposit_Activated(UIMenu sender, UIMenuItem selectedItem)
-        {
-            mainMenu.Visible = false;
-            string cash = Game.GetUserInput(WindowTitle.EnterMessage20, "", 20);
-            int result;
-            bool success = int.TryParse(cash, out result);
-            if (!success)
-            {
-                Screen.ShowSubtitle(Strings.InputNotNumber);
-                return;
-            }
-            if (!Common.Cost(result))
-            {
-                return;
-            }
-            Common.Bank += result;
-            GameUI.DisplayHelp(Strings.TransactionSuccess);
-        }
+				foodMenu = new NativeMenu("Food", Strings.MenuFoodShopSubtitle);
 
-        private void MenuScript_Aborted(object sender, EventArgs e)
-        {
-            if(repairBlip != null && repairBlip.Exists())
-            {
-                repairBlip.Delete();
-                
-            }
+				itemHamburger = HungryController.CreateFoodSellerItem(Strings.FoodBurger, Foods.Hamburger, 1);
+				itemChicken = HungryController.CreateFoodSellerItem(Strings.FoodChicken, Foods.Chicken, 3);
+				itemWater = HungryController.GenerateWaterSellItem(Strings.ItemWater, 2);
 
-            if (buyMenu != null) buyMenu.Visible = false;
-            if (mainMenu != null)
-            {
-                mainMenu.Visible = false;
-                itemLights.CheckboxEvent -= ItemLights_CheckboxEvent;
-                itemSave.Activated -= ItemSave_Activated;
-                itemLoad.Activated -= ItemLoad_Activated;
-                itemCallCops.Activated -= ItemCallCops_Activated;
-            }
-            
-            Tick -= MenuScript_Tick;
-            KeyDown -= MenuScript_KeyDown;
+				foodMenu.Add(itemHamburger);
+				foodMenu.Add(itemChicken);
+				foodMenu.Add(itemWater);
 
-            mainMenu = null;
-            buyMenu = null;
+				logger.Trace("All instances initialized");
+				mainMenu.Add(itemLights);
+				mainMenu.Add(itemSave);
+				mainMenu.Add(itemLoad);
+				mainMenu.Add(itemCallCops);
 
-        }
+				itemModels = mainMenu.AddSubMenu(modelMenu);
+				itemModels.Title = Strings.ItemModels;
+				itemModels.Description = Strings.ItemModelsDescription;
 
-        private void Common_Unload(object sender, EventArgs e)
-        {
-            if(!sender.Equals(this))
-            {
-                Abort();
-            }
-        }
+				mainMenu.Add(itemDifficulty);
+				mainMenu.Add(itemKills);
+				mainMenu.Add(itemDeposit);
+				mainMenu.Add(itemWithdraw);
+				mainMenu.Add(itemCash);
+				mainMenu.Add(itemBank);
+				lemonPool.Add(mainMenu);
+				lemonPool.Add(modelMenu);
+				lemonPool.Add(foodMenu);
+				logger.Trace("Main Menu Done");
+				Tick += MenuScript_Tick;
+				KeyDown += MenuScript_KeyDown;
+				itemLights.CheckboxChanged += ItemLights_CheckboxEvent;
+				itemSave.Activated += ItemSave_Activated;
+				itemLoad.Activated += ItemLoad_Activated;
+				itemCallCops.Activated += ItemCallCops_Activated;
+				itemDeposit.Activated += ItemDeposit_Activated;
+				itemWithdraw.Activated += ItemWithdraw_Activated;
 
-        private void ItemBodyArmor_Activated(UIMenu sender, UIMenuItem selectedItem) => AmmuController.SellArmor(50, 380);
-        private void ItemPumpShotgun_Activated(UIMenu sender, UIMenuItem selectedItem) => AmmuController.SellWeapon(200, 50, WeaponHash.PumpShotgun);
-        private void ItemPistol_Activated(UIMenu sender, UIMenuItem selectedItem) => AmmuController.SellWeapon(100, 100, WeaponHash.Pistol);
+				timerBars.Add(hungryBar);
 
-        private void Common_CashChanged(object sender, EventArgs e)
-        {
-            // cashBar.Text = $"${Common.Cash}";
-        }
+				Common.Unload += Common_Unload;
 
-        private void ItemCallCops_Activated(UIMenu sender, UIMenuItem selectedItem)
-        {
-            Function.Call(Hash.CREATE_INCIDENT, 7, Game.Player.Character.Position.X, Game.Player.Character.Position.Y, Game.Player.Character.Position.Z, 2, 3.0f, new OutputArgument());
-        }
+				logger.Trace("Loading Ammu-Nation Menu");
 
-        private void ItemLoad_Activated(UIMenu sender, UIMenuItem selectedItem)
-        {
-            SaveController.Load();
-            itemLights.Checked = Common.blackout;
-            itemDifficulty.SetRightLabel(Strings.ResourceManager.GetString("Difficulty" + Common.difficulty.ToString()));
-            itemKills.SetRightLabel(Common.counter.ToString());
-            itemCash.SetRightLabel("$" + Common.Cash.ToString());
-            Notification.Show(Strings.GameLoaded);
-        }
+				buyMenu = new NativeMenu(Strings.AmmuTitle, Strings.AmmuSubtitle);
+				itemPistol = AmmuController.GenerateWeaponSellerItem(Strings.AmmuPistol, Strings.AmmuPistolSubtitle, 100);
+				itemPumpShotgun = AmmuController.GenerateWeaponSellerItem(Strings.AmmuPumpShotgun, Strings.AmmuPumpShotgunSubtitle, 200);
+				itemCarbineRifle = AmmuController.GenerateWeaponSellerItem(Strings.AmmuCarbineRifle, Strings.AmmuCarbineRifleSubtitle, 350);
+				itemBodyArmor = new NativeItem(Strings.WeaponBodyArmor, Strings.WeaponBodyArmorDescription);
+				itemBodyArmor.AltTitle = "$380";
+				logger.Trace("Instances created");
+				buyMenu.Add(itemCash);
+				buyMenu.Add(itemPistol);
+				buyMenu.Add(itemPumpShotgun);
+				buyMenu.Add(itemBodyArmor);
+				lemonPool.Add(buyMenu);
+				itemPistol.Activated += ItemPistol_Activated;
+				itemPumpShotgun.Activated += ItemPumpShotgun_Activated;
+				itemCarbineRifle.Activated += ItemCarbineRifle_Activated;
+				itemBodyArmor.Activated += ItemBodyArmor_Activated;
 
-        private void ItemSave_Activated(UIMenu sender, UIMenuItem selectedItem) => SaveController.Save(itemLights.Checked);
+				repairBlip = World.CreateBlip(repair);
+				repairBlip.IsFriendly = true;
+				repairBlip.IsShortRange = true;
+				repairBlip.Sprite = BlipSprite.Garage;
+				repairBlip.Color = BlipColor.Blue;
+				repairBlip.Name = Strings.RepairBlip;
 
-        private void ItemLights_CheckboxEvent(UIMenuCheckboxItem sender, bool Checked)
-        {
-            Function.Call(Hash.SET_ARTIFICIAL_LIGHTS_STATE, Checked);
-        }
+				HungryController.AddBlipsToAllResellers();
+				instance = this;
 
-        private void MenuScript_Tick(object sender, EventArgs e)
-        {
-            pool.ProcessMenus();
-            if (AmmuController.DistanceToAmmu())
-            {
-                GameUI.DisplayHelp(Strings.AmmuOpenShop);
-            }
-            if (repair.DistanceTo(Game.Player.Character.Position) <= 10f && Game.Player.Character.IsInVehicle())
-            {
-                GameUI.DisplayHelp(Strings.RepairHelp);
-            }
-        }
+				this.Aborted += MenuScript_Aborted;
+			}
+			catch (Exception ex)
+			{
+				GameUI.DisplayHelp(Strings.ExceptionMenu);
+				logger.Fatal(ex, "Error while loading menu");
+				Common.UnloadMod(this);
+				this.Abort();
+			}
+		}
 
-        private void MenuScript_KeyDown(object sender, KeyEventArgs e)
-        {
-            switch (e.KeyCode)
-            {
-                case Keys.N:
-                    mainMenu.Visible = !mainMenu.Visible;
-                    itemDifficulty.SetRightLabel(Strings.ResourceManager.GetString("Difficulty" + Common.difficulty.ToString()));
-                    itemKills.SetRightLabel(Common.counter.ToString());
-                    itemCash.SetRightLabel("$" + Common.Cash.ToString());
-                    itemBank.SetRightLabel("$" + Common.Bank.ToString());
-                    break;
-                case Keys.E:
-                    if (mainMenu.Visible) return;
-                    if (buyMenu.Visible)
-                    {
-                        buyMenu.Visible = false;
-                        return;
-                    }
-                    if (AmmuController.DistanceToAmmu())
-                    {
-                        buyMenu.Visible = true;
-                    }
-                    if (repair.DistanceTo(Game.Player.Character.Position) <= 10f && Game.Player.Character.IsInVehicle())
-                    {
-        
-                        if(Game.Player.Character.CurrentVehicle.IsDamaged == false)
-                        {
-                            Screen.ShowSubtitle(Strings.RepairUndamaged);
-                            return;
-                        }
-                        if (!Common.Cost(100)) break;
-                        Game.Player.Character.CurrentVehicle.Repair();
-                        Screen.ShowSubtitle(Strings.RepairSuccess);
-                    }
-                    break;
-            }
-        }
-    }
+		private void ItemCopModel_Activated(object sender, EventArgs args)
+		{
+			Game.Player.ChangeModel("s_m_y_cop_01");
+			//selectedItem.SetRightBadge(UIMenuItem.BadgeStyle.Clothes);
+			//itemDefaultModel.SetRightBadge(UIMenuItem.BadgeStyle.None);
+			itemSave.Enabled = false;
+		}
+
+		private void ItemDefaultModel_Activated(object sender, EventArgs args)
+		{
+			Game.Player.ChangeModel("a_m_m_bevhills_02");
+			//selectedItem.SetRightBadge(UIMenuItem.BadgeStyle.Clothes);
+			//itemCopModel.SetRightBadge(UIMenuItem.BadgeStyle.None);
+			itemSave.Enabled = false;
+		}
+
+		private void ItemCarbineRifle_Activated(object sender, EventArgs args)
+		{
+			AmmuController.SellWeapon(350, 50, WeaponHash.CarbineRifle);
+		}
+
+		private void ItemWithdraw_Activated(object sender, EventArgs args)
+		{
+			mainMenu.Visible = false;
+			string cash = Game.GetUserInput(WindowTitle.EnterMessage20, "", 20);
+			int result;
+			bool success = int.TryParse(cash, out result);
+			if (!success)
+			{
+				Screen.ShowSubtitle(Strings.InputNotNumber);
+				return;
+			}
+			if(Common.Bank < result)
+			{
+				Screen.ShowSubtitle(Strings.WithdrawNoCurrency);
+				return;
+			}
+			Common.Bank -= result;
+			Common.Cash += result;
+			GameUI.DisplayHelp(Strings.TransactionSuccess);
+		}
+
+		private void ItemDeposit_Activated(object sender, EventArgs args)
+		{
+			mainMenu.Visible = false;
+			string cash = Game.GetUserInput(WindowTitle.EnterMessage20, "", 20);
+			int result;
+			bool success = int.TryParse(cash, out result);
+			if (!success)
+			{
+				Screen.ShowSubtitle(Strings.InputNotNumber);
+				return;
+			}
+			if (!Common.Cost(result))
+			{
+				return;
+			}
+			Common.Bank += result;
+			GameUI.DisplayHelp(Strings.TransactionSuccess);
+		}
+
+		private void MenuScript_Aborted(object sender, EventArgs e)
+		{
+			if(repairBlip != null && repairBlip.Exists())
+			{
+				repairBlip.Delete();
+				
+			}
+
+			if (buyMenu != null) buyMenu.Visible = false;
+			if (mainMenu != null)
+			{
+				mainMenu.Visible = false;
+				itemLights.CheckboxChanged -= ItemLights_CheckboxEvent;
+				itemSave.Activated -= ItemSave_Activated;
+				itemLoad.Activated -= ItemLoad_Activated;
+				itemCallCops.Activated -= ItemCallCops_Activated;
+			}
+			
+			Tick -= MenuScript_Tick;
+			KeyDown -= MenuScript_KeyDown;
+
+			mainMenu = null;
+			buyMenu = null;
+
+		}
+
+		private void Common_Unload(object sender, EventArgs e)
+		{
+			if(!sender.Equals(this))
+			{
+				Abort();
+			}
+		}
+
+		private void ItemBodyArmor_Activated(object sender, EventArgs args) => AmmuController.SellArmor(50, 380);
+		private void ItemPumpShotgun_Activated(object sender, EventArgs args) => AmmuController.SellWeapon(200, 50, WeaponHash.PumpShotgun);
+		private void ItemPistol_Activated(object sender, EventArgs args) => AmmuController.SellWeapon(100, 100, WeaponHash.Pistol);
+
+		private void ItemCallCops_Activated(object sender, EventArgs args)
+		{
+			Function.Call(Hash.CREATE_INCIDENT, 7, Game.Player.Character.Position.X, Game.Player.Character.Position.Y, Game.Player.Character.Position.Z, 2, 3.0f, new OutputArgument());
+		}
+
+		private void ItemLoad_Activated(object sender, EventArgs args)
+		{
+			SaveController.Load();
+			itemLights.Checked = Common.blackout;
+			itemDifficulty.AltTitle = Strings.ResourceManager.GetString("Difficulty" + Common.difficulty.ToString());
+			itemKills.AltTitle = Common.counter.ToString();
+			itemCash.AltTitle = "$" + Common.Cash.ToString();
+			itemSave.Enabled = true;
+			Notification.Show(Strings.GameLoaded);
+		}
+
+		private void ItemSave_Activated(object sender, EventArgs args) => SaveController.Save(itemLights.Checked);
+
+		private void ItemLights_CheckboxEvent(object sender, EventArgs args)
+		{
+			Function.Call(Hash.SET_ARTIFICIAL_LIGHTS_STATE, itemLights.Checked);
+		}
+
+		private void MenuScript_Tick(object sender, EventArgs e)
+		{
+			lemonPool.Process();
+			timerBars.Process();
+
+			hungryBar.Progress = HungryController.ProgressBarStatus;
+			waterBar.Progress = HungryController.WaterBarStatus;
+			if (AmmuController.DistanceToAmmu())
+			{
+				GameUI.DisplayHelp(Strings.AmmuOpenShop);
+			}
+			if (HungryController.IsPlayerCloseReseller())
+			{
+				GameUI.DisplayHelp(Strings.FoodOpenShop);
+			}
+			if (repair.DistanceTo(Game.Player.Character.Position) <= 10f && Game.Player.Character.IsInVehicle())
+			{
+				GameUI.DisplayHelp(Strings.RepairHelp);
+			}
+		}
+
+		private void MenuScript_KeyDown(object sender, KeyEventArgs e)
+		{
+			switch (e.KeyCode)
+			{
+				case Keys.N:
+					mainMenu.Visible = !mainMenu.Visible;
+					itemDifficulty.AltTitle = Strings.ResourceManager.GetString("Difficulty" + Common.difficulty.ToString());
+					itemKills.AltTitle = Common.counter.ToString();
+					itemCash.AltTitle = "$" + Common.Cash.ToString();
+					itemBank.AltTitle = "$" + Common.Bank.ToString();
+					break;
+				case Keys.E:
+					if (mainMenu.Visible) return;
+					if (buyMenu.Visible)
+					{
+						buyMenu.Visible = false;
+						return;
+					}
+					if (AmmuController.DistanceToAmmu() && !lemonPool.AreAnyVisible)
+					{
+						buyMenu.Visible = true;
+					}
+					if (HungryController.IsPlayerCloseReseller() && !lemonPool.AreAnyVisible)
+					{
+						foodMenu.Visible = true;
+					}
+					if (repair.DistanceTo(Game.Player.Character.Position) <= 10f && Game.Player.Character.IsInVehicle())
+					{
+		
+						if(Game.Player.Character.CurrentVehicle.IsDamaged == false)
+						{
+							Screen.ShowSubtitle(Strings.RepairUndamaged);
+							return;
+						}
+						if (!Common.Cost(100)) break;
+						Game.Player.Character.CurrentVehicle.Repair();
+						Screen.ShowSubtitle(Strings.RepairSuccess);
+					}
+					break;
+			}
+		}
+	}
 }

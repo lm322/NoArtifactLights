@@ -4,7 +4,6 @@
 using GTA;
 using GTA.Native;
 using GTA.UI;
-using NativeUI;
 using NLog;
 using NoArtifactLights.Engine.Mod.API;
 using NoArtifactLights.Engine.Mod.Controller;
@@ -16,9 +15,15 @@ using Logger = NLog.Logger;
 using NoArtifactLights.Engine.Process;
 using NoArtifactLights.Engine.Entities;
 using NoArtifactLights.Engine.Entities.Enums;
+using System.Collections.Generic;
+using LemonUI.Scaleform;
+using System.Threading;
+using NoArtifactLights.Cilent;
+using System.Reflection;
 
 namespace NoArtifactLights
 {
+	[ScriptAttributes(Author = "RelaperCrystal", SupportURL = "https://hotworkshop.atlassian.net/projects/NAL")]
 	public class Entry : Script
 	{
 		private Pickup weapon;
@@ -30,35 +35,66 @@ namespace NoArtifactLights
 		private Vehicle deliveryCar;
 		private Ped delivery;
 
+		internal static List<Blip> blips = new List<Blip>();
+
 		private Logger logger = LogManager.GetLogger("Entry");
 		internal static bool forcestart;
 
+		public NALClient Client { get; private set; }
+
 		public static void ForceStartEvent()
 		{
-			Entry.forcestart = true;
+			forcestart = true;
 		}
 
-		public Entry()
+		public void LoadMod()
 		{
 			try
 			{
+				Thread.CurrentThread.Name = "main";
 				Screen.FadeOut(1000);
-				logger.Info("Initialized");
-				Function.Call(Hash.SET_ARTIFICIAL_LIGHTS_STATE, true);
+				logger.Info("Starting NAL");
 				GameUI.DisplayHelp(Strings.Start);
-				if (!File.Exists("scripts\\PlayerReliveNoResetModel.dll"))
-				{
-					logger.Warn("No PlayerReliveNoResetModel to provide Screen.FadeIn upon player wasted or busted. The game will faded out and never fade in upon death or arrest.");
-					Notification.Show(Strings.NoModelWarning);
-					Notification.Show(Strings.NoModelWarning2);
-				}
 				if (!File.Exists("scripts\\NoArtifactLights.pdb"))
 				{
 					logger.Warn("Attention: No debug database found in game scripts folder. This means logs cannot provide additional information related to exception.");
 				}
-				Initializer.LoadProgram();
+				//Initializer.LoadProgram();
+
+
+				this.Client = new NALClient(Assembly.GetExecutingAssembly().GetName().Version);
 				this.Interval = 100;
-				this.Tick += Entry_Tick;
+				this.Tick += Ticking1;
+				Common.Unload += Common_Unload1;
+				this.Aborted += Entry_Aborted;
+			}
+			catch (Exception ex)
+			{
+				Screen.FadeIn(500);
+				logger.Fatal(ex, "Excepting during initial load process");
+				Abort();
+			}
+		}
+
+		public Entry()
+		{
+			this.KeyDown += Entry_KeyDown;
+
+			try
+			{
+				Thread.CurrentThread.Name = "main";
+				Screen.FadeOut(1000);
+				logger.Info("Starting NAL");
+				GameUI.DisplayHelp(Strings.Start);
+				if (!File.Exists("scripts\\NoArtifactLights.pdb"))
+				{
+					logger.Warn("Attention: No debug database found in game scripts folder. This means logs cannot provide additional information related to exception.");
+				}
+				//Initializer.LoadProgram();
+
+				this.Client = new NALClient(Assembly.GetExecutingAssembly().GetName().Version);
+				this.Interval = 100;
+				this.Tick += Ticking1;
 				Common.Unload += Common_Unload1;
 				this.Aborted += Entry_Aborted;
 			}
@@ -70,6 +106,17 @@ namespace NoArtifactLights
 			}
 		}
 
+		private void Entry_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+		{
+			if(e.KeyCode == System.Windows.Forms.Keys.L && e.Alt)
+			{
+				this.KeyDown -= Entry_KeyDown;
+				LoadMod();
+			}
+		}
+
+		private void Ticking1(object sender, EventArgs e) => Client.Tick();
+
 		private void Common_Unload1(object sender, EventArgs e)
 		{
 			throw new NotImplementedException();
@@ -77,7 +124,14 @@ namespace NoArtifactLights
 
 		private void Entry_Aborted(object sender, EventArgs e)
 		{
-			
+			GameController.SetRelationshipBetGroupsUInt(Relationship.Pedestrians, 0x02B8FA80, 0x47033600);
+			GameController.SetRelationshipBetGroupsUInt(Relationship.Pedestrians, 0x47033600, 0x02B8FA80);
+			this.Tick -= Entry_Tick;
+			foreach(Blip blip in blips)
+			{
+				if(blip.Exists())
+				blip.Delete();
+			}
 		}
 
 		private void Common_Unload(object sender, EventArgs e)
@@ -129,7 +183,7 @@ namespace NoArtifactLights
 						Common.counter++;
 						if (weaponedPeds.IsDuplicate(ped))
 						{
-							Common.Earn(10);
+							Common.Earn(50);
 							GameUI.DisplayHelp(Strings.ArmedBonus);
 							if (ped.AttachedBlip != null && ped.AttachedBlip.Exists())
 							{
@@ -144,28 +198,28 @@ namespace NoArtifactLights
 
 							case 100:
 								Common.difficulty = Difficulty.Easy;
-								BigMessageThread.MessageInstance.ShowSimpleShard(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyEasy));
+								new BigMessage(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyEasy));
 								GameUI.DisplayHelp(string.Format(Strings.DifficultyHelp, Strings.DifficultyEasy));
 								GameController.SetRelationship(Difficulty.Easy);
 								break;
 
 							case 300:
 								Common.difficulty = Difficulty.Normal;
-								BigMessageThread.MessageInstance.ShowSimpleShard(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyNormal));
+								new BigMessage(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyNormal));
 								GameUI.DisplayHelp(string.Format(Strings.DifficultyHelp, Strings.DifficultyNormal));
 								GameController.SetRelationship(Difficulty.Normal);
 								break;
 
 							case 700:
 								Common.difficulty = Difficulty.Hard;
-								BigMessageThread.MessageInstance.ShowSimpleShard(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyHard));
+								new BigMessage(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyHard));
 								GameUI.DisplayHelp(string.Format(Strings.DifficultyHelp, Strings.DifficultyHard));
 								GameController.SetRelationship(Difficulty.Hard);
 								break;
 
 							case 1500:
 								Common.difficulty = Difficulty.Nether;
-								BigMessageThread.MessageInstance.ShowSimpleShard(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyNether));
+								new BigMessage(Strings.DifficultyChange, string.Format(Strings.DifficultyShard, Strings.DifficultyNether));
 								GameUI.DisplayHelp(string.Format(Strings.DifficultyHelp, Strings.DifficultyNether));
 								GameController.SetRelationship(Difficulty.Nether);
 								break;
@@ -214,7 +268,7 @@ namespace NoArtifactLights
 					weaponBlip = World.CreateBlip(weapon.Position);
 					weaponBlip.Sprite = BlipSprite.AmmuNation;
 					weaponBlip.Name = Strings.WeaponPistol;
-					BigMessageThread.MessageInstance.ShowSimpleShard(Strings.WeaponsShard, Strings.WeaponsShardSubtitle);
+					new BigMessage(Strings.WeaponsShard, Strings.WeaponsShardSubtitle);
 				}
 				if (peds1.Count >= 60000)
 				{

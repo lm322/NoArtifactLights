@@ -160,6 +160,24 @@ namespace NoArtifactLights.Resources {
         }
         
         /// <summary>
+        ///   查找类似 Hungry 的本地化字符串。
+        /// </summary>
+        public static string BarHungry {
+            get {
+                return ResourceManager.GetString("BarHungry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Water 的本地化字符串。
+        /// </summary>
+        public static string BarWater {
+            get {
+                return ResourceManager.GetString("BarWater", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 You already ~h~has~s~~b~ body armor~s~. 的本地化字符串。
         /// </summary>
         public static string BodyArmorAlreadyHad {
@@ -192,6 +210,15 @@ namespace NoArtifactLights.Resources {
         public static string DepositNoMoney {
             get {
                 return ResourceManager.GetString("DepositNoMoney", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 You have a ~h~deprecated save~s~ in your NOAR save directory. It will no longer be loaded. 的本地化字符串。
+        /// </summary>
+        public static string DeprecatedXMLSave {
+            get {
+                return ResourceManager.GetString("DeprecatedXMLSave", resourceCulture);
             }
         }
         
@@ -340,6 +367,33 @@ namespace NoArtifactLights.Resources {
         }
         
         /// <summary>
+        ///   查找类似 Hamburger 的本地化字符串。
+        /// </summary>
+        public static string FoodBurger {
+            get {
+                return ResourceManager.GetString("FoodBurger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Chicken 的本地化字符串。
+        /// </summary>
+        public static string FoodChicken {
+            get {
+                return ResourceManager.GetString("FoodChicken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Press ~INPUT_CONTEXT~ to open shop. 的本地化字符串。
+        /// </summary>
+        public static string FoodOpenShop {
+            get {
+                return ResourceManager.GetString("FoodOpenShop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 The game has been ~b~loaded~s~. 的本地化字符串。
         /// </summary>
         public static string GameLoaded {
@@ -354,6 +408,15 @@ namespace NoArtifactLights.Resources {
         public static string GameSaved {
             get {
                 return ResourceManager.GetString("GameSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 You are now hungry and needs some food. 的本地化字符串。
+        /// </summary>
+        public static string Hungry {
+            get {
+                return ResourceManager.GetString("Hungry", resourceCulture);
             }
         }
         
@@ -511,6 +574,24 @@ namespace NoArtifactLights.Resources {
         }
         
         /// <summary>
+        ///   查找类似 Appearance 的本地化字符串。
+        /// </summary>
+        public static string ItemModels {
+            get {
+                return ResourceManager.GetString("ItemModels", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Change your look and feel. 的本地化字符串。
+        /// </summary>
+        public static string ItemModelsDescription {
+            get {
+                return ResourceManager.GetString("ItemModelsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Saves the current game status. 的本地化字符串。
         /// </summary>
         public static string ItemSaveSubtitle {
@@ -547,6 +628,15 @@ namespace NoArtifactLights.Resources {
         }
         
         /// <summary>
+        ///   查找类似 Bottle of Water 的本地化字符串。
+        /// </summary>
+        public static string ItemWater {
+            get {
+                return ResourceManager.GetString("ItemWater", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Withdraws currency into cash. 的本地化字符串。
         /// </summary>
         public static string ItemWithdrawSubtitle {
@@ -570,6 +660,15 @@ namespace NoArtifactLights.Resources {
         public static string MazeBank {
             get {
                 return ResourceManager.GetString("MazeBank", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Food Shop 的本地化字符串。
+        /// </summary>
+        public static string MenuFoodShopSubtitle {
+            get {
+                return ResourceManager.GetString("MenuFoodShopSubtitle", resourceCulture);
             }
         }
         
@@ -601,6 +700,15 @@ namespace NoArtifactLights.Resources {
         }
         
         /// <summary>
+        ///   查找类似 Models 的本地化字符串。
+        /// </summary>
+        public static string MenuModel {
+            get {
+                return ResourceManager.GetString("MenuModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 ~r~Warning~s~: You must use this mod together with ~b~MrTank&apos;s~h~ Player Death No Reset Model~s~ script or ~r~you will stuck~s~ on death screen. 的本地化字符串。
         /// </summary>
         public static string NoModelWarning {
@@ -624,6 +732,15 @@ namespace NoArtifactLights.Resources {
         public static string NoSave {
             get {
                 return ResourceManager.GetString("NoSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 joined the game. 的本地化字符串。
+        /// </summary>
+        public static string PlayerJoinedGame {
+            get {
+                return ResourceManager.GetString("PlayerJoinedGame", resourceCulture);
             }
         }
         
@@ -682,6 +799,15 @@ namespace NoArtifactLights.Resources {
         }
         
         /// <summary>
+        ///   查找类似 You are already full and cannot eat anymore. 的本地化字符串。
+        /// </summary>
+        public static string SellNotHungry {
+            get {
+                return ResourceManager.GetString("SellNotHungry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 You have successfully selled your vehicle. 的本地化字符串。
         /// </summary>
         public static string SellSuccess {
@@ -723,6 +849,15 @@ namespace NoArtifactLights.Resources {
         public static string Unload {
             get {
                 return ResourceManager.GetString("Unload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 You are dehydrating. Go to a shop to refill your water. 的本地化字符串。
+        /// </summary>
+        public static string WaterTooLow {
+            get {
+                return ResourceManager.GetString("WaterTooLow", resourceCulture);
             }
         }
         
