@@ -80,30 +80,30 @@ namespace NoArtifactLights
 		{
 			this.KeyDown += Entry_KeyDown;
 
-			try
-			{
-				Thread.CurrentThread.Name = "main";
-				Screen.FadeOut(1000);
-				logger.Info("Starting NAL");
-				GameUI.DisplayHelp(Strings.Start);
-				if (!File.Exists("scripts\\NoArtifactLights.pdb"))
-				{
-					logger.Warn("Attention: No debug database found in game scripts folder. This means logs cannot provide additional information related to exception.");
-				}
-				//Initializer.LoadProgram();
+			//try
+			//{
+			//	Thread.CurrentThread.Name = "main";
+			//	Screen.FadeOut(1000);
+			//	logger.Info("Starting NAL");
+			//	GameUI.DisplayHelp(Strings.Start);
+			//	if (!File.Exists("scripts\\NoArtifactLights.pdb"))
+			//	{
+			//		logger.Warn("Attention: No debug database found in game scripts folder. This means logs cannot provide additional information related to exception.");
+			//	}
+			//	//Initializer.LoadProgram();
 
-				this.Client = new NALClient(Assembly.GetExecutingAssembly().GetName().Version);
-				this.Interval = 100;
-				this.Tick += Ticking1;
-				Common.Unload += Common_Unload1;
-				this.Aborted += Entry_Aborted;
-			}
-			catch(Exception ex)
-			{
-				Screen.FadeIn(500);
-				logger.Fatal(ex, "Excepting during initial load process");
-				Abort();
-			}
+			//	this.Client = new NALClient(Assembly.GetExecutingAssembly().GetName().Version);
+			//	this.Interval = 100;
+			//	this.Tick += Ticking1;
+			//	Common.Unload += Common_Unload1;
+			//	this.Aborted += Entry_Aborted;
+			//}
+			//catch(Exception ex)
+			//{
+			//	Screen.FadeIn(500);
+			//	logger.Fatal(ex, "Excepting during initial load process");
+			//	Abort();
+			//}
 		}
 
 		private void Entry_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)

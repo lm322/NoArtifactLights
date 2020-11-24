@@ -62,6 +62,16 @@
         "runtime": {
           "lib/net48/ScriptHookVDotNet3.dll": {}
         }
+      },
+      "CommandPlus/0.1.1": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/CommandPlus.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CommandPlus.dll": {}
+        }
       }
     },
     ".NETFramework,Version=v4.8/win": {
@@ -124,6 +134,16 @@
         },
         "runtime": {
           "lib/net48/ScriptHookVDotNet3.dll": {}
+        }
+      },
+      "CommandPlus/0.1.1": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/CommandPlus.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CommandPlus.dll": {}
         }
       }
     },
@@ -188,6 +208,16 @@
         "runtime": {
           "lib/net48/ScriptHookVDotNet3.dll": {}
         }
+      },
+      "CommandPlus/0.1.1": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/CommandPlus.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CommandPlus.dll": {}
+        }
       }
     },
     ".NETFramework,Version=v4.8/win-x86": {
@@ -250,6 +280,16 @@
         },
         "runtime": {
           "lib/net48/ScriptHookVDotNet3.dll": {}
+        }
+      },
+      "CommandPlus/0.1.1": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/CommandPlus.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CommandPlus.dll": {}
         }
       }
     }
@@ -357,10 +397,16 @@
         "scripthookvdotnet3.3.0.4.nupkg.sha512",
         "scripthookvdotnet3.nuspec"
       ]
+    },
+    "CommandPlus/0.1.1": {
+      "type": "project",
+      "path": "../CommandPlus/CommandPlus/CommandPlus.csproj",
+      "msbuildProject": "../CommandPlus/CommandPlus/CommandPlus.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.8": [
+      "CommandPlus >= 0.1.1",
       "LemonUI.SHVDN3 >= 1.0.0",
       "NLog >= 4.7.5",
       "NLog.Schema >= 4.7.4",
@@ -393,7 +439,11 @@
       },
       "frameworks": {
         "net48": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Ender\\source\\repos\\NoArtifactLights\\CommandPlus\\CommandPlus\\CommandPlus.csproj": {
+              "projectPath": "C:\\Users\\Ender\\source\\repos\\NoArtifactLights\\CommandPlus\\CommandPlus\\CommandPlus.csproj"
+            }
+          }
         }
       }
     },
