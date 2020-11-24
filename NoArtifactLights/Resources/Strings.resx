@@ -165,6 +165,9 @@
   <data name="CashMaximum" xml:space="preserve">
     <value>Exchange failed because your cash amount has reached 32-bit integer limit.</value>
   </data>
+  <data name="CommandError" xml:space="preserve">
+    <value>Failed to run command. Check for notification to learn more.</value>
+  </data>
   <data name="DepositNoMoney" xml:space="preserve">
     <value>You don't have enough cash to deposit.</value>
   </data>
@@ -251,6 +254,12 @@
   </data>
   <data name="ItemCashTitle" xml:space="preserve">
     <value>Cash</value>
+  </data>
+  <data name="ItemCommand" xml:space="preserve">
+    <value>Run Command</value>
+  </data>
+  <data name="ItemCommandDescription" xml:space="preserve">
+    <value>Run a cheat command, usually for debugging purposes.</value>
   </data>
   <data name="ItemCopsSubtitle" xml:space="preserve">
     <value>Call for police assistence.</value>

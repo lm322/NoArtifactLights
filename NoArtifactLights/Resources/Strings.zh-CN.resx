@@ -159,6 +159,9 @@
   <data name="BuyNoMoney" xml:space="preserve">
     <value>您的现金不足。</value>
   </data>
+  <data name="CommandError" xml:space="preserve">
+    <value>命令执行失败。查看通知了解更多信息。</value>
+  </data>
   <data name="DepositNoMoney" xml:space="preserve">
     <value>您的现金不足以存款。</value>
   </data>
@@ -242,6 +245,12 @@
   </data>
   <data name="ItemCashTitle" xml:space="preserve">
     <value>现金</value>
+  </data>
+  <data name="ItemCommand" xml:space="preserve">
+    <value>执行命令</value>
+  </data>
+  <data name="ItemCommandDescription" xml:space="preserve">
+    <value>执行一个作弊命令，通常用于调试。</value>
   </data>
   <data name="ItemCopsSubtitle" xml:space="preserve">
     <value>请求警察的帮助。</value>

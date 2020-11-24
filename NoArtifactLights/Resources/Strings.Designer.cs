@@ -205,6 +205,15 @@ namespace NoArtifactLights.Resources {
         }
         
         /// <summary>
+        ///   查找类似 Failed to run command. Check for notification to learn more. 的本地化字符串。
+        /// </summary>
+        public static string CommandError {
+            get {
+                return ResourceManager.GetString("CommandError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 You don&apos;t have enough cash to deposit. 的本地化字符串。
         /// </summary>
         public static string DepositNoMoney {
@@ -462,6 +471,24 @@ namespace NoArtifactLights.Resources {
         public static string ItemCashTitle {
             get {
                 return ResourceManager.GetString("ItemCashTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Run Command 的本地化字符串。
+        /// </summary>
+        public static string ItemCommand {
+            get {
+                return ResourceManager.GetString("ItemCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Run a cheat command, usually for debugging purposes. 的本地化字符串。
+        /// </summary>
+        public static string ItemCommandDescription {
+            get {
+                return ResourceManager.GetString("ItemCommandDescription", resourceCulture);
             }
         }
         

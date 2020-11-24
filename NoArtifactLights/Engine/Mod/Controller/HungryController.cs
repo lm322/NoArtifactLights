@@ -21,7 +21,7 @@ namespace NoArtifactLights.Engine.Mod.Controller
 
 	public static class HungryController
 	{
-		public static float Hungry { get; private set; } = 10.0f;
+		public static float Hungry { get; internal set; } = 10.0f;
 		public static float Water { get; private set; } = 10.0f;
 
 		private static bool hinted = false;

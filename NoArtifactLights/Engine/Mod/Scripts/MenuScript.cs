@@ -31,6 +31,7 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 		private NativeItem itemModels;
 		private NativeItem itemDifficulty;
 		private NativeItem itemKills;
+		private NativeItem itemCommand;
 		private NativeItem itemDeposit;
 		private NativeItem itemWithdraw;
 		private NativeCheckboxItem itemLights;
@@ -92,6 +93,7 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 				itemCallCops = new NativeItem(Strings.ItemCopsTitle, Strings.ItemCopsSubtitle);
 				itemDifficulty = new NativeItem(Strings.ItemDifficulty, Strings.ItemDIfficultySubtitle);
 				itemKills = new NativeItem(Strings.ItemKills, Strings.ItemKillsSubtitle);
+				itemCommand = new NativeItem(Strings.ItemCommand, Strings.ItemCommandDescription);
 				itemDeposit = new NativeItem(Strings.ItemDepositTitle, Strings.ItemDepositSubtitle);
 				itemWithdraw = new NativeItem(Strings.ItemWithdrawTitle, Strings.ItemWithdrawSubtitle);
 				itemCash = new NativeItem(Strings.ItemCashTitle, Strings.ItemCashSubtitle);
@@ -143,6 +145,7 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 				itemSave.Activated += ItemSave_Activated;
 				itemLoad.Activated += ItemLoad_Activated;
 				itemCallCops.Activated += ItemCallCops_Activated;
+				itemCommand.Activated += ItemCommand_Activated;
 				itemDeposit.Activated += ItemDeposit_Activated;
 				itemWithdraw.Activated += ItemWithdraw_Activated;
 
@@ -188,6 +191,11 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 				Common.UnloadMod(this);
 				this.Abort();
 			}
+		}
+
+		private void ItemCommand_Activated(object sender, EventArgs e)
+		{
+			throw new NotImplementedException();
 		}
 
 		private void ItemCopModel_Activated(object sender, EventArgs args)

@@ -75,6 +75,8 @@
     <Compile Include="Engine\Entities\RelationshipGroupList.cs" />
     <Compile Include="Engine\Entities\Structures\Configuration.cs" />
     <Compile Include="Engine\Entities\Structures\LastSaveFile.cs" />
+    <Compile Include="Engine\Mod\Commands\SetHungryCommand.cs" />
+    <Compile Include="Engine\Mod\Controller\CommandController.cs" />
     <Compile Include="Engine\Mod\Controller\HungryController.cs" />
     <Compile Include="Engine\Mod\Controller\RespawnController.cs" />
     <Compile Include="Engine\Mod\Controller\WeaponSavingController.cs" />
@@ -154,6 +156,12 @@
     <Content Include="nal.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CommandPlus\CommandPlus\CommandPlus.csproj">
+      <Project>{3b60ea8c-a37b-434a-bb33-322e5a4bfe78}</Project>
+      <Name>CommandPlus</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
