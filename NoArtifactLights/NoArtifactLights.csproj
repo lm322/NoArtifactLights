@@ -72,7 +72,12 @@
     <Compile Include="Cmds.cs" />
     <Compile Include="Common.cs" />
     <Compile Include="Engine\Entities\Enums\Difficulty.cs" />
+    <Compile Include="Engine\Entities\Enums\Permission.cs" />
+    <Compile Include="Engine\Entities\IExecutor.cs" />
+    <Compile Include="Engine\Entities\IPermissionCommand.cs" />
+    <Compile Include="Engine\Entities\NALPlayer.cs" />
     <Compile Include="Engine\Entities\RelationshipGroupList.cs" />
+    <Compile Include="Engine\Entities\SPExecutor.cs" />
     <Compile Include="Engine\Entities\Structures\Configuration.cs" />
     <Compile Include="Engine\Entities\Structures\LastSaveFile.cs" />
     <Compile Include="Engine\Mod\Commands\SetHungryCommand.cs" />

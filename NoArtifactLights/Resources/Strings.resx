@@ -348,6 +348,9 @@
   <data name="NoModelWarning2" xml:space="preserve">
     <value>You can download it from ~b~GTA5-Mods~s~.</value>
   </data>
+  <data name="NoPermission" xml:space="preserve">
+    <value>You don't have the permission to do that.</value>
+  </data>
   <data name="NoSave" xml:space="preserve">
     <value>You do not have a save file.</value>
   </data>

@@ -336,6 +336,9 @@
   <data name="NoModelWarning2" xml:space="preserve">
     <value>也可以从 GTA5-Mods 里面搜索下载。</value>
   </data>
+  <data name="NoPermission" xml:space="preserve">
+    <value>您没有权限执行此操作。</value>
+  </data>
   <data name="NoSave" xml:space="preserve">
     <value>没有存档文件可供加载。</value>
   </data>

@@ -55,15 +55,15 @@ namespace NoArtifactLights.Engine.Mod.Controller
 				byte[] data = Encoding.UTF8.GetBytes(json);
 				string dat = Convert.ToBase64String(data);
 
-				if(Directory.Exists("NAL\\tmp"))
+				if(Directory.Exists("NAL\\temp"))
 				{
-					logger.Info("Cleaning up uncleaned temponary files");
-					Directory.Delete("NAL\\tmp", true);
+					logger.Info("Cleaning up uncleaned temporary files");
+					Directory.Delete("NAL\\temp", true);
 				}
 
-				Directory.CreateDirectory("NAL\\tmp");
-				string tmpPath = "NAL\\tmp\\raw.dat";
-				File.WriteAllText(tmpPath, dat);
+				Directory.CreateDirectory("NAL\\temp");
+				string tempPath = "NAL\\temp\\raw.dat";
+				File.WriteAllText(tempPath, dat);
 
 				if(File.Exists("NAL\\game.dat"))
 				{
@@ -71,8 +71,8 @@ namespace NoArtifactLights.Engine.Mod.Controller
 					File.Delete("NAL\\game.dat");
 				}
 
-				ZipFile.CreateFromDirectory("NAL\\tmp", "NAL\\game.dat");
-				Directory.Delete("NAL\\tmp", true);
+				ZipFile.CreateFromDirectory("NAL\\temp", "NAL\\game.dat");
+				Directory.Delete("NAL\\temp", true);
 			}
 			catch (IOException ioex)
 			{
@@ -86,15 +86,15 @@ namespace NoArtifactLights.Engine.Mod.Controller
 
 		internal static SaveFile LoadGameFile()
 		{
-			if(Directory.Exists("NAL\\tmp"))
+			if(Directory.Exists("NAL\\temp"))
 			{
 				logger.Info("Overwritten temponary files");
-				Directory.Delete("NAL\\tmp", true);
+				Directory.Delete("NAL\\temp", true);
 			}
 
-			Directory.CreateDirectory("NAL\\tmp");
-			ZipFile.ExtractToDirectory("NAL\\game.dat", "NAL\\tmp");
-			string datBase64 = File.ReadAllText("NAL\\tmp\\raw.dat");
+			Directory.CreateDirectory("NAL\\temp");
+			ZipFile.ExtractToDirectory("NAL\\game.dat", "NAL\\temp");
+			string datBase64 = File.ReadAllText("NAL\\temp\\raw.dat");
 			byte[] jsonBytes = Convert.FromBase64String(datBase64);
 			string json = Encoding.UTF8.GetString(jsonBytes);
 
@@ -109,21 +109,21 @@ namespace NoArtifactLights.Engine.Mod.Controller
 				Formatting = Formatting.None
 			});
 
-			Directory.Delete("NAL\\tmp", true);
+			Directory.Delete("NAL\\temp", true);
 			return result;
 		}
 
 		internal static LastSaveFile LoadOldSave()
 		{
-			if (Directory.Exists("NAL\\tmp"))
+			if (Directory.Exists("NAL\\temp"))
 			{
 				logger.Info("Overwritten temponary files");
-				Directory.Delete("NAL\\tmp", true);
+				Directory.Delete("NAL\\temp", true);
 			}
 
-			Directory.CreateDirectory("NAL\\tmp");
-			ZipFile.ExtractToDirectory("NAL\\game.dat", "NAL\\tmp");
-			string datBase64 = File.ReadAllText("NAL\\tmp\\raw.dat");
+			Directory.CreateDirectory("NAL\\temp");
+			ZipFile.ExtractToDirectory("NAL\\game.dat", "NAL\\temp");
+			string datBase64 = File.ReadAllText("NAL\\temp\\raw.dat");
 			byte[] jsonBytes = Convert.FromBase64String(datBase64);
 			string json = Encoding.UTF8.GetString(jsonBytes);
 
@@ -138,7 +138,7 @@ namespace NoArtifactLights.Engine.Mod.Controller
 				Formatting = Formatting.None
 			});
 
-			Directory.Delete("NAL\\tmp", true);
+			Directory.Delete("NAL\\temp", true);
 			return result;
 		}
 

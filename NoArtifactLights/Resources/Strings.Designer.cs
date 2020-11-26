@@ -754,6 +754,15 @@ namespace NoArtifactLights.Resources {
         }
         
         /// <summary>
+        ///   查找类似 You don&apos;t have the permission to do that. 的本地化字符串。
+        /// </summary>
+        public static string NoPermission {
+            get {
+                return ResourceManager.GetString("NoPermission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 You do not have a save file. 的本地化字符串。
         /// </summary>
         public static string NoSave {
