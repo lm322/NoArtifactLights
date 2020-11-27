@@ -17,6 +17,7 @@ using LemonUI;
 using LemonUI.Menus;
 using LemonUI.TimerBars;
 using System.Threading;
+using CommandPlus.Exceptions;
 
 namespace NoArtifactLights.Engine.Mod.Scripts
 {
@@ -31,6 +32,7 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 		private NativeItem itemModels;
 		private NativeItem itemDifficulty;
 		private NativeItem itemKills;
+		private NativeCheckboxItem itemCheatEnabled;
 		private NativeItem itemCommand;
 		private NativeItem itemDeposit;
 		private NativeItem itemWithdraw;
@@ -93,6 +95,7 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 				itemCallCops = new NativeItem(Strings.ItemCopsTitle, Strings.ItemCopsSubtitle);
 				itemDifficulty = new NativeItem(Strings.ItemDifficulty, Strings.ItemDIfficultySubtitle);
 				itemKills = new NativeItem(Strings.ItemKills, Strings.ItemKillsSubtitle);
+				itemCheatEnabled = new NativeCheckboxItem(Strings.ItemCheat, Strings.ItemCheatDescription);
 				itemCommand = new NativeItem(Strings.ItemCommand, Strings.ItemCommandDescription);
 				itemDeposit = new NativeItem(Strings.ItemDepositTitle, Strings.ItemDepositSubtitle);
 				itemWithdraw = new NativeItem(Strings.ItemWithdrawTitle, Strings.ItemWithdrawSubtitle);
@@ -146,6 +149,7 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 				itemLoad.Activated += ItemLoad_Activated;
 				itemCallCops.Activated += ItemCallCops_Activated;
 				itemCommand.Activated += ItemCommand_Activated;
+				itemCheatEnabled.Activated += ItemCheatEnabled_Activated;
 				itemDeposit.Activated += ItemDeposit_Activated;
 				itemWithdraw.Activated += ItemWithdraw_Activated;
 
@@ -183,6 +187,7 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 				instance = this;
 
 				this.Aborted += MenuScript_Aborted;
+				CommandController.Init();
 			}
 			catch (Exception ex)
 			{
@@ -193,9 +198,36 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 			}
 		}
 
+		private void ItemCheatEnabled_Activated(object sender, EventArgs e)
+		{
+			Common.IsCheatEnabled = itemCheatEnabled.Checked;
+		}
+
 		private void ItemCommand_Activated(object sender, EventArgs e)
 		{
-			throw new NotImplementedException();
+			string str = Game.GetUserInput(WindowTitle.EnterMessage60, "", short.MaxValue);
+			if(!Common.IsCheatEnabled)
+			{
+				GameUI.DisplayHelp(Strings.NoPermission);
+				return;
+			}
+			try
+			{
+				CommandController.Run(str);
+			}
+			catch(UnexceptedValueException uvex)
+			{
+				Notification.Show(uvex.Message);
+			}
+			catch(Exception ex)
+			{
+				Notification.Show(ex.ToString());
+			}
+			finally
+			{
+				logger.Info("User typed command: " + str);
+			}
+
 		}
 
 		private void ItemCopModel_Activated(object sender, EventArgs args)

@@ -27,6 +27,8 @@ namespace NoArtifactLights
 
 		public static int Bank { get; set; } = 0;
 
+		public static bool IsCheatEnabled { get; internal set; }
+
 		internal static void UnloadMod(object you)
 		{
 			Notification.Show(Strings.Unload);

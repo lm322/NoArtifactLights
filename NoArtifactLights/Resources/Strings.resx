@@ -255,6 +255,12 @@
   <data name="ItemCashTitle" xml:space="preserve">
     <value>Cash</value>
   </data>
+  <data name="ItemCheat" xml:space="preserve">
+    <value>Enable Cheat</value>
+  </data>
+  <data name="ItemCheatDescription" xml:space="preserve">
+    <value>Enables cheat commands to be used.</value>
+  </data>
   <data name="ItemCommand" xml:space="preserve">
     <value>Run Command</value>
   </data>

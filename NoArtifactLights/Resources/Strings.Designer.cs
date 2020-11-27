@@ -475,6 +475,24 @@ namespace NoArtifactLights.Resources {
         }
         
         /// <summary>
+        ///   查找类似 Enable Cheat 的本地化字符串。
+        /// </summary>
+        public static string ItemCheat {
+            get {
+                return ResourceManager.GetString("ItemCheat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 Enables cheat commands to be used. 的本地化字符串。
+        /// </summary>
+        public static string ItemCheatDescription {
+            get {
+                return ResourceManager.GetString("ItemCheatDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Run Command 的本地化字符串。
         /// </summary>
         public static string ItemCommand {

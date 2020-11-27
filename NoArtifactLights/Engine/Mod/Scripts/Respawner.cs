@@ -13,7 +13,7 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 	{
 		public Respawner()
 		{
-			Thread.CurrentThread.Name = "Respawn Worker";
+			Thread.CurrentThread.Name = "Re-spawn Worker";
 			Tick += Respawner_Tick;
 		}
 
