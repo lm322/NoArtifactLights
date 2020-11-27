@@ -369,6 +369,9 @@
   <data name="SellSuccess" xml:space="preserve">
     <value>您已成功出售车辆。</value>
   </data>
+  <data name="SnapshotInfo" xml:space="preserve">
+    <value>欢迎来到 Alpha 0.3.100.22！此次更新添加了作弊命令，以帮助您控制您的世界环境。此版本也是两个快照版本后的首个 Alpha 版本！</value>
+  </data>
   <data name="Start" xml:space="preserve">
     <value>欢迎来到 NoArtifactLights 生存模组。</value>
   </data>

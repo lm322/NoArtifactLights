@@ -871,6 +871,15 @@ namespace NoArtifactLights.Resources {
         }
         
         /// <summary>
+        ///   查找类似 Welcome to Alpha 0.3.100.22! This alpha version adds cheat commands which helps you to control your world. Also, it&apos;s the first alpha after two snapshots! 的本地化字符串。
+        /// </summary>
+        public static string SnapshotInfo {
+            get {
+                return ResourceManager.GetString("SnapshotInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 Welcome to NoArtifactLights survival modification.  的本地化字符串。
         /// </summary>
         public static string Start {

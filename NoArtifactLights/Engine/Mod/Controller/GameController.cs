@@ -3,10 +3,13 @@
 
 using GTA;
 using GTA.Native;
+using GTA.UI;
 using NLog;
 using NoArtifactLights.Engine.Entities.Enums;
+using NoArtifactLights.Resources;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +19,16 @@ namespace NoArtifactLights.Engine.Mod.Controller
 	public static class GameController
 	{
 		private static NLog.Logger logger = LogManager.GetCurrentClassLogger();
+
+		public static void CheckSnapshotInformation()
+		{
+			if(Properties.Settings.Default.LastSnapshot != "0.3.100.22")
+			{
+				Properties.Settings.Default.LastSnapshot = "0.3.100.22";
+				Properties.Settings.Default.Save();
+				Notification.Show(Strings.SnapshotInfo);
+			}
+		}
 
 		/// <summary>
 		/// Adds a ped to list of armed peds. These peds will not be re-assigned to certain events.
