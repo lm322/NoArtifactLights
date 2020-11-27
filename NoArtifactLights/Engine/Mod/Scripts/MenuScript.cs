@@ -160,6 +160,7 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 				itemWithdraw.Activated += ItemWithdraw_Activated;
 
 				timerBars.Add(hungryBar);
+				timerBars.Add(waterBar);
 
 				Common.Unload += Common_Unload;
 
