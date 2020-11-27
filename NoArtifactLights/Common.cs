@@ -28,6 +28,11 @@ namespace NoArtifactLights
 		public static int Bank { get; set; } = 0;
 
 		public static bool IsCheatEnabled { get; internal set; }
+		internal static void OnLaunch(object you)
+		{
+			Start(you, new EventArgs());
+		}
+		internal static event EventHandler Start;
 
 		internal static void UnloadMod(object you)
 		{

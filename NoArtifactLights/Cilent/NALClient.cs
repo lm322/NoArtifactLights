@@ -49,6 +49,7 @@ namespace NoArtifactLights.Cilent
 			NAL.Cmds.client = this;
 			sw.Stop();
 
+			Common.OnLaunch(this);
 			logger.Info("DONE! Client construction took " + sw.ElapsedMilliseconds);
 		}
 

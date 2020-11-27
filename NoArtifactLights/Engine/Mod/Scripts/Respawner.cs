@@ -13,6 +13,11 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 	{
 		public Respawner()
 		{
+			Common.Start += Common_Start;
+		}
+
+		private void Common_Start(object sender, EventArgs e)
+		{
 			Thread.CurrentThread.Name = "Re-spawn Worker";
 			Tick += Respawner_Tick;
 		}

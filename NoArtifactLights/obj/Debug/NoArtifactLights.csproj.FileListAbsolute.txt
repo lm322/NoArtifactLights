@@ -19,3 +19,4 @@ C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\obj\Debug\NoArtifa
 C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\LemonUI.SHVDN3.dll
 C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\CommandPlus.dll
 C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\CommandPlus.pdb
+C:\Users\Ender\source\repos\NoArtifactLights\NoArtifactLights\bin\Debug\NoArtifactLights.dll.config

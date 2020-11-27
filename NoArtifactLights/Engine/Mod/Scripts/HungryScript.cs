@@ -9,6 +9,11 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 	{
 		public HungryScript()
 		{
+			Common.Start += Common_Start;
+		}
+
+		private void Common_Start(object sender, System.EventArgs e)
+		{
 			this.Interval = 1500;
 			Thread.CurrentThread.Name = "Hungry Worker Thread";
 			this.Tick += HungryScript_Tick;

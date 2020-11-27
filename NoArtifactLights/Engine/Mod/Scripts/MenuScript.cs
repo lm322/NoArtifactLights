@@ -78,6 +78,12 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 
 		public MenuScript()
 		{
+			Common.Start += Common_Start;
+			
+		}
+
+		private void Common_Start(object sender, EventArgs e)
+		{
 			try
 			{
 				Thread.CurrentThread.Name = "UI Thread";
@@ -89,7 +95,7 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 #else
 				mainMenu = new NativeMenu("NAL", Strings.MenuMainTitle);
 #endif
-				itemLights = new NativeCheckboxItem(Strings.ItemLightsTitle, Strings.ItemLightsSubtitle, true );
+				itemLights = new NativeCheckboxItem(Strings.ItemLightsTitle, Strings.ItemLightsSubtitle, true);
 				itemSave = new NativeItem(Strings.ItemSaveTitle, Strings.ItemSaveSubtitle);
 				itemLoad = new NativeItem(Strings.ItemLoadTitle, Strings.ItemLoadSubtitle);
 				itemCallCops = new NativeItem(Strings.ItemCopsTitle, Strings.ItemCopsSubtitle);
