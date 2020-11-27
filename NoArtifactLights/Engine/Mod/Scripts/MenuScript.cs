@@ -86,7 +86,7 @@ namespace NoArtifactLights.Engine.Mod.Scripts
 		{
 			try
 			{
-				Thread.CurrentThread.Name = "UI Thread";
+				//Thread.CurrentThread.Name = "UI Thread";
 				logger.Trace("Loading Main Menu");
 				lemonPool = new ObjectPool();
 				logger.Trace("Menu Pool created");
